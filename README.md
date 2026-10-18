@@ -9,7 +9,7 @@ A Bluetooth desk speaker that you print in three colors of PLA. Two Dayton Audio
 drivers and a ZK-502C Bluetooth amplifier sit in a sealed box of 166 × 108 × 94 mm. The
 grille and the control strip snap on over four flush socket head screws.
 
-- Website: https://beetlebugorg.github.io/mini/
+- Website: https://beetlebug.org/mini/
 - Spec sheet and build steps: [docs/Bluespeaker-Mini-Specs.pdf](docs/Bluespeaker-Mini-Specs.pdf)
 - Drawings, 12 sheets: [docs/Bluespeaker-Mini-Drawings.pdf](docs/Bluespeaker-Mini-Drawings.pdf)
 - Engineering report: [docs/Bluespeaker-Mini-Engineering-Report.pdf](docs/Bluespeaker-Mini-Engineering-Report.pdf)
