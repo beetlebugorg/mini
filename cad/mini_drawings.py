@@ -4,10 +4,13 @@
     uv run cad/mini_report.py --step     # write cad/step-mini/ first
     uv run cad/mini_drawings.py          # docs/drawings-mini/*.svg and docs/Bluespeaker-Mini-Drawings.pdf
 
+BSM-00 embeds the line-art image docs/lineart/img/hero-light.png. Run docs/lineart/build.sh first.
+
 The views use the OpenCascade hidden-line removal (the same algorithm as FreeCAD TechDraw).
 Sections cut the parts with a plane and hatch the cut faces. All sizes are in millimetres.
 """
 
+import base64
 import functools
 import http.server
 import json
@@ -325,12 +328,14 @@ def ga():
     f = View("front", c, (118, 205), 1.0)
     r = View("right", c, (268, 205), 1.0)
     t = View("top", c, (118, 92), 1.0)
-    iso = View("iso", c, (362, 205), 0.36)
-    b = [project(shapes, f, hidden=False), project(shapes, r, hidden=False), project(shapes, t, hidden=False), project(shapes, iso, hidden=False)]
+    # The pictorial view is the line-art render of the docs, embedded in the SVG.
+    art = base64.b64encode((ROOT / "docs" / "lineart" / "img" / "hero-light.png").read_bytes()).decode()
+    pic = f'<image x="318" y="51" width="88" height="82" preserveAspectRatio="xMidYMid meet" href="data:image/png;base64,{art}"/>'
+    b = [project(shapes, f, hidden=False), project(shapes, r, hidden=False), project(shapes, t, hidden=False), pic]
     b += [dim(f, (-83, FY, 0), (83, FY, 0), "h", -10), dim(f, (-83, FY, 0), (-83, FY, H), "v", -10),
           dim(r, (83, -47, 0), (83, 47, 0), "h", -10), dim(t, (-83, -47, H), (-83, 47, H), "v", -10),
           dim(f, (-SX, FY, SZ1), (SX, FY, SZ1), "h", 12), dim(f, (SX, FY, SZ0), (SX, FY, SZ1), "v", 14),
-          label(118, 275, "FRONT"), label(268, 275, "RIGHT"), label(118, 146, "TOP"), label(362, 250, "ISOMETRIC (0.36:1)")]
+          label(118, 275, "FRONT"), label(268, 275, "RIGHT"), label(118, 146, "TOP"), label(362, 250, "PICTORIAL VIEW (NOT TO SCALE)")]
     b.append(notes(248, 96, ["Grille (grey) and control strip (white) snap onto", "the orange baffle. Four M3 socket head cap screws",
                               "show in the corners, flush with the cover faces.", "Feet, drivers, and the amplifier are not shown."]))
     sheet("Bluespeaker Mini", "General arrangement", "1:1", "PLA (printed parts)", "BSM-00", "".join(b))

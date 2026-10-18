@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>Bluespeaker Mini Specs</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@500;600;800&display=swap" rel="stylesheet">
 <style>
 :root {
   --ink: #1d1d1f;
@@ -12,7 +12,12 @@
   --line: #d2d2d7;
   --soft: #f5f5f7;
   --orange: #e2541f;
+  --accent: #0a7f63;
+  --accent-soft: #e3f3ee;
+  --grid: #ececE6;
+  --paper: #fbfbf9;
   --bg: #ffffff;
+  --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
 }
 @page { size: letter; margin: 0; }
 * { box-sizing: border-box; }
@@ -32,30 +37,33 @@ body {
   display: flex; justify-content: space-between; font-size: 7pt; color: var(--muted);
   border-top: 0.5pt solid var(--line); padding-top: 6pt;
 }
-.eyebrow { font-size: 10pt; font-weight: 600; color: var(--orange); letter-spacing: 0.01em; margin: 0 0 6pt; }
+.eyebrow { font: 600 9pt var(--font-mono); text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); letter-spacing: 0.01em; margin: 0 0 6pt; }
 h1 { font-size: 46pt; line-height: 1.02; font-weight: 700; letter-spacing: -0.025em; margin: 0; }
 h2 { font-size: 30pt; line-height: 1.06; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 8pt; }
 h3 { font-size: 12pt; font-weight: 600; margin: 0 0 4pt; letter-spacing: -0.01em; }
 .lede { font-size: 13pt; line-height: 1.4; color: var(--muted); font-weight: 400; max-width: 5.6in; margin: 10pt 0 0; }
 .lede b { color: var(--ink); font-weight: 600; }
 img { display: block; max-width: 100%; }
+/* Line-art figures sit on the grid of beetlebug.org. */
+.grid { background-color: var(--paper); background-size: 0.25in 0.25in; border: 0.5pt solid var(--line); border-radius: 10pt;
+  background-image: linear-gradient(var(--grid) 0.6pt, transparent 0.6pt), linear-gradient(90deg, var(--grid) 0.6pt, transparent 0.6pt); }
 .center { text-align: center; }
 
 /* cover */
 .cover { justify-content: flex-start; }
 .cover .brand { display: flex; align-items: center; gap: 8pt; font-weight: 600; font-size: 11pt; margin-bottom: 0.55in; }
-.cover .dot { width: 10pt; height: 10pt; border-radius: 50%; background: var(--orange); }
-.cover .hero { margin: 0.25in auto 0; width: 6.4in; }
+.cover .dot { width: 10pt; height: 10pt; border-radius: 50%; background: var(--accent); }
+.cover .hero { margin: 0.25in 0 0; padding: 0.25in; height: 4.6in; object-fit: contain; width: 100%; }
 .stats { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: auto; margin-bottom: 0.35in; border-top: 0.5pt solid var(--line); }
 .stat { padding: 12pt 10pt 0 0; }
 .stat .big { font-size: 15pt; white-space: nowrap; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; }
 .stat .small { color: var(--muted); font-size: 8.5pt; margin-top: 3pt; }
 
 /* feature tiles */
-.front-img { width: 5.6in; margin: 0.2in auto 0.15in; }
+.front-img { width: 100%; height: 3.6in; object-fit: contain; padding: 0.2in; margin: 0.2in 0 0.15in; }
 .tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10pt; margin-top: 6pt; }
-.tile { background: var(--soft); border-radius: 12pt; overflow: hidden; }
-.tile img { width: 100%; height: 1.7in; object-fit: cover; background: #fff; }
+.tile { background: var(--soft); border-radius: 10pt; overflow: hidden; border: 0.5pt solid var(--line); }
+.tile img { width: 100%; height: 1.7in; object-fit: cover; border: 0; border-radius: 0; }
 .tile .txt { padding: 9pt 11pt 11pt; }
 .tile p { margin: 0; color: var(--muted); font-size: 8.5pt; }
 .tile p b { color: var(--ink); font-weight: 600; }
@@ -72,7 +80,7 @@ table { width: 100%; border-collapse: collapse; font-size: 8.3pt; }
 th { text-align: left; font-weight: 600; color: var(--muted); font-size: 7.5pt; text-transform: uppercase; letter-spacing: 0.04em; padding: 0 8pt 5pt 0; border-bottom: 0.5pt solid var(--ink); }
 td { padding: 3.5pt 8pt 3.5pt 0; border-bottom: 0.5pt solid var(--line); vertical-align: top; }
 td.n { font-variant-numeric: tabular-nums; white-space: nowrap; }
-.mono { font-family: "SF Mono", "JetBrains Mono", Menlo, monospace; font-size: 7.8pt; }
+.mono { font-family: var(--font-mono); font-size: 7.8pt; }
 .section { margin-top: 0.16in; }
 .section h3 { margin-bottom: 6pt; }
 .sw { display: inline-block; width: 8pt; height: 8pt; border-radius: 50%; vertical-align: -0.5pt; margin-right: 4pt; border: 0.5pt solid rgba(0,0,0,0.15); }
@@ -80,10 +88,20 @@ ul.clean { margin: 0; padding-left: 12pt; }
 ul.clean li { margin: 0 0 3pt; }
 ol.steps { margin: 0; padding: 0; list-style: none; counter-reset: s; }
 ol.steps li { counter-increment: s; display: grid; grid-template-columns: 18pt 1fr; padding: 6pt 0; border-bottom: 0.5pt solid var(--line); }
-ol.steps li::before { content: counter(s); font-weight: 700; color: var(--orange); }
+ol.steps li::before { content: counter(s); font: 800 10pt var(--font-mono); color: var(--accent); }
 ol.steps b { font-weight: 600; }
-.note { background: var(--soft); border-radius: 10pt; padding: 10pt 12pt; color: var(--muted); font-size: 8.3pt; }
+.note { background: var(--accent-soft); border: 0.5pt solid var(--accent); border-radius: 10pt; padding: 10pt 12pt; color: var(--muted); font-size: 8.3pt; }
 .note b { color: var(--ink); }
+
+/* step pages */
+.stephead { display: flex; align-items: flex-end; gap: 14pt; border-bottom: 0.75pt solid var(--ink); padding-bottom: 8pt; }
+.stephead .num { font: 800 54pt/0.9 var(--font-mono); color: var(--accent); }
+.stephead h2 { margin: 0; font-size: 24pt; }
+.chips { display: flex; flex-wrap: wrap; gap: 5pt; margin-top: 10pt; }
+.chip { font: 600 8pt var(--font-mono); border: 0.75pt solid var(--ink); border-radius: 999px; padding: 3pt 9pt; }
+.stepfig { width: 100%; height: 4.8in; object-fit: contain; padding: 0.2in; margin: 12pt 0; }
+ol.do { font-size: 10pt; line-height: 1.5; padding-left: 14pt; margin: 0; }
+ol.do li { margin-bottom: 3pt; }
 </style>
 </head>
 <body>
@@ -95,7 +113,7 @@ ol.steps b { font-weight: 600; }
   <h1>Two drivers.<br>One small box.</h1>
   <p class="lede">A Bluetooth desk speaker that you print in three colours of PLA.
     <b>Socket head screws on the face. Covers that snap on.</b> The panels and covers print with no support.</p>
-  <img class="hero" src="hero.jpg" alt="Bluespeaker Mini, front three-quarter view">
+  <img class="hero grid" src="../lineart/img/hero-light.png" alt="Bluespeaker Mini, front three-quarter view">
   <div class="stats">
     <div class="stat"><div class="big">166 × 108 × 94</div><div class="small">mm, W × H × D</div></div>
     <div class="stat"><div class="big">2 × 2.5 in</div><div class="small">Dayton Audio PC68-4 full-range drivers</div></div>
@@ -111,15 +129,15 @@ ol.steps b { font-weight: 600; }
   <h2>The screws are part of the face.</h2>
   <p class="lede">Four black socket head cap screws hold the front module in the sleeve. Their heads go through round ports in the
     grille and the strip. <b>Each head is flush with the face.</b></p>
-  <img class="front-img" src="front.jpg" alt="Front view">
+  <img class="front-img grid" src="../lineart/img/front-light.png" alt="Front view">
   <div class="tiles">
-    <div class="tile"><img src="corner.jpg" alt="Head port detail">
+    <div class="tile"><img class="grid" src="../lineart/img/corner-light.png" alt="Head port detail">
       <div class="txt"><h3>Head ports</h3><p><b>6.0 mm ports for 5.5 mm heads.</b> A thin orange ring of the baffle shows around each head.
         A 0.5 mm chamfer at 45° prints face down with no support.</p></div></div>
-    <div class="tile"><img src="snap.jpg" alt="Snap catch on the grille back">
+    <div class="tile"><img class="grid" src="../lineart/img/snap-light.png" alt="Snap catch on the grille back">
       <div class="txt"><h3>Snap catches</h3><p><b>Four catches on each cover back.</b> Each beam is one 0.5 mm line that bridges between two posts.
         It flexes along its printed lines, not across the layers.</p></div></div>
-    <div class="tile"><img src="baffle.jpg" alt="Pocket in the baffle">
+    <div class="tile"><img class="grid" src="../lineart/img/pocket-light.png" alt="Pocket in the baffle">
       <div class="txt"><h3>Pockets</h3><p><b>A lip at each pocket mouth holds the catch.</b> The lip face is at 45°, so a pull releases the grille.
         A 0.05 mm preload holds the grille flat.</p></div></div>
   </div>
@@ -235,7 +253,7 @@ ol.steps b { font-weight: 600; }
   <p class="eyebrow">Build</p>
   <h2>Six steps.</h2>
   <div class="two" style="margin-top:0.15in; align-items:start">
-    <img src="exploded.jpg" alt="Exploded view" style="width:100%">
+    <img class="grid" src="../lineart/img/exploded-light.png" alt="Exploded view" style="width:100%; padding:0.12in">
     <ol class="steps">
       <li><span><b>Prepare the sleeve.</b> Remove the supports. Drill the front post holes. Install 8 inserts. Glue the feet.</span></li>
       <li><span><b>Mount the speakers.</b> Drill or cut the baffle membranes. Install 8 inserts in the spacer frames. Fit the drivers with M3 × 5 screws.</span></li>
@@ -269,6 +287,68 @@ ol.steps b { font-weight: 600; }
     Measure your ZK-502C and check its shaft type. The board positions in the model come from photos.
   </div>
   <div class="foot"><span>Bluespeaker Mini · Build</span><span>5</span></div>
+</section>
+
+<!-- 6 · Step 1 -->
+<section class="page">
+  <p class="eyebrow">Step 1 of 6</p>
+  <div class="stephead"><div class="num">1</div><h2>Prepare the sleeve</h2></div>
+  <div class="chips"><span class="chip">Sleeve</span><span class="chip">Feet</span><span class="chip">8 × insert</span><span class="chip">4.0 mm drill</span></div>
+  <img class="stepfig grid" src="../lineart/img/step1-light.png" alt="Step 1: Prepare the sleeve">
+  <ol class="do"><li>Remove the supports below the four front posts.</li><li>Drill the four front post holes: 4.0 mm, 7 mm deep.</li><li>Install 8 short inserts in the sleeve posts: 4 at the front, 4 at the rear.</li><li>Glue the four feet into the recesses on the bottom.</li></ol>
+  <div class="foot"><span>Bluespeaker Mini · Step 1</span><span>6</span></div>
+</section>
+
+<!-- 7 · Step 2 -->
+<section class="page">
+  <p class="eyebrow">Step 2 of 6</p>
+  <div class="stephead"><div class="num">2</div><h2>Mount the speakers on the baffle</h2></div>
+  <div class="chips"><span class="chip">Front baffle</span><span class="chip">2 × PC68-4</span><span class="chip">8 × insert</span><span class="chip">8 × M3 × 5</span><span class="chip">Foam tape</span></div>
+  <img class="stepfig grid" src="../lineart/img/step2-light.png" alt="Step 2: Mount the speakers on the baffle">
+  <ol class="do"><li>Drill or cut the membranes in the baffle.</li><li>Install 8 short inserts in the two spacer frames on the back of the baffle.</li><li>Apply foam tape to the front face of each driver frame.</li><li>Put each driver on its spacer frame from the back. The terminals point down.</li><li>Install four M3 × 5 pan head screws in each driver.</li></ol>
+  <div class="foot"><span>Bluespeaker Mini · Step 2</span><span>7</span></div>
+</section>
+
+<!-- 8 · Step 3 -->
+<section class="page">
+  <p class="eyebrow">Step 3 of 6</p>
+  <div class="stephead"><div class="num">3</div><h2>Fit the tray and the amplifier</h2></div>
+  <div class="chips"><span class="chip">Amp tray</span><span class="chip">ZK-502C</span><span class="chip">2 × insert</span><span class="chip">2 × M3 × 8</span><span class="chip">2 × self-tapper</span><span class="chip">Speaker wire</span></div>
+  <img class="stepfig grid" src="../lineart/img/step3-light.png" alt="Step 3: Fit the tray and the amplifier">
+  <ol class="do"><li>Drill the two tab holes of the tray: 4.0 mm, through the tab. Install 2 short inserts in the tabs.</li><li>Put the tray against the back of the baffle. Install two M3 × 8 screws from the front of the baffle into the tabs.</li><li>Remove the knob and the nut from the ZK-502C volume control.</li><li>Put the board on the tray rails. Push the volume control bushing and the AUX socket into their holes in the baffle.</li><li>Install the nut on the bushing from the front. It pulls the volume control body onto the pocket floor.</li><li>Install the two self-tapping screws through the rear holes into the tray posts. Stop when the head touches the board.</li><li>Connect the speaker wires to the drivers and to the ZK-502C terminals.</li></ol>
+  <div class="section note"><b>Note.</b> Do not tighten the self-tapping screws more than snug. The thread strips the 1.5 mm plastic hole.</div>
+  <div class="foot"><span>Bluespeaker Mini · Step 3</span><span>8</span></div>
+</section>
+
+<!-- 9 · Step 4 -->
+<section class="page">
+  <p class="eyebrow">Step 4 of 6</p>
+  <div class="stephead"><div class="num">4</div><h2>Install the front module</h2></div>
+  <div class="chips"><span class="chip">Front module</span><span class="chip">4 × M3 × 8</span></div>
+  <img class="stepfig grid" src="../lineart/img/step4-light.png" alt="Step 4: Install the front module">
+  <ol class="do"><li>Push the front module into the front of the sleeve.</li><li>Install four M3 × 8 socket head cap screws through the baffle into the posts. The heads are flush in their counterbores.</li></ol>
+  <div class="foot"><span>Bluespeaker Mini · Step 4</span><span>9</span></div>
+</section>
+
+<!-- 10 · Step 5 -->
+<section class="page">
+  <p class="eyebrow">Step 5 of 6</p>
+  <div class="stephead"><div class="num">5</div><h2>Install the rear panel</h2></div>
+  <div class="chips"><span class="chip">Rear panel</span><span class="chip">4 × M3 × 6</span></div>
+  <img class="stepfig grid" src="../lineart/img/step5-light.png" alt="Step 5: Install the rear panel">
+  <ol class="do"><li>Push the rear panel into the sleeve. The DC socket aligns with the hole.</li><li>Install four M3 × 6 socket head cap screws.</li></ol>
+  <div class="foot"><span>Bluespeaker Mini · Step 5</span><span>10</span></div>
+</section>
+
+<!-- 11 · Step 6 -->
+<section class="page">
+  <p class="eyebrow">Step 6 of 6</p>
+  <div class="stephead"><div class="num">6</div><h2>Fit the covers and the knob</h2></div>
+  <div class="chips"><span class="chip">Control strip</span><span class="chip">Grille</span><span class="chip">Knob</span></div>
+  <img class="stepfig grid" src="../lineart/img/step6-light.png" alt="Step 6: Fit the covers and the knob">
+  <ol class="do"><li>Align the white strip with the two lower screw heads and the volume control. Push it on until the four catches click.</li><li>Align the grille ports with the two upper screw heads. Push the grille on until the four catches click.</li><li>Push the knob onto the volume control shaft.</li></ol>
+  <div class="section note"><b>Note.</b> To remove the covers, pull off the knob. Put a flat blade in the pry slot at the top edge of the strip. Lift the bottom edge of the grille, then pull the grille off. Do not pry at the center of the lattice.</div>
+  <div class="foot"><span>Bluespeaker Mini · Step 6</span><span>11</span></div>
 </section>
 
 </body>

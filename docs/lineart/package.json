@@ -1,0 +1,10 @@
+{
+  "name": "mini-lineart",
+  "private": true,
+  "type": "module",
+  "description": "Line-art renders of the Bluespeaker Mini, in the style of beetlebug.org",
+  "dependencies": {
+    "puppeteer-core": "^24.0.0",
+    "three": "^0.186.1"
+  }
+}
