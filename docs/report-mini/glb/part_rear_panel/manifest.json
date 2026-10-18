@@ -1,0 +1,15 @@
+{
+ "parts": [
+  {
+   "name": "rear_panel",
+   "color": "#8b8e91",
+   "file": "glb/part_rear_panel/rear_panel.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  }
+ ]
+}

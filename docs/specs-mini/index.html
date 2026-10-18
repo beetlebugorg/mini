@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Bluespeaker Mini Specs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1d1d1f;
+  --muted: #6e6e73;
+  --line: #d2d2d7;
+  --soft: #f5f5f7;
+  --orange: #e2541f;
+  --bg: #ffffff;
+}
+@page { size: letter; margin: 0; }
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--ink); }
+body {
+  font-family: Inter, -apple-system, "SF Pro Display", Helvetica, Arial, sans-serif;
+  font-size: 9.5pt; line-height: 1.45; -webkit-font-smoothing: antialiased;
+  -webkit-print-color-adjust: exact; print-color-adjust: exact;
+}
+.page {
+  width: 8.5in; height: 11in; padding: 0.6in 0.65in 0.5in; position: relative;
+  page-break-after: always; overflow: hidden; display: flex; flex-direction: column;
+}
+.page:last-child { page-break-after: auto; }
+.foot {
+  position: absolute; left: 0.65in; right: 0.65in; bottom: 0.35in;
+  display: flex; justify-content: space-between; font-size: 7pt; color: var(--muted);
+  border-top: 0.5pt solid var(--line); padding-top: 6pt;
+}
+.eyebrow { font-size: 10pt; font-weight: 600; color: var(--orange); letter-spacing: 0.01em; margin: 0 0 6pt; }
+h1 { font-size: 46pt; line-height: 1.02; font-weight: 700; letter-spacing: -0.025em; margin: 0; }
+h2 { font-size: 30pt; line-height: 1.06; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 8pt; }
+h3 { font-size: 12pt; font-weight: 600; margin: 0 0 4pt; letter-spacing: -0.01em; }
+.lede { font-size: 13pt; line-height: 1.4; color: var(--muted); font-weight: 400; max-width: 5.6in; margin: 10pt 0 0; }
+.lede b { color: var(--ink); font-weight: 600; }
+img { display: block; max-width: 100%; }
+.center { text-align: center; }
+
+/* cover */
+.cover { justify-content: flex-start; }
+.cover .brand { display: flex; align-items: center; gap: 8pt; font-weight: 600; font-size: 11pt; margin-bottom: 0.55in; }
+.cover .dot { width: 10pt; height: 10pt; border-radius: 50%; background: var(--orange); }
+.cover .hero { margin: 0.25in auto 0; width: 6.4in; }
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: auto; margin-bottom: 0.35in; border-top: 0.5pt solid var(--line); }
+.stat { padding: 12pt 10pt 0 0; }
+.stat .big { font-size: 15pt; white-space: nowrap; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; }
+.stat .small { color: var(--muted); font-size: 8.5pt; margin-top: 3pt; }
+
+/* feature tiles */
+.front-img { width: 5.6in; margin: 0.2in auto 0.15in; }
+.tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10pt; margin-top: 6pt; }
+.tile { background: var(--soft); border-radius: 12pt; overflow: hidden; }
+.tile img { width: 100%; height: 1.7in; object-fit: cover; background: #fff; }
+.tile .txt { padding: 9pt 11pt 11pt; }
+.tile p { margin: 0; color: var(--muted); font-size: 8.5pt; }
+.tile p b { color: var(--ink); font-weight: 600; }
+
+/* spec table */
+.specs { margin-top: 0.2in; border-top: 0.5pt solid var(--line); }
+.row { display: grid; grid-template-columns: 1.55in 1fr; gap: 14pt; padding: 9pt 0; border-bottom: 0.5pt solid var(--line); }
+.row .k { font-weight: 600; font-size: 10pt; }
+.row .v p { margin: 0 0 2pt; }
+.row .v .sub { color: var(--muted); font-size: 8.5pt; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 18pt; }
+
+table { width: 100%; border-collapse: collapse; font-size: 8.3pt; }
+th { text-align: left; font-weight: 600; color: var(--muted); font-size: 7.5pt; text-transform: uppercase; letter-spacing: 0.04em; padding: 0 8pt 5pt 0; border-bottom: 0.5pt solid var(--ink); }
+td { padding: 3.5pt 8pt 3.5pt 0; border-bottom: 0.5pt solid var(--line); vertical-align: top; }
+td.n { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.mono { font-family: "SF Mono", "JetBrains Mono", Menlo, monospace; font-size: 7.8pt; }
+.section { margin-top: 0.16in; }
+.section h3 { margin-bottom: 6pt; }
+.sw { display: inline-block; width: 8pt; height: 8pt; border-radius: 50%; vertical-align: -0.5pt; margin-right: 4pt; border: 0.5pt solid rgba(0,0,0,0.15); }
+ul.clean { margin: 0; padding-left: 12pt; }
+ul.clean li { margin: 0 0 3pt; }
+ol.steps { margin: 0; padding: 0; list-style: none; counter-reset: s; }
+ol.steps li { counter-increment: s; display: grid; grid-template-columns: 18pt 1fr; padding: 6pt 0; border-bottom: 0.5pt solid var(--line); }
+ol.steps li::before { content: counter(s); font-weight: 700; color: var(--orange); }
+ol.steps b { font-weight: 600; }
+.note { background: var(--soft); border-radius: 10pt; padding: 10pt 12pt; color: var(--muted); font-size: 8.3pt; }
+.note b { color: var(--ink); }
+</style>
+</head>
+<body>
+
+<!-- 1 · Cover -->
+<section class="page cover">
+  <div class="brand"><span class="dot"></span>Bluespeaker</div>
+  <p class="eyebrow">Bluespeaker Mini</p>
+  <h1>Two drivers.<br>One small box.</h1>
+  <p class="lede">A Bluetooth desk speaker that you print in three colours of PLA.
+    <b>Socket head screws on the face. Covers that snap on.</b> The panels and covers print with no support.</p>
+  <img class="hero" src="hero.jpg" alt="Bluespeaker Mini, front three-quarter view">
+  <div class="stats">
+    <div class="stat"><div class="big">166 × 108 × 94</div><div class="small">mm, W × H × D</div></div>
+    <div class="stat"><div class="big">2 × 2.5 in</div><div class="small">Dayton Audio PC68-4 full-range drivers</div></div>
+    <div class="stat"><div class="big">Bluetooth + AUX</div><div class="small">ZK-502C amplifier board</div></div>
+    <div class="stat"><div class="big">12–24 V</div><div class="small">DC adapter, 2 A or more</div></div>
+  </div>
+  <div class="foot"><span>Bluespeaker Mini · Revision 0.3 · 11 October 2026</span><span>1</span></div>
+</section>
+
+<!-- 2 · Design -->
+<section class="page">
+  <p class="eyebrow">Design</p>
+  <h2>The screws are part of the face.</h2>
+  <p class="lede">Four black socket head cap screws hold the front module in the sleeve. Their heads go through round ports in the
+    grille and the strip. <b>Each head is flush with the face.</b></p>
+  <img class="front-img" src="front.jpg" alt="Front view">
+  <div class="tiles">
+    <div class="tile"><img src="corner.jpg" alt="Head port detail">
+      <div class="txt"><h3>Head ports</h3><p><b>6.0 mm ports for 5.5 mm heads.</b> A thin orange ring of the baffle shows around each head.
+        A 0.5 mm chamfer at 45° prints face down with no support.</p></div></div>
+    <div class="tile"><img src="snap.jpg" alt="Snap catch on the grille back">
+      <div class="txt"><h3>Snap catches</h3><p><b>Four catches on each cover back.</b> Each beam is one 0.5 mm line that bridges between two posts.
+        It flexes along its printed lines, not across the layers.</p></div></div>
+    <div class="tile"><img src="baffle.jpg" alt="Pocket in the baffle">
+      <div class="txt"><h3>Pockets</h3><p><b>A lip at each pocket mouth holds the catch.</b> The lip face is at 45°, so a pull releases the grille.
+        A 0.05 mm preload holds the grille flat.</p></div></div>
+  </div>
+  <div class="foot"><span>Bluespeaker Mini · Design</span><span>2</span></div>
+</section>
+
+<!-- 3 · Tech specs -->
+<section class="page">
+  <p class="eyebrow">Tech Specs</p>
+  <h2>Bluespeaker Mini</h2>
+  <div class="specs">
+    <div class="row"><div class="k">Size</div><div class="v">
+      <p>Width: 166 mm</p><p>Height: 108 mm</p><p>Depth: 94 mm</p>
+      <p class="sub">Sleeve wall 3 mm. Corner radius 3 mm.</p></div></div>
+    <div class="row"><div class="k">Enclosure</div><div class="v">
+      <p>Sealed, about 1.1 L. Both drivers share the volume.</p>
+      <p class="sub">About 0.55 L for each driver: Qtc near 1.0, F3 near 150 Hz.</p></div></div>
+    <div class="row"><div class="k">Drivers</div><div class="v">
+      <p>2 × Dayton Audio PC68-4, 2.5 in full-range, 4 Ω</p>
+      <p class="sub">Fs 117 Hz, Qts 0.65, Vas 0.7 L. Rear-mounted on 3 mm spacer frames, 74 mm apart.</p></div></div>
+    <div class="row"><div class="k">Amplifier</div><div class="v">
+      <p>ZK-502C Bluetooth amplifier board</p>
+      <p class="sub">Lies flat on a printed tray. The volume control nut holds the board against the baffle.</p></div></div>
+    <div class="row"><div class="k">Inputs and controls</div><div class="v">
+      <p>Bluetooth</p><p>3.5 mm AUX in, on the front</p><p>Volume knob, on the front</p></div></div>
+    <div class="row"><div class="k">Power</div><div class="v">
+      <p>12–24 V DC adapter, 2 A or more, into the rear panel</p>
+      <p class="sub">Check the plug size of the ZK-502C socket before you buy the adapter.</p></div></div>
+    <div class="row"><div class="k">Colours</div><div class="v">
+      <p><span class="sw" style="background:#8b8e91"></span>Grey: sleeve, grille, rear panel, tray, feet</p>
+      <p><span class="sw" style="background:#e2541f"></span>Orange: baffle (shows through the grille), knob</p>
+      <p><span class="sw" style="background:#f2f1ec"></span>White: control strip, knob mark</p></div></div>
+    <div class="row"><div class="k">Front grille</div><div class="v">
+      <p>Lattice of 0.5 mm ribs at a 3.0 mm pitch, about 69 % open</p>
+      <p class="sub">Two other options: slicer-infill grille (Cura 3MF) and a round-hole grille for resin.
+        Grille and strip each snap on with four catches. Pry slot at the top edge of the strip.</p></div></div>
+    <div class="row"><div class="k">Fasteners</div><div class="v">
+      <p>M3 socket head cap screws (ISO 4762): 6 × M3 × 8, 4 × M3 × 6</p>
+      <p>M3 pan head screws: 8 × M3 × 5 (drivers)</p>
+      <p>M3 heat-set inserts, short (3 mm long, 4.0 mm hole): 18</p></div></div>
+    <div class="row"><div class="k">Printer</div><div class="v">
+      <p>LulzBot TAZ Workhorse SE, 0.5 mm tool head, 2.85 mm PLA</p>
+      <p class="sub">Klipper firmware. Cura 5.13 profiles in <span class="mono">cura/</span>.</p></div></div>
+  </div>
+  <div class="foot"><span>Bluespeaker Mini · Tech Specs</span><span>3</span></div>
+</section>
+
+<!-- 4 · Made to print -->
+<section class="page">
+  <p class="eyebrow">Made to print</p>
+  <h2>Designed for filament.</h2>
+  <p class="lede" style="max-width:none">Heights use the 0.25 mm layer. Widths use the 0.5 mm line. <b>Calibrated profiles.</b></p>
+
+  <div class="section">
+    <h3>Printed parts</h3>
+    <table>
+      <tr><th>File</th><th>Colour</th><th>Orientation</th><th>Cura profile</th></tr>
+      <tr><td class="mono">sleeve.stl</td><td><span class="sw" style="background:#8b8e91"></span>Grey</td><td>Front opening down. Supports below the four front posts only.</td><td>PLA Shell 0.25</td></tr>
+      <tr><td class="mono">baffle.stl</td><td><span class="sw" style="background:#e2541f"></span>Orange</td><td>Front face down. Supports off.</td><td>PLA Parts 0.25</td></tr>
+      <tr><td class="mono">grille.stl</td><td><span class="sw" style="background:#8b8e91"></span>Grey</td><td>Front face down. One line for each rib.</td><td>PLA Grille 0.25</td></tr>
+      <tr><td class="mono">grille_infill*.3mf</td><td><span class="sw" style="background:#8b8e91"></span>Grey</td><td>Front face down. Cura infill makes the mesh.</td><td>PLA Grille Infill 0.25</td></tr>
+      <tr><td class="mono">control_strip.stl</td><td><span class="sw" style="background:#f2f1ec"></span>White</td><td>Front face down.</td><td>PLA Parts 0.25</td></tr>
+      <tr><td class="mono">rear_panel.stl</td><td><span class="sw" style="background:#8b8e91"></span>Grey</td><td>Outer face down.</td><td>PLA Parts 0.25</td></tr>
+      <tr><td class="mono">tray.stl, feet.stl</td><td><span class="sw" style="background:#8b8e91"></span>Grey</td><td>Flat.</td><td>PLA Parts 0.25</td></tr>
+      <tr><td class="mono">knob.stl, knob_mark.stl</td><td><span class="sw" style="background:#e2541f"></span>Orange, white</td><td>Knob front face up. Glue the mark into the groove.</td><td>PLA Parts 0.25</td></tr>
+    </table>
+  </div>
+
+  <div class="two section">
+    <div>
+      <h3>Calibrated values</h3>
+      <table>
+        <tr><th>Setting</th><th>Value</th><th>Profiles</th></tr>
+        <tr><td>Shrinkage compensation XY</td><td class="n">100.21 %</td><td>All</td></tr>
+        <tr><td>Shrinkage compensation Z</td><td class="n">100 %</td><td>All</td></tr>
+        <tr><td>Printing temperature</td><td class="n">220 °C</td><td>All</td></tr>
+        <tr><td>Horizontal expansion</td><td class="n">0.095 mm</td><td>Shell, Parts</td></tr>
+        <tr><td>Hole horizontal expansion</td><td class="n">0.17 mm</td><td>Shell, Parts</td></tr>
+      </table>
+      <p class="note" style="margin-top:8pt">The Grille profiles have no expansion: it would change the width of each one-line rib.
+        <b>The model adds the expansion to the grille catches (0.095 mm) and ports (0.075 mm).</b></p>
+    </div>
+    <div>
+      <h3>Layers and lines</h3>
+      <table>
+        <tr><th>Feature</th><th>Size</th><th>Layers or lines</th></tr>
+        <tr><td>Grille and strip</td><td class="n">1.5 mm</td><td>6 layers</td></tr>
+        <tr><td>Baffle</td><td class="n">4.0 mm</td><td>16 layers</td></tr>
+        <tr><td>Front counterbore</td><td class="n">1.5 mm</td><td>6 layers</td></tr>
+        <tr><td>Membrane</td><td class="n">0.25 mm</td><td>1 layer</td></tr>
+        <tr><td>Snap catch</td><td class="n">2.5 mm</td><td>10 layers</td></tr>
+        <tr><td>Snap beam</td><td class="n">0.5 mm</td><td>1 line</td></tr>
+        <tr><td>Ring around a head port</td><td class="n">1.5 mm</td><td>3 lines</td></tr>
+        <tr><td>Head clearance</td><td class="n">0.25 mm</td><td>½ line</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3>Drilled holes</h3>
+    <table>
+      <tr><th>Part</th><th>Holes</th><th>Drill</th><th>Depth</th></tr>
+      <tr><td>Sleeve</td><td>4 front post holes (inserts)</td><td class="n">4.0 mm</td><td>7 mm</td></tr>
+      <tr><td>Tray</td><td>2 tab holes (inserts)</td><td class="n">4.0 mm</td><td>Through the tab</td></tr>
+      <tr><td>Baffle</td><td>6 counterbore membranes</td><td class="n">3.4 mm</td><td>From the back</td></tr>
+    </table>
+  </div>
+  <div class="foot"><span>Bluespeaker Mini · Made to print</span><span>4</span></div>
+</section>
+
+<!-- 5 · Build -->
+<section class="page">
+  <p class="eyebrow">Build</p>
+  <h2>Six steps.</h2>
+  <div class="two" style="margin-top:0.15in; align-items:start">
+    <img src="exploded.jpg" alt="Exploded view" style="width:100%">
+    <ol class="steps">
+      <li><span><b>Prepare the sleeve.</b> Remove the supports. Drill the front post holes. Install 8 inserts. Glue the feet.</span></li>
+      <li><span><b>Mount the speakers.</b> Drill or cut the baffle membranes. Install 8 inserts in the spacer frames. Fit the drivers with M3 × 5 screws.</span></li>
+      <li><span><b>Fit the tray and the amplifier.</b> Screw the tray to the baffle. Put the board on the rails. The volume control nut holds it.</span></li>
+      <li><span><b>Install the front module.</b> Push it into the sleeve. Install four M3 × 8 cap screws.</span></li>
+      <li><span><b>Install the rear panel.</b> Install four M3 × 6 cap screws.</span></li>
+      <li><span><b>Fit the covers and the knob.</b> Push the strip on, then the grille, until each set of four catches clicks.</span></li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <h3>Hardware</h3>
+    <table>
+      <tr><th>Item</th><th>Qty</th><th>Use</th></tr>
+      <tr><td>Dayton Audio PC68-4 (Parts Express 295-150)</td><td class="n">2</td><td>Drivers</td></tr>
+      <tr><td>ZK-502C Bluetooth amplifier board</td><td class="n">1</td><td>Amplifier, Bluetooth, volume control</td></tr>
+      <tr><td>DC adapter, 12–24 V, 2 A or more</td><td class="n">1</td><td>Power</td></tr>
+      <tr><td>M3 heat-set insert, short (3 mm long, 4.0 mm hole)</td><td class="n">18</td><td>Sleeve 8, spacer frames 8, tray 2</td></tr>
+      <tr><td>M3 × 8 socket head cap screw</td><td class="n">6</td><td>Baffle 4, tray 2</td></tr>
+      <tr><td>M3 × 6 socket head cap screw</td><td class="n">4</td><td>Rear panel</td></tr>
+      <tr><td>M3 × 5 pan head screw</td><td class="n">8</td><td>Drivers</td></tr>
+      <tr><td>Speaker wire, 2 × 0.5 mm², 150 mm</td><td class="n">2</td><td>Drivers to the amplifier</td></tr>
+      <tr><td>Closed-cell foam tape, 3 × 6 mm</td><td class="n">0.6 m</td><td>Driver flanges, panel seams</td></tr>
+      <tr><td>Drills: 3.4 mm and 4.0 mm</td><td class="n">1 each</td><td>Pilot holes and membranes</td></tr>
+    </table>
+  </div>
+
+  <div class="section note">
+    <b>Before you print.</b> Print the three snap test parts: <span class="mono">fit_test_snap_baffle</span>,
+    <span class="mono">fit_test_snap_grille</span>, and <span class="mono">fit_test_snap_strip</span>.
+    Measure your ZK-502C and check its shaft type. The board positions in the model come from photos.
+  </div>
+  <div class="foot"><span>Bluespeaker Mini · Build</span><span>5</span></div>
+</section>
+
+</body>
+</html>

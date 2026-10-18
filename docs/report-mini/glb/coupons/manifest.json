@@ -1,0 +1,37 @@
+{
+ "parts": [
+  {
+   "name": "fit_test_snap_baffle",
+   "color": "#e2541f",
+   "file": "glb/coupons/fit_test_snap_baffle.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  },
+  {
+   "name": "fit_test_snap_grille",
+   "color": "#8b8e91",
+   "file": "glb/coupons/fit_test_snap_grille.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  },
+  {
+   "name": "fit_test_snap_strip",
+   "color": "#f2f1ec",
+   "file": "glb/coupons/fit_test_snap_strip.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  }
+ ]
+}

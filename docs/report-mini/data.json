@@ -1,0 +1,739 @@
+{
+ "params": {
+  "width": 166.0,
+  "height": 108.0,
+  "depth": 94.0,
+  "wall": 3.0,
+  "edge_r": 3.0,
+  "grille_t": 1.5,
+  "baffle_t": 4.0,
+  "rear_t": 3.0,
+  "strip_top": 33.0,
+  "seam": 0.5,
+  "fit": 0.3,
+  "rim_chamfer": 0.6,
+  "post_setback": 0.4,
+  "insert_relief": 0.5,
+  "grille_style": "lattice",
+  "rib_w": 0.5,
+  "rib_pitch": 3.0,
+  "hole_d": 2.5,
+  "hole_pitch": 3.8,
+  "grille_side": 3.0,
+  "grille_band": 6.0,
+  "spk_x": 37.0,
+  "spk_z": 69.5,
+  "spk_cut": 65.0,
+  "spk_spacer": 3.0,
+  "spk_frame": 70.0,
+  "spk_chamfer": 10.0,
+  "spk_holes": 26.09,
+  "amp_x0": 6.8,
+  "amp_standoff": 8.0,
+  "rail_drop": 0.5,
+  "tab_out": 5.5,
+  "tab_gap": 0.3,
+  "tab_wall": 5.5,
+  "tab_d": 9.0,
+  "amp_holes": [
+   [
+    3.0,
+    60.77
+   ],
+   [
+    47.5,
+    60.77
+   ]
+  ],
+  "board_post_d": 6.5,
+  "tap_d": 1.5,
+  "tap_depth": 6.5,
+  "amp_w": 50.5,
+  "amp_l": 82.0,
+  "pcb_t": 1.6,
+  "pot_x": 38.2,
+  "pot_z": 5.5,
+  "pot_body_w": 10.0,
+  "pot_body_h": 11.45,
+  "pot_proud": 2.0,
+  "pot_pocket_d": 1.5,
+  "pot_wall": 1.0,
+  "nut_t": 2.0,
+  "pot_pocket_clear": 0.3,
+  "aux_x": 11.2,
+  "aux_z": 2.5,
+  "dc_x": 38.0,
+  "dc_z": 6.5,
+  "pilot_d": 1.6,
+  "membrane": 0.25,
+  "snap_span": 10.0,
+  "snap_beam": 0.5,
+  "snap_h": 2.5,
+  "snap_gap": 0.5,
+  "snap_post": 2.0,
+  "snap_w": 3.0,
+  "snap_bump": 0.4,
+  "snap_clear": 0.15,
+  "snap_preload": 0.05,
+  "snap_depth": 3.0,
+  "cap_d": 5.5,
+  "cap_h": 3.0,
+  "cap_clear": 0.25,
+  "port_band": 1.5,
+  "port_chamfer": 0.5,
+  "screw_inset": 0.5,
+  "grille_xy_comp": 0.095,
+  "grille_hole_comp": 0.075,
+  "parts_xy": 0.095,
+  "knob_d": 22.0,
+  "knob_h": 12.0,
+  "knob_gap": 0.8,
+  "post": 8.0,
+  "insert_hole": 4.0,
+  "insert_depth": 4.5
+ },
+ "parts": [
+  {
+   "name": "sleeve",
+   "label": "Sleeve",
+   "process": "FDM, grey",
+   "printed": true,
+   "qty": 1,
+   "step": 1,
+   "color": "#8b8e91",
+   "print_size": [
+    166.0,
+    108.0,
+    94.0
+   ],
+   "volume_cm3": 156.1,
+   "mass_solid_g": 193.5
+  },
+  {
+   "name": "feet",
+   "label": "Feet",
+   "process": "FDM, grey (or stick-on rubber feet)",
+   "printed": true,
+   "qty": 4,
+   "step": 1,
+   "color": "#8b8e91",
+   "print_size": [
+    142.0,
+    76.0,
+    3.9
+   ],
+   "volume_cm3": 1.2,
+   "mass_solid_g": 1.5
+  },
+  {
+   "name": "baffle",
+   "label": "Front baffle",
+   "process": "FDM, orange (shows through the grille)",
+   "printed": true,
+   "qty": 1,
+   "step": 2,
+   "color": "#e2541f",
+   "print_size": [
+    159.4,
+    101.4,
+    7.0
+   ],
+   "volume_cm3": 42.8,
+   "mass_solid_g": 53.1
+  },
+  {
+   "name": "speaker_l",
+   "label": "PC68-4 left",
+   "process": "Dayton Audio PC68-4",
+   "printed": false,
+   "qty": 1,
+   "step": 2,
+   "color": "#2f2f2d"
+  },
+  {
+   "name": "speaker_r",
+   "label": "PC68-4 right",
+   "process": "Dayton Audio PC68-4",
+   "printed": false,
+   "qty": 1,
+   "step": 2,
+   "color": "#2f2f2d"
+  },
+  {
+   "name": "tray",
+   "label": "Amplifier tray",
+   "process": "FDM, grey",
+   "printed": true,
+   "qty": 1,
+   "step": 3,
+   "color": "#8b8e91",
+   "print_size": [
+    72.5,
+    81.0,
+    15.5
+   ],
+   "volume_cm3": 16.7,
+   "mass_solid_g": 20.8
+  },
+  {
+   "name": "amp_board",
+   "label": "ZK-502C board",
+   "process": "ZK-502C Bluetooth amplifier",
+   "printed": false,
+   "qty": 1,
+   "step": 3,
+   "color": "#1c1c1c"
+  },
+  {
+   "name": "amp_parts",
+   "label": "ZK-502C parts",
+   "process": "Part of the ZK-502C",
+   "printed": false,
+   "qty": 1,
+   "step": 3,
+   "color": "#55575a"
+  },
+  {
+   "name": "rear_panel",
+   "label": "Rear panel",
+   "process": "FDM, grey",
+   "printed": true,
+   "qty": 1,
+   "step": 5,
+   "color": "#8b8e91",
+   "print_size": [
+    159.4,
+    101.4,
+    3.0
+   ],
+   "volume_cm3": 48.1,
+   "mass_solid_g": 59.6
+  },
+  {
+   "name": "pot_nut",
+   "label": "Volume control nut",
+   "process": "Supplied with the ZK-502C",
+   "printed": false,
+   "qty": 1,
+   "step": 6,
+   "color": "#9a9a9a"
+  },
+  {
+   "name": "control_strip",
+   "label": "Control strip",
+   "process": "FDM, white",
+   "printed": true,
+   "qty": 1,
+   "step": 6,
+   "color": "#f2f1ec",
+   "print_size": [
+    159.4,
+    29.7,
+    4.0
+   ],
+   "volume_cm3": 6.8,
+   "mass_solid_g": 8.5
+  },
+  {
+   "name": "grille",
+   "label": "Front grille (lattice)",
+   "process": "FDM, grey, front face down, 0.4 mm nozzle",
+   "printed": true,
+   "qty": 1,
+   "step": 6,
+   "color": "#8b8e91",
+   "print_size": [
+    159.4,
+    71.2,
+    4.0
+   ],
+   "volume_cm3": 5.8,
+   "mass_solid_g": 7.2
+  },
+  {
+   "name": "knob",
+   "label": "Knob",
+   "process": "FDM, orange",
+   "printed": true,
+   "qty": 1,
+   "step": 6,
+   "color": "#e2541f",
+   "print_size": [
+    22.0,
+    22.0,
+    12.0
+   ],
+   "volume_cm3": 3.9,
+   "mass_solid_g": 4.8
+  },
+  {
+   "name": "knob_mark",
+   "label": "Knob mark",
+   "process": "FDM, white",
+   "printed": true,
+   "qty": 1,
+   "step": 6,
+   "color": "#f2f1ec",
+   "print_size": [
+    1.4,
+    5.5,
+    1.2
+   ],
+   "volume_cm3": 0.0,
+   "mass_solid_g": 0.0
+  },
+  {
+   "name": "screws_front",
+   "label": "Screws: baffle to sleeve",
+   "process": "M3 x 8 socket head cap screw",
+   "printed": false,
+   "qty": 4,
+   "step": 4,
+   "color": "#2b2b2b"
+  },
+  {
+   "name": "inserts_front",
+   "label": "Inserts: baffle to sleeve",
+   "process": "M3 heat-set insert, short (3 mm)",
+   "printed": false,
+   "qty": 4,
+   "step": 1,
+   "color": "#c9a24a"
+  },
+  {
+   "name": "screws_tray",
+   "label": "Screws: tray to baffle",
+   "process": "M3 x 8 socket head cap screw",
+   "printed": false,
+   "qty": 2,
+   "step": 3,
+   "color": "#2b2b2b"
+  },
+  {
+   "name": "inserts_tray",
+   "label": "Inserts: tray to baffle",
+   "process": "M3 heat-set insert, short (3 mm)",
+   "printed": false,
+   "qty": 2,
+   "step": 3,
+   "color": "#c9a24a"
+  },
+  {
+   "name": "screws_rear",
+   "label": "Screws: rear panel to sleeve",
+   "process": "M3 x 6 socket head cap screw",
+   "printed": false,
+   "qty": 4,
+   "step": 5,
+   "color": "#2b2b2b"
+  },
+  {
+   "name": "inserts_rear",
+   "label": "Inserts: rear panel to sleeve",
+   "process": "M3 heat-set insert, short (3 mm)",
+   "printed": false,
+   "qty": 4,
+   "step": 1,
+   "color": "#c9a24a"
+  },
+  {
+   "name": "screws_speaker",
+   "label": "Screws: speakers",
+   "process": "M3 x 5 pan head",
+   "printed": false,
+   "qty": 8,
+   "step": 2,
+   "color": "#2b2b2b"
+  },
+  {
+   "name": "inserts_speaker",
+   "label": "Inserts: speakers",
+   "process": "M3 heat-set insert, short (3 mm)",
+   "printed": false,
+   "qty": 8,
+   "step": 2,
+   "color": "#c9a24a"
+  },
+  {
+   "name": "screws_board",
+   "label": "Screws: board to tray",
+   "process": "Self-tapping screw, 1.9 x 7, pan head 3.28 (your board screws)",
+   "printed": false,
+   "qty": 2,
+   "step": 3,
+   "color": "#2b2b2b"
+  }
+ ],
+ "fasteners": [
+  {
+   "group": "front",
+   "kind": "cap3",
+   "at": [
+    -75.5,
+    -45.5,
+    7.5
+   ],
+   "dir": [
+    0,
+    1,
+    0
+   ],
+   "through": 4.0,
+   "len": 8
+  },
+  {
+   "group": "rear",
+   "kind": "cap3",
+   "at": [
+    -75.5,
+    47.0,
+    7.5
+   ],
+   "dir": [
+    0,
+    -1,
+    0
+   ],
+   "through": 3.0,
+   "len": 6
+  },
+  {
+   "group": "front",
+   "kind": "cap3",
+   "at": [
+    -75.5,
+    -45.5,
+    100.5
+   ],
+   "dir": [
+    0,
+    1,
+    0
+   ],
+   "through": 4.0,
+   "len": 8
+  },
+  {
+   "group": "rear",
+   "kind": "cap3",
+   "at": [
+    -75.5,
+    47.0,
+    100.5
+   ],
+   "dir": [
+    0,
+    -1,
+    0
+   ],
+   "through": 3.0,
+   "len": 6
+  },
+  {
+   "group": "front",
+   "kind": "cap3",
+   "at": [
+    75.5,
+    -45.5,
+    7.5
+   ],
+   "dir": [
+    0,
+    1,
+    0
+   ],
+   "through": 4.0,
+   "len": 8
+  },
+  {
+   "group": "rear",
+   "kind": "cap3",
+   "at": [
+    75.5,
+    47.0,
+    7.5
+   ],
+   "dir": [
+    0,
+    -1,
+    0
+   ],
+   "through": 3.0,
+   "len": 6
+  },
+  {
+   "group": "front",
+   "kind": "cap3",
+   "at": [
+    75.5,
+    -45.5,
+    100.5
+   ],
+   "dir": [
+    0,
+    1,
+    0
+   ],
+   "through": 4.0,
+   "len": 8
+  },
+  {
+   "group": "rear",
+   "kind": "cap3",
+   "at": [
+    75.5,
+    47.0,
+    100.5
+   ],
+   "dir": [
+    0,
+    -1,
+    0
+   ],
+   "through": 3.0,
+   "len": 6
+  },
+  {
+   "group": "tray",
+   "kind": "cap3",
+   "at": [
+    1.3,
+    -45.5,
+    13.0
+   ],
+   "dir": [
+    0,
+    1,
+    0
+   ],
+   "through": 4.0,
+   "len": 8
+  },
+  {
+   "group": "tray",
+   "kind": "cap3",
+   "at": [
+    62.8,
+    -45.5,
+    13.0
+   ],
+   "dir": [
+    0,
+    1,
+    0
+   ],
+   "through": 4.0,
+   "len": 8
+  },
+  {
+   "group": "speaker",
+   "kind": "pan3",
+   "at": [
+    -63.09,
+    -37.9,
+    43.41
+   ],
+   "dir": [
+    0,
+    -1,
+    0
+   ],
+   "through": 0.6,
+   "len": 5
+  },
+  {
+   "group": "speaker",
+   "kind": "pan3",
+   "at": [
+    -63.09,
+    -37.9,
+    95.59
+   ],
+   "dir": [
+    0,
+    -1,
+    0
+   ],
+   "through": 0.6,
+   "len": 5
+  },
+  {
+   "group": "speaker",
+   "kind": "pan3",
+   "at": [
+    -10.91,
+    -37.9,
+    43.41
+   ],
+   "dir": [
+    0,
+    -1,
+    0
+   ],
+   "through": 0.6,
+   "len": 5
+  },
+  {
+   "group": "speaker",
+   "kind": "pan3",
+   "at": [
+    -10.91,
+    -37.9,
+    95.59
+   ],
+   "dir": [
+    0,
+    -1,
+    0
+   ],
+   "through": 0.6,
+   "len": 5
+  },
+  {
+   "group": "speaker",
+   "kind": "pan3",
+   "at": [
+    10.91,
+    -37.9,
+    43.41
+   ],
+   "dir": [
+    0,
+    -1,
+    0
+   ],
+   "through": 0.6,
+   "len": 5
+  },
+  {
+   "group": "speaker",
+   "kind": "pan3",
+   "at": [
+    10.91,
+    -37.9,
+    95.59
+   ],
+   "dir": [
+    0,
+    -1,
+    0
+   ],
+   "through": 0.6,
+   "len": 5
+  },
+  {
+   "group": "speaker",
+   "kind": "pan3",
+   "at": [
+    63.09,
+    -37.9,
+    43.41
+   ],
+   "dir": [
+    0,
+    -1,
+    0
+   ],
+   "through": 0.6,
+   "len": 5
+  },
+  {
+   "group": "speaker",
+   "kind": "pan3",
+   "at": [
+    63.09,
+    -37.9,
+    95.59
+   ],
+   "dir": [
+    0,
+    -1,
+    0
+   ],
+   "through": 0.6,
+   "len": 5
+  },
+  {
+   "group": "board",
+   "kind": "tap2",
+   "at": [
+    9.8,
+    19.77,
+    12.6
+   ],
+   "dir": [
+    0,
+    0,
+    -1
+   ],
+   "through": 1.6,
+   "len": 7
+  },
+  {
+   "group": "board",
+   "kind": "tap2",
+   "at": [
+    54.3,
+    19.77,
+    12.6
+   ],
+   "dir": [
+    0,
+    0,
+    -1
+   ],
+   "through": 1.6,
+   "len": 7
+  }
+ ],
+ "snaps": [
+  {
+   "x": -63.75,
+   "z": 36.5,
+   "side": -1,
+   "cover": "grille"
+  },
+  {
+   "x": -63.75,
+   "z": 101.7,
+   "side": 1,
+   "cover": "grille"
+  },
+  {
+   "x": 63.75,
+   "z": 36.5,
+   "side": -1,
+   "cover": "grille"
+  },
+  {
+   "x": 63.75,
+   "z": 101.7,
+   "side": 1,
+   "cover": "grille"
+  },
+  {
+   "x": -60.0,
+   "z": 24.0,
+   "side": 1,
+   "cover": "strip"
+  },
+  {
+   "x": -60.0,
+   "z": 9.0,
+   "side": -1,
+   "cover": "strip"
+  },
+  {
+   "x": 62.0,
+   "z": 26.0,
+   "side": 1,
+   "cover": "strip"
+  },
+  {
+   "x": 27.0,
+   "z": 7.0,
+   "side": -1,
+   "cover": "strip"
+  }
+ ]
+}

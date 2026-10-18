@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bluespeaker Design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+} }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<style>
+:root {
+  --bg: #f1efea;
+  --paper: #fbfaf7;
+  --ink: #1d1d1b;
+  --muted: #6e6c66;
+  --line: #d9d6ce;
+  --shell: #ebe8e0;
+  --shell-edge: #c9c5ba;
+  --strip: #c8c8c4;
+  --hole: #2a2a28;
+  --orange: #e2541f;
+  --grey-key: #b9b8b2;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: Inter, Helvetica, Arial, sans-serif; line-height: 1.55;
+}
+header {
+  padding: 48px 16px 24px; max-width: 1100px; margin: 0 auto;
+  display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap;
+}
+header h1 { margin: 0; font-weight: 700; letter-spacing: -0.02em; font-size: 2.2rem; }
+header .dot { width: 14px; height: 14px; border-radius: 50%; background: var(--orange); display: inline-block; }
+header p { margin: 0; color: var(--muted); }
+main { max-width: 1100px; margin: 0 auto; padding: 0 16px 80px; }
+.views {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 40px;
+}
+.card {
+  background: var(--paper); border: 1px solid var(--line); border-radius: 6px;
+  padding: 20px;
+}
+.card.wide { grid-column: 1 / -1; }
+.card h2 { margin: 0 0 4px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); font-weight: 500; }
+.card .note { color: var(--muted); font-size: 0.85rem; margin: 8px 0 0; }
+svg { width: 100%; height: auto; display: block; }
+label.toggle { font-size: 0.85rem; color: var(--muted); cursor: pointer; user-select: none; }
+.lcd-wrap { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
+.lcd-wrap svg { max-width: 480px; flex: 1 1 320px; }
+.lcd-wrap ul { flex: 1 1 240px; margin: 0; padding-left: 18px; color: var(--muted); font-size: 0.9rem; }
+.tabs { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+.tabs button {
+  font: inherit; font-size: 0.85rem; border: 1px solid var(--line); background: var(--bg);
+  padding: 4px 12px; border-radius: 999px; cursor: pointer; color: var(--ink);
+}
+.tabs button.on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.md { background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 8px 32px 32px; }
+.md h1 { font-size: 1.8rem; letter-spacing: -0.02em; }
+.md h2 { border-top: 1px solid var(--line); padding-top: 24px; margin-top: 40px; }
+.md table { border-collapse: collapse; width: 100%; font-size: 0.9rem; display: block; overflow-x: auto; }
+.md th, .md td { border-bottom: 1px solid var(--line); padding: 6px 10px; text-align: left; vertical-align: top; }
+.md th { background: var(--bg); }
+.md code { font-family: "JetBrains Mono", monospace; font-size: 0.85em; background: var(--bg); padding: 1px 4px; border-radius: 3px; }
+.md pre { background: var(--bg); padding: 12px; border-radius: 4px; overflow-x: auto; line-height: 1.25; }
+.md pre code { background: none; padding: 0; }
+.md .mermaid { background: var(--paper); text-align: center; }
+.md a { color: var(--orange); }
+.model { display: grid; grid-template-columns: 1fr 240px; gap: 16px; }
+#stage { position: relative; height: 560px; border-radius: 4px; overflow: hidden; background: radial-gradient(circle at 50% 40%, #ffffff, #e4e1d9); }
+#stage canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+#stage .status { position: absolute; inset: auto 12px 10px auto; font-size: 0.8rem; color: var(--muted); }
+#pick { position: absolute; left: 12px; top: 10px; font-size: 0.85rem; background: #fbfaf7e6; border: 1px solid var(--line); border-radius: 4px; padding: 6px 10px; display: none; }
+.ctl { display: flex; flex-direction: column; gap: 12px; font-size: 0.85rem; }
+.ctl input[type=range] { width: 100%; accent-color: var(--orange); }
+.ctl .row { display: flex; gap: 8px; flex-wrap: wrap; }
+.ctl button { font: inherit; font-size: 0.8rem; border: 1px solid var(--line); background: var(--bg); padding: 4px 10px; border-radius: 4px; cursor: pointer; color: var(--ink); }
+.ctl button:hover { border-color: var(--ink); }
+#parts { list-style: none; margin: 0; padding: 0; max-height: 330px; overflow-y: auto; border-top: 1px solid var(--line); }
+#parts li { display: flex; align-items: center; gap: 8px; padding: 3px 0; border-bottom: 1px solid var(--line); cursor: pointer; }
+#parts li.sel { font-weight: 700; }
+.pcbsides { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+.pcbsides figure { margin: 0; }
+.pcbsides img { width: 100%; border-radius: 4px; }
+.pcbsides figcaption { font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
+@media (max-width: 760px) { .pcbsides { grid-template-columns: 1fr; } }
+#parts li.dim { opacity: 0.35; }
+#parts li.cur .lbl { color: var(--orange); font-weight: 700; }
+.stepbar { display: flex; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 4px; padding: 6px; background: var(--bg); }
+.stepbar span { flex: 1; text-align: center; font-size: 0.8rem; line-height: 1.3; }
+.md .show3d { margin-left: 12px; font: inherit; font-size: 0.75rem; vertical-align: middle; border: 1px solid var(--orange); color: var(--orange); background: transparent; border-radius: 999px; padding: 2px 10px; cursor: pointer; }
+.md .show3d:hover { background: var(--orange); color: #fff; }
+.md blockquote { margin: 12px 0; padding: 8px 14px; border-left: 4px solid var(--orange); background: var(--bg); }
+.md blockquote p { margin: 0; }
+#assembly { margin-bottom: 32px; }
+#parts .sw { width: 10px; height: 10px; border-radius: 2px; flex: none; border: 1px solid #0003; }
+#parts li span.lbl { flex: 1; }
+#parts .tag { color: var(--muted); font-size: 0.7rem; }
+@media (max-width: 760px) {
+  .model { grid-template-columns: 1fr; }
+  #stage { height: 420px; }
+  .views { grid-template-columns: 1fr; }
+  .md { padding: 4px 16px 16px; }
+  header { padding-top: 24px; }
+}
+</style>
+</head>
+<body>
+<header>
+  <span class="dot"></span>
+  <h1>Bluespeaker</h1>
+  <p>Stereo Spotify Connect and Bluetooth speaker · concept rev 0.1 · <a href="mini.html" style="color:var(--orange)">Mini version</a></p>
+</header>
+<main>
+  <section class="views">
+    <div class="card wide">
+      <h2>3D model · cad/bluespeaker.py</h2>
+      <div class="model">
+        <div id="stage"><div id="pick"></div><div class="status" id="status">Loading parts…</div></div>
+        <div class="ctl">
+          <label>Explode <input type="range" id="explode" min="0" max="1" step="0.01" value="0"></label>
+          <div class="row">
+            <button id="anim">Explode</button>
+            <button id="reset">Reset view</button>
+          </div>
+          <div class="stepbar">
+            <button id="sPrev" aria-label="Previous step">&#9664;</button>
+            <span id="sLbl">Assembly steps</span>
+            <button id="sNext" aria-label="Next step">&#9654;</button>
+          </div>
+          <button id="sAll">Show all parts</button>
+          <label><input type="checkbox" id="ghost"> Transparent sleeve</label>
+          <label><input type="checkbox" id="refs" checked> Bought parts</label>
+          <label><input type="checkbox" id="edges" checked> Edges</label>
+          <ul id="parts"></ul>
+        </div>
+      </div>
+      <p class="note">Drag to orbit. Scroll to zoom. Right-drag to pan. Click a part, or its name in the list, to see its size, quantity, and step. Click a colour square to hide or show a part. Use the arrows to go through the assembly steps.</p>
+    </div>
+    <div class="card wide">
+      <h2>Main PCB · pcb/bluespeaker.kicad_pcb</h2>
+      <img src="pcb/iso.png" alt="Main PCB, 3D view of the rear side" style="width:100%;border-radius:4px">
+      <div class="pcbsides">
+        <figure><img src="pcb/top.png" alt="Top side"><figcaption>Top side (faces the rear): ESP32-S3 at the left with the antenna at the board edge, TAS5805M amplifier, Bluetooth module, BQ25792 charger, and 3.3 V buck.</figcaption></figure>
+        <figure><img src="pcb/bottom.png" alt="Bottom side"><figcaption>Bottom side (faces the baffle): three key switches and the LCD connector.</figcaption></figure>
+      </div>
+      <p class="note">224 × 46 mm, 4 layers, 71 parts. Placement only: no tracks yet. ERC 0, DRC 0 errors, schematic and PCB in sync. Made by <code>pcb/build.py</code> from <code>pcb/netlist.py</code>.</p>
+    </div>
+    <div class="card wide">
+      <h2>Front view · scale 1:1 mm</h2>
+      <label class="toggle"><input type="checkbox" id="xray"> Show the parts behind the grille</label>
+      <svg id="front" viewBox="-12 -12 284 200" aria-label="Front view"></svg>
+      <p class="note">260 × 165 mm. The grille has 3.0 mm holes at a 4.5 mm pitch. The drivers are 140 mm apart.</p>
+    </div>
+    <div class="card">
+      <h2>Rear view</h2>
+      <svg id="rear" viewBox="-12 -12 284 200" aria-label="Rear view"></svg>
+      <p class="note">2× ND90-PR passive radiators (low) and the USB-C port (high).</p>
+    </div>
+    <div class="card">
+      <h2>Side section</h2>
+      <svg id="side" viewBox="-20 -12 158 200" aria-label="Side section"></svg>
+      <p class="note">120 mm deep, section through one driver and one radiator. The battery is a 3-cell stick in the electronics bay.</p>
+    </div>
+    <div class="card wide">
+      <h2>LCD UI · 320 × 240</h2>
+      <div class="tabs" id="tabs">
+        <button data-s="now" class="on">Now playing</button>
+        <button data-s="lib">Library</button>
+        <button data-s="src">Source</button>
+      </div>
+      <div class="lcd-wrap">
+        <svg id="lcd" viewBox="0 0 320 240" aria-label="LCD mock-up"></svg>
+        <ul>
+          <li>Black background, off-white text, one orange accent.</li>
+          <li>Album art at 150 × 150 (300 px JPEG at 1/2 scale).</li>
+          <li>The knob scrolls lists. A knob push selects.</li>
+          <li>The source icon is at the top right.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <article id="assembly" class="md">Loading ASSEMBLY.md…</article>
+  <article id="doc" class="md">Loading DESIGN.md…</article>
+</main>
+
+<script>
+const NS = "http://www.w3.org/2000/svg";
+function el(parent, tag, attrs, text) {
+  const e = document.createElementNS(NS, tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (text != null) e.textContent = text;
+  parent.appendChild(e);
+  return e;
+}
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+
+/* ---------- Front view ---------- */
+function drawFront() {
+  const s = document.getElementById("front");
+  s.innerHTML = "";
+  const W = 260, H = 165, GRILLE = 109, R = 4;
+  el(s, "rect", { x: 2, y: 3, width: W, height: H, rx: R, fill: "#00000014" });
+  el(s, "rect", { x: 0, y: 0, width: W, height: H, rx: R, fill: css("--shell"), stroke: css("--shell-edge"), "stroke-width": 0.6 });
+  // control strip
+  el(s, "rect", { x: 6, y: GRILLE, width: W - 12, height: H - GRILLE - 6, rx: 1.5, fill: css("--strip") });
+  // hole grid
+  const g = el(s, "g", { fill: css("--hole") });
+  const pitch = 4.5, m = 9;
+  for (let y = m; y <= GRILLE - 7; y += pitch)
+    for (let x = m; x <= W - m + 0.01; x += pitch)
+      el(g, "circle", { cx: x, cy: y, r: 1.5 });
+  // x-ray
+  if (document.getElementById("xray").checked) {
+    const x = el(s, "g", { fill: "none", stroke: css("--orange"), "stroke-width": 0.6, "stroke-dasharray": "2 1.5" });
+    for (const cx of [60, 200]) {
+      el(x, "circle", { cx, cy: 56.5, r: 103.5 / 2 });
+      el(x, "circle", { cx, cy: 56.5, r: 44 });
+      el(s, "text", { x: cx, y: 58.5, "text-anchor": "middle", "font-size": 5, fill: css("--orange"), "font-weight": 700 }, "ND90-4");
+    }
+    el(x, "rect", { x: 14, y: 112, width: 220, height: 46, rx: 1 });
+    el(s, "text", { x: 130, y: 160, "text-anchor": "middle", "font-size": 3.6, fill: css("--orange") }, "main PCB 220 × 46");
+  }
+  // LCD window
+  el(s, "rect", { x: 18, y: 113, width: 62, height: 44, rx: 2, fill: "#141414" });
+  el(s, "rect", { x: 21, y: 116.5, width: 56, height: 37, fill: "#000" });
+  miniLcd(s, 21, 116.5, 56, 37);
+  // keys
+  [[112, css("--grey-key")], [130, css("--orange")], [148, css("--grey-key")]].forEach(([cx, c]) => {
+    el(s, "circle", { cx, cy: 135, r: 6.6, fill: "#9a9993" });
+    el(s, "circle", { cx, cy: 135, r: 6, fill: c });
+    el(s, "circle", { cx: cx - 1.8, cy: 133, r: 2.2, fill: "#ffffff40" });
+  });
+  // knob
+  el(s, "circle", { cx: 222, cy: 135, r: 16, fill: "#a8a7a1" });
+  el(s, "circle", { cx: 222, cy: 135, r: 15, fill: css("--grey-key") });
+  for (let a = 0; a < 360; a += 6) {
+    const r1 = 13.6, r2 = 15, t = a * Math.PI / 180;
+    el(s, "line", { x1: 222 + r1 * Math.cos(t), y1: 135 + r1 * Math.sin(t), x2: 222 + r2 * Math.cos(t), y2: 135 + r2 * Math.sin(t), stroke: "#8e8d87", "stroke-width": 0.35 });
+  }
+  el(s, "line", { x1: 222, y1: 122, x2: 222, y2: 129, stroke: css("--orange"), "stroke-width": 1.4, "stroke-linecap": "round" });
+  // labels
+  [["prev", 112], ["play", 130], ["next", 148]].forEach(([t, x]) =>
+    el(s, "text", { x, y: 149.5, "text-anchor": "middle", "font-size": 3.2, fill: "#55544f" }, t));
+  // dimensions
+  dim(s, 0, H + 8, W, H + 8, "260");
+  dimV(s, W + 8, 0, W + 8, H, "165");
+}
+function miniLcd(s, x, y, w, h) {
+  el(s, "rect", { x: x + 3, y: y + 4, width: 22, height: 22, fill: css("--orange") });
+  el(s, "circle", { cx: x + 14, cy: y + 15, r: 6, fill: "#1a1a1a" });
+  el(s, "rect", { x: x + 28, y: y + 7, width: 22, height: 2.4, fill: "#eee" });
+  el(s, "rect", { x: x + 28, y: y + 12, width: 15, height: 1.8, fill: "#888" });
+  el(s, "rect", { x: x + 3, y: y + 31, width: w - 6, height: 0.8, fill: "#444" });
+  el(s, "rect", { x: x + 3, y: y + 31, width: (w - 6) * 0.4, height: 0.8, fill: css("--orange") });
+}
+function dim(s, x1, y1, x2, y2, t) {
+  const g = el(s, "g", { stroke: css("--muted"), "stroke-width": 0.3 });
+  el(g, "line", { x1, y1, x2, y2 });
+  el(g, "line", { x1, y1: y1 - 2, x2: x1, y2: y1 + 2 });
+  el(g, "line", { x1: x2, y1: y2 - 2, x2, y2: y2 + 2 });
+  el(s, "text", { x: (x1 + x2) / 2, y: y1 - 1.5, "text-anchor": "middle", "font-size": 4, fill: css("--muted") }, t);
+}
+function dimV(s, x1, y1, x2, y2, t) {
+  const g = el(s, "g", { stroke: css("--muted"), "stroke-width": 0.3 });
+  el(g, "line", { x1, y1, x2, y2 });
+  el(g, "line", { x1: x1 - 2, y1, x2: x1 + 2, y2: y1 });
+  el(g, "line", { x1: x2 - 2, y1: y2, x2: x2 + 2, y2 });
+  el(s, "text", { x: x1 + 1.5, y: (y1 + y2) / 2, "font-size": 4, fill: css("--muted"), transform: `rotate(90 ${x1 + 1.5} ${(y1 + y2) / 2})`, "text-anchor": "middle" }, t);
+}
+
+/* ---------- Rear view ---------- */
+function drawRear() {
+  const s = document.getElementById("rear");
+  const W = 260, H = 165, CY = 105;
+  el(s, "rect", { x: 0, y: 0, width: W, height: H, rx: 4, fill: css("--shell"), stroke: css("--shell-edge"), "stroke-width": 0.6 });
+  el(s, "rect", { x: 4, y: 4, width: W - 8, height: H - 8, rx: 1, fill: "#d8d4ca" });
+  for (const cx of [72, 188]) {
+    el(s, "circle", { cx, cy: CY, r: 44, fill: "#2b2b29" });
+    el(s, "circle", { cx, cy: CY, r: 36, fill: "#4a4a46" });
+    el(s, "circle", { cx, cy: CY, r: 36, fill: "none", stroke: "#777", "stroke-width": 0.4 });
+    el(s, "text", { x: cx, y: CY + 2, "text-anchor": "middle", "font-size": 5, fill: "#ccc" }, "ND90-PR");
+  }
+  el(s, "rect", { x: 125.2, y: 18.2, width: 9.6, height: 3.6, rx: 1.8, fill: "#222" });
+  el(s, "text", { x: 130, y: 30, "text-anchor": "middle", "font-size": 3.6, fill: css("--muted") }, "USB-C PD");
+  el(s, "text", { x: 10, y: 14, "font-size": 3.6, fill: css("--muted") }, "bluespeaker · 11.1 V 50 Wh");
+}
+
+/* ---------- Side section ---------- */
+function drawSide() {
+  // Section at x = 70 (driver) and x = 58 (radiator). Front is left.
+  const s = document.getElementById("side");
+  const D = 120, H = 165, w = 4, Z = z => H - z, Y = y => y + 60;
+  el(s, "rect", { x: 0, y: 0, width: D, height: H, rx: 4, fill: css("--shell"), stroke: css("--shell-edge"), "stroke-width": 0.6 });
+  el(s, "rect", { x: w, y: w, width: D - 2 * w, height: H - 2 * w, fill: "#f7f5f0" });
+  // grille + strip, baffle, rear panel
+  el(s, "rect", { x: Y(-60), y: Z(161), width: 2, height: 104.5, fill: "#cfcbc0" });
+  el(s, "rect", { x: Y(-60), y: Z(56), width: 2, height: 52, fill: "#a9a9a4" });
+  el(s, "rect", { x: Y(-58), y: w, width: 6, height: H - 2 * w, fill: "#d8d4ca" });
+  el(s, "rect", { x: Y(54), y: w, width: 6, height: H - 2 * w, fill: "#d8d4ca" });
+  // driver: flange at the baffle, body to the rear
+  const dz = 108.5;
+  el(s, "path", { d: `M${Y(-52)} ${Z(dz + 51.75)} h4 L${Y(-18)} ${Z(dz + 26)} V${Z(dz - 26)} L${Y(-48)} ${Z(dz - 51.75)} h-4 Z`, fill: "#3a3a37" });
+  el(s, "rect", { x: Y(-18), y: Z(dz + 28), width: 26.8, height: 56, rx: 2, fill: "#55554f" });
+  el(s, "text", { x: Y(-30), y: Z(dz) + 1.5, "font-size": 4, fill: "#fff", "text-anchor": "middle" }, "ND90-4");
+  // radiator: flange at the rear panel, body to the front
+  const pz = 60;
+  el(s, "path", { d: `M${Y(54)} ${Z(pz + 51.7)} h-4 L${Y(30)} ${Z(pz + 34)} V${Z(pz - 34)} L${Y(50)} ${Z(pz - 51.7)} h4 Z`, fill: "#3a3a37" });
+  el(s, "rect", { x: Y(-7), y: Z(pz + 14), width: 4, height: 28, fill: "#55554f" });
+  el(s, "rect", { x: Y(-3), y: Z(pz + 3), width: 33, height: 6, fill: "#55554f" });
+  el(s, "text", { x: Y(40), y: Z(pz) + 1.5, "font-size": 4, fill: "#fff", "text-anchor": "middle" }, "PR");
+  // brace
+  el(s, "rect", { x: Y(26), y: Z(144), width: 8, height: 8, fill: "#cfc6b4" });
+  // electronics bay
+  el(s, "rect", { x: Y(-52), y: Z(56), width: 43, height: 3, fill: "#cfc6b4" });
+  el(s, "rect", { x: Y(-12), y: Z(56), width: 3, height: 52, fill: "#cfc6b4" });
+  el(s, "rect", { x: Y(-45), y: Z(53), width: 1.6, height: 46, fill: "#2d6a3e" });
+  el(s, "rect", { x: Y(-51.5), y: Z(51), width: 4, height: 42, fill: "#111" });
+  el(s, "circle", { cx: Y(-24.5), cy: Z(18.5), r: 10.5, fill: "#5d7f9c" });
+  el(s, "text", { x: Y(-24.5), y: Z(18.5) + 1.3, "font-size": 3.4, fill: "#fff", "text-anchor": "middle" }, "3S");
+  el(s, "text", { x: Y(-40), y: Z(60) - 2, "font-size": 3.6, fill: "#55544f" }, "bay");
+  // knob
+  el(s, "rect", { x: Y(-75), y: Z(45), width: 14, height: 30, rx: 1, fill: css("--grey-key") });
+  el(s, "text", { x: 0, y: -4, "font-size": 4, fill: css("--muted") }, "front");
+  el(s, "text", { x: D, y: -4, "font-size": 4, fill: css("--muted"), "text-anchor": "end" }, "rear");
+  dim(s, 0, H + 8, D, H + 8, "120");
+}
+
+/* ---------- LCD mock ---------- */
+function drawLcd(screen) {
+  const s = document.getElementById("lcd");
+  s.innerHTML = "";
+  const O = css("--orange");
+  el(s, "rect", { x: 0, y: 0, width: 320, height: 240, fill: "#000" });
+  const font = { "font-family": "Inter, Helvetica, sans-serif" };
+  el(s, "text", { ...font, x: 12, y: 20, "font-size": 11, fill: "#777", "letter-spacing": 1.5 }, screen === "now" ? "NOW PLAYING" : screen === "lib" ? "LIBRARY" : "SOURCE");
+  el(s, "text", { ...font, x: 308, y: 20, "font-size": 11, fill: O, "text-anchor": "end", "font-weight": 700 }, "● SPOTIFY");
+  if (screen === "now") {
+    el(s, "rect", { x: 12, y: 36, width: 150, height: 150, fill: O });
+    el(s, "circle", { cx: 87, cy: 111, r: 46, fill: "#151515" });
+    el(s, "circle", { cx: 87, cy: 111, r: 10, fill: "#e8e4da" });
+    el(s, "rect", { x: 12, y: 36, width: 150, height: 40, fill: "#e8e4da" });
+    el(s, "text", { ...font, x: 176, y: 70, "font-size": 18, fill: "#f1efea", "font-weight": 700 }, "Ohm Sweet");
+    el(s, "text", { ...font, x: 176, y: 92, "font-size": 18, fill: "#f1efea", "font-weight": 700 }, "Ohm");
+    el(s, "text", { ...font, x: 176, y: 116, "font-size": 13, fill: "#999" }, "Kraftwerk");
+    el(s, "text", { ...font, x: 176, y: 134, "font-size": 11, fill: "#666" }, "Radio-Activity, 1975");
+    // transport
+    el(s, "path", { d: "M188 168 l12 -8 v16 z M186 160 h3 v16 h-3 z", fill: "#bbb" });
+    el(s, "circle", { cx: 236, cy: 168, r: 14, fill: O });
+    el(s, "path", { d: "M231 161 v14 h3 v-14 z M238 161 v14 h3 v-14 z", fill: "#000" });
+    el(s, "path", { d: "M284 168 l-12 -8 v16 z M286 160 h-3 v16 h3 z", fill: "#bbb" });
+    el(s, "rect", { x: 12, y: 206, width: 296, height: 3, fill: "#333" });
+    el(s, "rect", { x: 12, y: 206, width: 118, height: 3, fill: O });
+    el(s, "text", { ...font, x: 12, y: 228, "font-size": 11, fill: "#777" }, "3:12");
+    el(s, "text", { ...font, x: 308, y: 228, "font-size": 11, fill: "#777", "text-anchor": "end" }, "7:39");
+  } else if (screen === "lib") {
+    const items = ["Discover Weekly", "Liked Songs", "Krautrock Essentials", "Late Night Jazz", "70s Soul", "Ambient Works"];
+    items.forEach((t, i) => {
+      const y = 36 + i * 32, sel = i === 2;
+      if (sel) el(s, "rect", { x: 0, y, width: 320, height: 30, fill: "#1c1c1c" });
+      if (sel) el(s, "rect", { x: 0, y, width: 4, height: 30, fill: O });
+      el(s, "rect", { x: 12, y: y + 3, width: 24, height: 24, fill: ["#e8e4da", O, "#777", "#444", "#b9b8b2", "#2a2a28"][i] });
+      el(s, "text", { ...font, x: 46, y: y + 20, "font-size": 14, fill: sel ? "#fff" : "#aaa", "font-weight": sel ? 700 : 400 }, t);
+    });
+  } else {
+    [["Spotify Connect", "Wi-Fi · bluespeaker", true], ["Bluetooth", "Not connected · hold play to pair", false]].forEach(([t, sub, on], i) => {
+      const y = 50 + i * 80;
+      el(s, "rect", { x: 12, y, width: 296, height: 66, rx: 4, fill: on ? "#1c1c1c" : "#0d0d0d", stroke: on ? O : "#333", "stroke-width": 1.5 });
+      el(s, "circle", { cx: 40, cy: y + 33, r: 8, fill: on ? O : "#333" });
+      el(s, "text", { ...font, x: 62, y: y + 30, "font-size": 16, fill: "#f1efea", "font-weight": 700 }, t);
+      el(s, "text", { ...font, x: 62, y: y + 48, "font-size": 11, fill: "#888" }, sub);
+    });
+  }
+}
+
+document.getElementById("xray").addEventListener("change", drawFront);
+document.getElementById("tabs").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  document.querySelectorAll("#tabs button").forEach(x => x.classList.toggle("on", x === b));
+  drawLcd(b.dataset.s);
+});
+drawFront(); drawRear(); drawSide(); drawLcd("now");
+
+/* ---------- Assembly instructions ---------- */
+fetch("ASSEMBLY.md", { cache: "no-store" }).then(r => r.text()).then(md => {
+  const art = document.getElementById("assembly");
+  art.innerHTML = marked.parse(md);
+  art.querySelectorAll("h2").forEach(h => {
+    const m = h.textContent.match(/^Step (\d+)/);
+    if (!m || +m[1] > 9) return;
+    const b = document.createElement("button");
+    b.className = "show3d"; b.textContent = "Show in 3D";
+    b.addEventListener("click", () => window.bsShowStep && window.bsShowStep(+m[1]));
+    h.appendChild(b);
+  });
+}).catch(err => { document.getElementById("assembly").textContent = "Could not load ASSEMBLY.md: " + err; });
+
+/* ---------- Design document ---------- */
+mermaid.initialize({ startOnLoad: false, theme: "neutral", fontFamily: "Inter" });
+fetch("DESIGN.md", { cache: "no-store" }).then(r => r.text()).then(async md => {
+  const doc = document.getElementById("doc");
+  doc.innerHTML = marked.parse(md);
+  doc.querySelectorAll("pre code.language-mermaid").forEach(c => {
+    const d = document.createElement("div");
+    d.className = "mermaid"; d.textContent = c.textContent;
+    c.parentElement.replaceWith(d);
+  });
+  await mermaid.run({ querySelector: "#doc .mermaid" });
+}).catch(err => { document.getElementById("doc").textContent = "Could not load DESIGN.md: " + err; });
+</script>
+
+<script type="module" src="viewer.js"></script>
+</body>
+</html>

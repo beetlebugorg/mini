@@ -1,0 +1,37 @@
+{
+ "parts": [
+  {
+   "name": "sleeve",
+   "color": "#8b8e91",
+   "file": "glb/cut_snap/sleeve.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  },
+  {
+   "name": "baffle",
+   "color": "#e2541f",
+   "file": "glb/cut_snap/baffle.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  },
+  {
+   "name": "grille",
+   "color": "#8b8e91",
+   "file": "glb/cut_snap/grille.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  }
+ ]
+}

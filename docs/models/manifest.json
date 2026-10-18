@@ -1,0 +1,1040 @@
+{
+  "steps": [
+    {
+      "n": 1,
+      "title": "Prepare the sleeve",
+      "groups": [
+        "shell"
+      ]
+    },
+    {
+      "n": 2,
+      "title": "Mount the drivers on the baffle",
+      "groups": [
+        "front"
+      ]
+    },
+    {
+      "n": 3,
+      "title": "Fit the keys and the LCD",
+      "groups": [
+        "front"
+      ]
+    },
+    {
+      "n": 4,
+      "title": "Fit the main PCB",
+      "groups": [
+        "front"
+      ]
+    },
+    {
+      "n": 5,
+      "title": "Fit the bay wall and the battery",
+      "groups": [
+        "front"
+      ]
+    },
+    {
+      "n": 6,
+      "title": "Build the rear panel",
+      "groups": [
+        "rear"
+      ]
+    },
+    {
+      "n": 7,
+      "title": "Install the front module",
+      "groups": [
+        "shell",
+        "front"
+      ],
+      "move": {
+        "groups": [
+          "front"
+        ],
+        "by": [
+          0,
+          -200,
+          0
+        ]
+      }
+    },
+    {
+      "n": 8,
+      "title": "Install the rear panel",
+      "groups": [
+        "shell",
+        "front",
+        "rear"
+      ],
+      "move": {
+        "groups": [
+          "rear"
+        ],
+        "by": [
+          0,
+          160,
+          0
+        ]
+      }
+    },
+    {
+      "n": 9,
+      "title": "Fit the covers and the knob",
+      "groups": [
+        "shell",
+        "front",
+        "rear",
+        "covers"
+      ]
+    }
+  ],
+  "parts": [
+    {
+      "name": "sleeve",
+      "label": "Sleeve",
+      "color": "#ebe8e0",
+      "printed": true,
+      "process": "FDM or resin",
+      "explode": [
+        0,
+        0,
+        190
+      ],
+      "step": 1,
+      "group": "shell",
+      "qty": 1,
+      "file": "models/sleeve.glb",
+      "size": [
+        260.0,
+        120.0,
+        165.0
+      ]
+    },
+    {
+      "name": "brace",
+      "label": "Brace",
+      "color": "#cfc6b4",
+      "printed": true,
+      "process": "FDM",
+      "explode": [
+        0,
+        0,
+        250
+      ],
+      "step": 1,
+      "group": "shell",
+      "qty": 1,
+      "file": "models/brace.glb",
+      "size": [
+        255.6,
+        8.0,
+        8.0
+      ]
+    },
+    {
+      "name": "feet",
+      "label": "Feet",
+      "color": "#2a2a28",
+      "printed": true,
+      "process": "FDM (TPU)",
+      "explode": [
+        0,
+        0,
+        -60
+      ],
+      "step": 1,
+      "group": "shell",
+      "qty": 4,
+      "file": "models/feet.glb",
+      "size": [
+        232.0,
+        100.0,
+        3.9
+      ]
+    },
+    {
+      "name": "baffle",
+      "label": "Front baffle",
+      "color": "#d8d4ca",
+      "printed": true,
+      "process": "FDM or resin",
+      "explode": [
+        0,
+        -85,
+        0
+      ],
+      "step": 2,
+      "group": "front",
+      "qty": 1,
+      "file": "models/baffle.glb",
+      "size": [
+        251.6,
+        16.0,
+        156.6
+      ]
+    },
+    {
+      "name": "driver_l",
+      "label": "ND90-4 left",
+      "color": "#2f2f2d",
+      "printed": false,
+      "process": "Dayton Audio ND90-4",
+      "explode": [
+        0,
+        -45,
+        0
+      ],
+      "step": 2,
+      "group": "front",
+      "qty": 1,
+      "file": "models/driver_l.glb",
+      "size": [
+        88.5,
+        61.1,
+        88.5
+      ]
+    },
+    {
+      "name": "driver_r",
+      "label": "ND90-4 right",
+      "color": "#2f2f2d",
+      "printed": false,
+      "process": "Dayton Audio ND90-4",
+      "explode": [
+        0,
+        -45,
+        0
+      ],
+      "step": 2,
+      "group": "front",
+      "qty": 1,
+      "file": "models/driver_r.glb",
+      "size": [
+        88.5,
+        61.1,
+        88.5
+      ]
+    },
+    {
+      "name": "key_prev",
+      "label": "Key: prev",
+      "color": "#b9b8b2",
+      "printed": true,
+      "process": "Resin",
+      "explode": [
+        0,
+        -150,
+        0
+      ],
+      "step": 3,
+      "group": "front",
+      "qty": 1,
+      "file": "models/key_prev.glb",
+      "size": [
+        15.2,
+        16.5,
+        15.2
+      ]
+    },
+    {
+      "name": "key_play",
+      "label": "Key: play",
+      "color": "#e2541f",
+      "printed": true,
+      "process": "Resin, orange",
+      "explode": [
+        0,
+        -150,
+        0
+      ],
+      "step": 3,
+      "group": "front",
+      "qty": 1,
+      "file": "models/key_play.glb",
+      "size": [
+        15.2,
+        16.5,
+        15.2
+      ]
+    },
+    {
+      "name": "key_next",
+      "label": "Key: next",
+      "color": "#b9b8b2",
+      "printed": true,
+      "process": "Resin",
+      "explode": [
+        0,
+        -150,
+        0
+      ],
+      "step": 3,
+      "group": "front",
+      "qty": 1,
+      "file": "models/key_next.glb",
+      "size": [
+        15.2,
+        16.5,
+        15.2
+      ]
+    },
+    {
+      "name": "lcd_panel",
+      "label": "LCD glass",
+      "color": "#0d0d0f",
+      "printed": false,
+      "process": "2.4in TFT, ST7789 or ILI9341",
+      "explode": [
+        0,
+        -65,
+        0
+      ],
+      "step": 3,
+      "group": "front",
+      "qty": 1,
+      "file": "models/lcd_panel.glb",
+      "size": [
+        60.3,
+        2.2,
+        42.7
+      ]
+    },
+    {
+      "name": "lcd_backlight",
+      "label": "LCD backlight",
+      "color": "#cfd3d6",
+      "printed": false,
+      "process": "Part of the LCD module",
+      "explode": [
+        0,
+        -63,
+        0
+      ],
+      "step": 3,
+      "group": "front",
+      "qty": 1,
+      "file": "models/lcd_backlight.glb",
+      "size": [
+        60.3,
+        1.7,
+        42.7
+      ]
+    },
+    {
+      "name": "lcd_carrier",
+      "label": "LCD carrier PCB",
+      "color": "#2b5d9c",
+      "printed": false,
+      "process": "Part of the LCD module",
+      "explode": [
+        0,
+        -60,
+        0
+      ],
+      "step": 3,
+      "group": "front",
+      "qty": 1,
+      "file": "models/lcd_carrier.glb",
+      "size": [
+        73.0,
+        2.8,
+        44.0
+      ]
+    },
+    {
+      "name": "pcb_board",
+      "label": "Main PCB",
+      "color": "#2d6a3e",
+      "printed": false,
+      "process": "4-layer PCB, 224 x 46 mm",
+      "explode": [
+        0,
+        -35,
+        0
+      ],
+      "step": 4,
+      "group": "front",
+      "qty": 1,
+      "file": "models/pcb_board.glb",
+      "size": [
+        224.0,
+        1.6,
+        46.0
+      ]
+    },
+    {
+      "name": "pcb_parts",
+      "label": "PCB parts (ESP32-S3, TAS5805M, BT, JST)",
+      "color": "#8a8d91",
+      "printed": false,
+      "process": "Assembled by the PCB service",
+      "explode": [
+        0,
+        -35,
+        0
+      ],
+      "step": 4,
+      "group": "front",
+      "qty": 1,
+      "file": "models/pcb_parts.glb",
+      "size": [
+        193.9,
+        8.3,
+        32.4
+      ]
+    },
+    {
+      "name": "tact_switches",
+      "label": "Tact switches 6 x 6 x 5",
+      "color": "#2a2a28",
+      "printed": false,
+      "process": "THT, 5 mm high",
+      "explode": [
+        0,
+        -35,
+        0
+      ],
+      "step": 4,
+      "group": "front",
+      "qty": 1,
+      "file": "models/tact_switches.glb",
+      "size": [
+        43.2,
+        8.5,
+        6.0
+      ]
+    },
+    {
+      "name": "encoder",
+      "label": "Encoder EC11, 30 mm D-shaft",
+      "color": "#cfd3d6",
+      "printed": false,
+      "process": "EC11 type, 20 detents",
+      "explode": [
+        0,
+        -35,
+        0
+      ],
+      "step": 4,
+      "group": "front",
+      "qty": 1,
+      "file": "models/encoder.glb",
+      "size": [
+        11.7,
+        30.0,
+        12.0
+      ]
+    },
+    {
+      "name": "bay_wall",
+      "label": "Bay wall",
+      "color": "#cfc6b4",
+      "printed": true,
+      "process": "FDM (PETG)",
+      "explode": [
+        0,
+        0,
+        70
+      ],
+      "step": 5,
+      "group": "front",
+      "qty": 1,
+      "file": "models/bay_wall.glb",
+      "size": [
+        250.0,
+        43.0,
+        60.0
+      ]
+    },
+    {
+      "name": "battery_cells",
+      "label": "3S 21700 cells",
+      "color": "#3d6fa8",
+      "printed": false,
+      "process": "3x Molicel P45B",
+      "explode": [
+        0,
+        0,
+        -30
+      ],
+      "step": 5,
+      "group": "front",
+      "qty": 1,
+      "file": "models/battery_cells.glb",
+      "size": [
+        212.0,
+        21.0,
+        21.0
+      ]
+    },
+    {
+      "name": "battery_nickel",
+      "label": "Nickel strips",
+      "color": "#cfd3d6",
+      "printed": false,
+      "process": "Part of the pack",
+      "explode": [
+        0,
+        0,
+        -30
+      ],
+      "step": 5,
+      "group": "front",
+      "qty": 1,
+      "file": "models/battery_nickel.glb",
+      "size": [
+        213.3,
+        14.0,
+        14.0
+      ]
+    },
+    {
+      "name": "battery_bms",
+      "label": "Protection board",
+      "color": "#2d6a3e",
+      "printed": false,
+      "process": "Part of the pack",
+      "explode": [
+        0,
+        0,
+        -30
+      ],
+      "step": 5,
+      "group": "front",
+      "qty": 1,
+      "file": "models/battery_bms.glb",
+      "size": [
+        2.8,
+        18.0,
+        18.0
+      ]
+    },
+    {
+      "name": "rear_panel",
+      "label": "Rear panel",
+      "color": "#d8d4ca",
+      "printed": true,
+      "process": "FDM or resin",
+      "explode": [
+        0,
+        125,
+        0
+      ],
+      "step": 6,
+      "group": "rear",
+      "qty": 1,
+      "file": "models/rear_panel.glb",
+      "size": [
+        251.6,
+        22.0,
+        156.6
+      ]
+    },
+    {
+      "name": "radiator_l",
+      "label": "ND90-PR left",
+      "color": "#2f2f2d",
+      "printed": false,
+      "process": "Dayton Audio ND90-PR",
+      "explode": [
+        0,
+        70,
+        0
+      ],
+      "step": 6,
+      "group": "rear",
+      "qty": 1,
+      "file": "models/radiator_l.glb",
+      "size": [
+        88.5,
+        60.1,
+        88.5
+      ]
+    },
+    {
+      "name": "radiator_r",
+      "label": "ND90-PR right",
+      "color": "#2f2f2d",
+      "printed": false,
+      "process": "Dayton Audio ND90-PR",
+      "explode": [
+        0,
+        70,
+        0
+      ],
+      "step": 6,
+      "group": "rear",
+      "qty": 1,
+      "file": "models/radiator_r.glb",
+      "size": [
+        88.5,
+        60.1,
+        88.5
+      ]
+    },
+    {
+      "name": "port_board",
+      "label": "USB-C port board",
+      "color": "#2d6a3e",
+      "printed": false,
+      "process": "2-layer PCB, STUSB4500",
+      "explode": [
+        0,
+        95,
+        0
+      ],
+      "step": 6,
+      "group": "rear",
+      "qty": 1,
+      "file": "models/port_board.glb",
+      "size": [
+        22.0,
+        15.7,
+        1.6
+      ]
+    },
+    {
+      "name": "usb_c",
+      "label": "USB-C receptacle",
+      "color": "#cfd3d6",
+      "printed": false,
+      "process": "GCT USB4105",
+      "explode": [
+        0,
+        95,
+        0
+      ],
+      "step": 6,
+      "group": "rear",
+      "qty": 1,
+      "file": "models/usb_c.glb",
+      "size": [
+        8.9,
+        7.8,
+        4.3
+      ]
+    },
+    {
+      "name": "control_strip",
+      "label": "Control strip",
+      "color": "#c8c8c4",
+      "printed": true,
+      "process": "FDM or resin, silver paint",
+      "explode": [
+        0,
+        -125,
+        0
+      ],
+      "step": 9,
+      "group": "covers",
+      "qty": 1,
+      "file": "models/control_strip.glb",
+      "size": [
+        251.6,
+        2.0,
+        51.8
+      ]
+    },
+    {
+      "name": "lcd_window",
+      "label": "LCD window",
+      "color": "#1a1a1a",
+      "printed": false,
+      "process": "1.5 mm smoked acrylic",
+      "explode": [
+        0,
+        -175,
+        0
+      ],
+      "step": 9,
+      "group": "covers",
+      "qty": 1,
+      "file": "models/lcd_window.glb",
+      "size": [
+        61.6,
+        1.5,
+        43.6
+      ]
+    },
+    {
+      "name": "grille",
+      "label": "Front grille",
+      "color": "#efede6",
+      "printed": true,
+      "process": "Resin preferred",
+      "explode": [
+        0,
+        -150,
+        0
+      ],
+      "step": 9,
+      "group": "covers",
+      "qty": 1,
+      "file": "models/grille.glb",
+      "size": [
+        251.6,
+        2.0,
+        104.3
+      ]
+    },
+    {
+      "name": "knob",
+      "label": "Knob",
+      "color": "#b9b8b2",
+      "printed": true,
+      "process": "Resin preferred",
+      "explode": [
+        0,
+        -215,
+        0
+      ],
+      "step": 9,
+      "group": "covers",
+      "qty": 1,
+      "file": "models/knob.glb",
+      "size": [
+        30.0,
+        14.0,
+        30.0
+      ]
+    },
+    {
+      "name": "knob_mark",
+      "label": "Knob mark",
+      "color": "#e2541f",
+      "printed": true,
+      "process": "Resin, orange",
+      "explode": [
+        0,
+        -222,
+        0
+      ],
+      "step": 9,
+      "group": "covers",
+      "qty": 1,
+      "file": "models/knob_mark.glb",
+      "size": [
+        1.6,
+        1.2,
+        7.0
+      ]
+    },
+    {
+      "name": "screws_baffle",
+      "label": "Screws: baffle to sleeve",
+      "color": "#2b2b2b",
+      "printed": false,
+      "process": "M3 x 10 countersunk",
+      "explode": [
+        0,
+        -110,
+        0
+      ],
+      "step": 7,
+      "group": "front",
+      "qty": 5,
+      "file": "models/screws_baffle.glb",
+      "size": [
+        247.0,
+        10.0,
+        152.0
+      ]
+    },
+    {
+      "name": "inserts_baffle",
+      "label": "Inserts: baffle to sleeve",
+      "color": "#c9a24a",
+      "printed": false,
+      "process": "M3 heat-set insert, 5.7 mm",
+      "explode": [
+        0,
+        0,
+        190
+      ],
+      "step": 1,
+      "group": "shell",
+      "qty": 5,
+      "file": "models/inserts_baffle.glb",
+      "size": [
+        245.0,
+        5.7,
+        150.0
+      ]
+    },
+    {
+      "name": "screws_bay",
+      "label": "Screws: baffle to bay wall",
+      "color": "#2b2b2b",
+      "printed": false,
+      "process": "M3 x 10 countersunk",
+      "explode": [
+        0,
+        -100,
+        0
+      ],
+      "step": 5,
+      "group": "front",
+      "qty": 3,
+      "file": "models/screws_bay.glb",
+      "size": [
+        244.0,
+        10.0,
+        6.0
+      ]
+    },
+    {
+      "name": "inserts_bay",
+      "label": "Inserts: baffle to bay wall",
+      "color": "#c9a24a",
+      "printed": false,
+      "process": "M3 heat-set insert, 5.7 mm",
+      "explode": [
+        0,
+        0,
+        70
+      ],
+      "step": 5,
+      "group": "front",
+      "qty": 3,
+      "file": "models/inserts_bay.glb",
+      "size": [
+        242.0,
+        5.7,
+        4.0
+      ]
+    },
+    {
+      "name": "screws_rear",
+      "label": "Screws: rear panel to sleeve",
+      "color": "#2b2b2b",
+      "printed": false,
+      "process": "M3 x 10 countersunk",
+      "explode": [
+        0,
+        150,
+        0
+      ],
+      "step": 8,
+      "group": "rear",
+      "qty": 6,
+      "file": "models/screws_rear.glb",
+      "size": [
+        247.0,
+        10.0,
+        152.0
+      ]
+    },
+    {
+      "name": "inserts_rear",
+      "label": "Inserts: rear panel to sleeve",
+      "color": "#c9a24a",
+      "printed": false,
+      "process": "M3 heat-set insert, 5.7 mm",
+      "explode": [
+        0,
+        0,
+        190
+      ],
+      "step": 1,
+      "group": "shell",
+      "qty": 6,
+      "file": "models/inserts_rear.glb",
+      "size": [
+        245.0,
+        5.7,
+        150.0
+      ]
+    },
+    {
+      "name": "screws_driver",
+      "label": "Screws: drivers",
+      "color": "#2b2b2b",
+      "printed": false,
+      "process": "M3 x 6 pan head",
+      "explode": [
+        0,
+        -20,
+        0
+      ],
+      "step": 2,
+      "group": "front",
+      "qty": 8,
+      "file": "models/screws_driver.glb",
+      "size": [
+        211.5,
+        8.0,
+        71.5
+      ]
+    },
+    {
+      "name": "inserts_driver",
+      "label": "Inserts: drivers",
+      "color": "#c9a24a",
+      "printed": false,
+      "process": "M3 heat-set insert, 5.7 mm",
+      "explode": [
+        0,
+        -85,
+        0
+      ],
+      "step": 2,
+      "group": "front",
+      "qty": 8,
+      "file": "models/inserts_driver.glb",
+      "size": [
+        210.0,
+        5.7,
+        70.0
+      ]
+    },
+    {
+      "name": "screws_radiator",
+      "label": "Screws: radiators",
+      "color": "#2b2b2b",
+      "printed": false,
+      "process": "M3 x 6 pan head",
+      "explode": [
+        0,
+        45,
+        0
+      ],
+      "step": 6,
+      "group": "rear",
+      "qty": 8,
+      "file": "models/screws_radiator.glb",
+      "size": [
+        187.5,
+        8.0,
+        71.5
+      ]
+    },
+    {
+      "name": "inserts_radiator",
+      "label": "Inserts: radiators",
+      "color": "#c9a24a",
+      "printed": false,
+      "process": "M3 heat-set insert, 5.7 mm",
+      "explode": [
+        0,
+        125,
+        0
+      ],
+      "step": 6,
+      "group": "rear",
+      "qty": 8,
+      "file": "models/inserts_radiator.glb",
+      "size": [
+        186.0,
+        5.7,
+        70.0
+      ]
+    },
+    {
+      "name": "screws_pcb",
+      "label": "Screws: main PCB",
+      "color": "#2b2b2b",
+      "printed": false,
+      "process": "M3 x 6 pan head",
+      "explode": [
+        0,
+        -20,
+        0
+      ],
+      "step": 4,
+      "group": "front",
+      "qty": 4,
+      "file": "models/screws_pcb.glb",
+      "size": [
+        97.5,
+        8.0,
+        41.5
+      ]
+    },
+    {
+      "name": "inserts_pcb",
+      "label": "Inserts: main PCB",
+      "color": "#c9a24a",
+      "printed": false,
+      "process": "M3 heat-set insert, 5.7 mm",
+      "explode": [
+        0,
+        -85,
+        0
+      ],
+      "step": 2,
+      "group": "front",
+      "qty": 4,
+      "file": "models/inserts_pcb.glb",
+      "size": [
+        96.0,
+        5.7,
+        40.0
+      ]
+    },
+    {
+      "name": "screws_lcd",
+      "label": "Screws: LCD module",
+      "color": "#2b2b2b",
+      "printed": false,
+      "process": "M2.5 x 6 pan head, thread-forming",
+      "explode": [
+        0,
+        -45,
+        0
+      ],
+      "step": 3,
+      "group": "front",
+      "qty": 4,
+      "file": "models/screws_lcd.glb",
+      "size": [
+        72.5,
+        8.0,
+        41.5
+      ]
+    },
+    {
+      "name": "screws_port",
+      "label": "Screws: port board",
+      "color": "#2b2b2b",
+      "printed": false,
+      "process": "M2.5 x 6 pan head, thread-forming",
+      "explode": [
+        0,
+        95,
+        25
+      ],
+      "step": 6,
+      "group": "rear",
+      "qty": 2,
+      "file": "models/screws_port.glb",
+      "size": [
+        20.5,
+        4.5,
+        8.0
+      ]
+    },
+    {
+      "name": "magnets",
+      "label": "Magnets 6 x 2 (baffle) and 6 x 1 (covers)",
+      "color": "#b8bcc2",
+      "printed": false,
+      "process": "N52 neodymium discs",
+      "explode": [
+        0,
+        -120,
+        0
+      ],
+      "step": 9,
+      "group": "covers",
+      "qty": 16,
+      "file": "models/magnets.glb",
+      "size": [
+        234.0,
+        3.0,
+        150.8
+      ]
+    }
+  ]
+}

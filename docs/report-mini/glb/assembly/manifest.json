@@ -1,0 +1,246 @@
+{
+ "parts": [
+  {
+   "name": "sleeve",
+   "color": "#8b8e91",
+   "file": "glb/assembly/sleeve.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  },
+  {
+   "name": "baffle",
+   "color": "#e2541f",
+   "file": "glb/assembly/baffle.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  },
+  {
+   "name": "speaker_l",
+   "color": "#2f2f2d",
+   "file": "glb/assembly/speaker_l.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  },
+  {
+   "name": "speaker_r",
+   "color": "#2f2f2d",
+   "file": "glb/assembly/speaker_r.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  },
+  {
+   "name": "tray",
+   "color": "#8b8e91",
+   "file": "glb/assembly/tray.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  },
+  {
+   "name": "amp_board",
+   "color": "#1c1c1c",
+   "file": "glb/assembly/amp_board.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  },
+  {
+   "name": "amp_parts",
+   "color": "#55575a",
+   "file": "glb/assembly/amp_parts.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  },
+  {
+   "name": "rear_panel",
+   "color": "#8b8e91",
+   "file": "glb/assembly/rear_panel.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  },
+  {
+   "name": "pot_nut",
+   "color": "#9a9a9a",
+   "file": "glb/assembly/pot_nut.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  },
+  {
+   "name": "control_strip",
+   "color": "#f2f1ec",
+   "file": "glb/assembly/control_strip.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  },
+  {
+   "name": "grille",
+   "color": "#8b8e91",
+   "file": "glb/assembly/grille.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  },
+  {
+   "name": "knob",
+   "color": "#e2541f",
+   "file": "glb/assembly/knob.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  },
+  {
+   "name": "knob_mark",
+   "color": "#f2f1ec",
+   "file": "glb/assembly/knob_mark.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  },
+  {
+   "name": "screws_front",
+   "color": "#2b2b2b",
+   "file": "glb/assembly/screws_front.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  },
+  {
+   "name": "inserts_front",
+   "color": "#c9a24a",
+   "file": "glb/assembly/inserts_front.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  },
+  {
+   "name": "screws_tray",
+   "color": "#2b2b2b",
+   "file": "glb/assembly/screws_tray.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  },
+  {
+   "name": "inserts_tray",
+   "color": "#c9a24a",
+   "file": "glb/assembly/inserts_tray.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  },
+  {
+   "name": "screws_rear",
+   "color": "#2b2b2b",
+   "file": "glb/assembly/screws_rear.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  },
+  {
+   "name": "inserts_rear",
+   "color": "#c9a24a",
+   "file": "glb/assembly/inserts_rear.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  },
+  {
+   "name": "screws_speaker",
+   "color": "#2b2b2b",
+   "file": "glb/assembly/screws_speaker.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  },
+  {
+   "name": "inserts_speaker",
+   "color": "#c9a24a",
+   "file": "glb/assembly/inserts_speaker.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  },
+  {
+   "name": "screws_board",
+   "color": "#2b2b2b",
+   "file": "glb/assembly/screws_board.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  }
+ ]
+}

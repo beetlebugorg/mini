@@ -1,0 +1,86 @@
+[
+ {
+  "file": "01-BSM-00.svg",
+  "number": "BSM-00",
+  "title": "Bluespeaker Mini",
+  "subject": "General arrangement",
+  "scale": "1:1"
+ },
+ {
+  "file": "02-BSM-01.svg",
+  "number": "BSM-01",
+  "title": "Bluespeaker Mini",
+  "subject": "Sleeve",
+  "scale": "1:1"
+ },
+ {
+  "file": "03-BSM-02.svg",
+  "number": "BSM-02",
+  "title": "Bluespeaker Mini",
+  "subject": "Front baffle",
+  "scale": "1:1"
+ },
+ {
+  "file": "04-BSM-03.svg",
+  "number": "BSM-03",
+  "title": "Bluespeaker Mini",
+  "subject": "Front grille (lattice)",
+  "scale": "1:1"
+ },
+ {
+  "file": "05-BSM-04.svg",
+  "number": "BSM-04",
+  "title": "Bluespeaker Mini",
+  "subject": "Control strip",
+  "scale": "1:1"
+ },
+ {
+  "file": "06-BSM-05.svg",
+  "number": "BSM-05",
+  "title": "Bluespeaker Mini",
+  "subject": "Rear panel",
+  "scale": "1:1"
+ },
+ {
+  "file": "07-BSM-06.svg",
+  "number": "BSM-06",
+  "title": "Bluespeaker Mini",
+  "subject": "Amplifier tray",
+  "scale": "1:1"
+ },
+ {
+  "file": "08-BSM-07.svg",
+  "number": "BSM-07",
+  "title": "Bluespeaker Mini",
+  "subject": "Knob",
+  "scale": "1:1"
+ },
+ {
+  "file": "09-BSM-08.svg",
+  "number": "BSM-08",
+  "title": "Bluespeaker Mini",
+  "subject": "Joint details: front corner and tray screws",
+  "scale": "6:1, 5:1"
+ },
+ {
+  "file": "10-BSM-09.svg",
+  "number": "BSM-09",
+  "title": "Bluespeaker Mini",
+  "subject": "Joint details: snap catches",
+  "scale": "9:1"
+ },
+ {
+  "file": "11-BSM-10.svg",
+  "number": "BSM-10",
+  "title": "Bluespeaker Mini",
+  "subject": "Joint details: rear post and driver mount",
+  "scale": "4.5:1"
+ },
+ {
+  "file": "12-BSM-11.svg",
+  "number": "BSM-11",
+  "title": "Bluespeaker Mini",
+  "subject": "Joint details: volume control and AUX socket",
+  "scale": "4:1, 5:1"
+ }
+]

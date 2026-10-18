@@ -1,0 +1,347 @@
+[
+ {
+  "name": "sleeve",
+  "label": "Sleeve",
+  "color": "#8b8e91",
+  "printed": true,
+  "process": "FDM, grey",
+  "explode": [
+   0,
+   0,
+   140
+  ],
+  "step": 1,
+  "group": "shell",
+  "qty": 1
+ },
+ {
+  "name": "feet",
+  "label": "Feet",
+  "color": "#8b8e91",
+  "printed": true,
+  "process": "FDM, grey (or stick-on rubber feet)",
+  "explode": [
+   0,
+   0,
+   -45
+  ],
+  "step": 1,
+  "group": "shell",
+  "qty": 4
+ },
+ {
+  "name": "baffle",
+  "label": "Front baffle",
+  "color": "#e2541f",
+  "printed": true,
+  "process": "FDM, orange (shows through the grille)",
+  "explode": [
+   0,
+   -60,
+   0
+  ],
+  "step": 2,
+  "group": "front",
+  "qty": 1
+ },
+ {
+  "name": "speaker_l",
+  "label": "PC68-4 left",
+  "color": "#2f2f2d",
+  "printed": false,
+  "process": "Dayton Audio PC68-4",
+  "explode": [
+   0,
+   -30,
+   0
+  ],
+  "step": 2,
+  "group": "front",
+  "qty": 1
+ },
+ {
+  "name": "speaker_r",
+  "label": "PC68-4 right",
+  "color": "#2f2f2d",
+  "printed": false,
+  "process": "Dayton Audio PC68-4",
+  "explode": [
+   0,
+   -30,
+   0
+  ],
+  "step": 2,
+  "group": "front",
+  "qty": 1
+ },
+ {
+  "name": "tray",
+  "label": "Amplifier tray",
+  "color": "#8b8e91",
+  "printed": true,
+  "process": "FDM, grey",
+  "explode": [
+   0,
+   0,
+   -40
+  ],
+  "step": 3,
+  "group": "front",
+  "qty": 1
+ },
+ {
+  "name": "amp_board",
+  "label": "ZK-502C board",
+  "color": "#1c1c1c",
+  "printed": false,
+  "process": "ZK-502C Bluetooth amplifier",
+  "explode": [
+   0,
+   40,
+   20
+  ],
+  "step": 3,
+  "group": "front",
+  "qty": 1
+ },
+ {
+  "name": "amp_parts",
+  "label": "ZK-502C parts",
+  "color": "#55575a",
+  "printed": false,
+  "process": "Part of the ZK-502C",
+  "explode": [
+   0,
+   40,
+   20
+  ],
+  "step": 3,
+  "group": "front",
+  "qty": 1
+ },
+ {
+  "name": "rear_panel",
+  "label": "Rear panel",
+  "color": "#8b8e91",
+  "printed": true,
+  "process": "FDM, grey",
+  "explode": [
+   0,
+   80,
+   0
+  ],
+  "step": 5,
+  "group": "rear",
+  "qty": 1
+ },
+ {
+  "name": "pot_nut",
+  "label": "Volume control nut",
+  "color": "#9a9a9a",
+  "printed": false,
+  "process": "Supplied with the ZK-502C",
+  "explode": [
+   0,
+   -70,
+   0
+  ],
+  "step": 6,
+  "group": "covers",
+  "qty": 1
+ },
+ {
+  "name": "control_strip",
+  "label": "Control strip",
+  "color": "#f2f1ec",
+  "printed": true,
+  "process": "FDM, white",
+  "explode": [
+   0,
+   -95,
+   0
+  ],
+  "step": 6,
+  "group": "covers",
+  "qty": 1
+ },
+ {
+  "name": "grille",
+  "label": "Front grille (lattice)",
+  "color": "#8b8e91",
+  "printed": true,
+  "process": "FDM, grey, front face down, 0.4 mm nozzle",
+  "explode": [
+   0,
+   -110,
+   0
+  ],
+  "step": 6,
+  "group": "covers",
+  "qty": 1
+ },
+ {
+  "name": "knob",
+  "label": "Knob",
+  "color": "#e2541f",
+  "printed": true,
+  "process": "FDM, orange",
+  "explode": [
+   0,
+   -150,
+   0
+  ],
+  "step": 6,
+  "group": "covers",
+  "qty": 1
+ },
+ {
+  "name": "knob_mark",
+  "label": "Knob mark",
+  "color": "#f2f1ec",
+  "printed": true,
+  "process": "FDM, white",
+  "explode": [
+   0,
+   -156,
+   0
+  ],
+  "step": 6,
+  "group": "covers",
+  "qty": 1
+ },
+ {
+  "name": "screws_front",
+  "label": "Screws: baffle to sleeve",
+  "color": "#2b2b2b",
+  "printed": false,
+  "process": "M3 x 8 socket head cap screw",
+  "explode": [
+   0,
+   -90,
+   0
+  ],
+  "step": 4,
+  "group": "front",
+  "qty": 4
+ },
+ {
+  "name": "inserts_front",
+  "label": "Inserts: baffle to sleeve",
+  "color": "#c9a24a",
+  "printed": false,
+  "process": "M3 heat-set insert, short (3 mm)",
+  "explode": [
+   0,
+   0,
+   140
+  ],
+  "step": 1,
+  "group": "shell",
+  "qty": 4
+ },
+ {
+  "name": "screws_tray",
+  "label": "Screws: tray to baffle",
+  "color": "#2b2b2b",
+  "printed": false,
+  "process": "M3 x 8 socket head cap screw",
+  "explode": [
+   0,
+   -80,
+   0
+  ],
+  "step": 3,
+  "group": "front",
+  "qty": 2
+ },
+ {
+  "name": "inserts_tray",
+  "label": "Inserts: tray to baffle",
+  "color": "#c9a24a",
+  "printed": false,
+  "process": "M3 heat-set insert, short (3 mm)",
+  "explode": [
+   0,
+   0,
+   -40
+  ],
+  "step": 3,
+  "group": "front",
+  "qty": 2
+ },
+ {
+  "name": "screws_rear",
+  "label": "Screws: rear panel to sleeve",
+  "color": "#2b2b2b",
+  "printed": false,
+  "process": "M3 x 6 socket head cap screw",
+  "explode": [
+   0,
+   110,
+   0
+  ],
+  "step": 5,
+  "group": "rear",
+  "qty": 4
+ },
+ {
+  "name": "inserts_rear",
+  "label": "Inserts: rear panel to sleeve",
+  "color": "#c9a24a",
+  "printed": false,
+  "process": "M3 heat-set insert, short (3 mm)",
+  "explode": [
+   0,
+   0,
+   140
+  ],
+  "step": 1,
+  "group": "shell",
+  "qty": 4
+ },
+ {
+  "name": "screws_speaker",
+  "label": "Screws: speakers",
+  "color": "#2b2b2b",
+  "printed": false,
+  "process": "M3 x 5 pan head",
+  "explode": [
+   0,
+   -12,
+   0
+  ],
+  "step": 2,
+  "group": "front",
+  "qty": 8
+ },
+ {
+  "name": "inserts_speaker",
+  "label": "Inserts: speakers",
+  "color": "#c9a24a",
+  "printed": false,
+  "process": "M3 heat-set insert, short (3 mm)",
+  "explode": [
+   0,
+   -60,
+   0
+  ],
+  "step": 2,
+  "group": "front",
+  "qty": 8
+ },
+ {
+  "name": "screws_board",
+  "label": "Screws: board to tray",
+  "color": "#2b2b2b",
+  "printed": false,
+  "process": "Self-tapping screw, 1.9 x 7, pan head 3.28 (your board screws)",
+  "explode": [
+   0,
+   0,
+   30
+  ],
+  "step": 3,
+  "group": "front",
+  "qty": 2
+ }
+]

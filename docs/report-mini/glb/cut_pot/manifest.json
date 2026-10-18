@@ -1,0 +1,92 @@
+{
+ "parts": [
+  {
+   "name": "baffle",
+   "color": "#e2541f",
+   "file": "glb/cut_pot/baffle.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  },
+  {
+   "name": "control_strip",
+   "color": "#f2f1ec",
+   "file": "glb/cut_pot/control_strip.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  },
+  {
+   "name": "knob",
+   "color": "#e2541f",
+   "file": "glb/cut_pot/knob.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  },
+  {
+   "name": "pot_nut",
+   "color": "#9a9a9a",
+   "file": "glb/cut_pot/pot_nut.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  },
+  {
+   "name": "amp_parts",
+   "color": "#55575a",
+   "file": "glb/cut_pot/amp_parts.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  },
+  {
+   "name": "amp_board",
+   "color": "#1c1c1c",
+   "file": "glb/cut_pot/amp_board.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  },
+  {
+   "name": "tray",
+   "color": "#8b8e91",
+   "file": "glb/cut_pot/tray.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  },
+  {
+   "name": "sleeve",
+   "color": "#8b8e91",
+   "file": "glb/cut_pot/sleeve.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  }
+ ]
+}

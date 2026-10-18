@@ -1,0 +1,68 @@
+(sym_lib_table
+	(version 7)
+	(lib
+		(name "74xx")
+		(type "KiCad")
+		(uri "${KIPRJMOD}/lib/symbols/74xx.kicad_symdir")
+		(options "")
+		(descr ""))
+	(lib
+		(name "Amplifier_Audio")
+		(type "KiCad")
+		(uri "${KIPRJMOD}/lib/symbols/Amplifier_Audio.kicad_symdir")
+		(options "")
+		(descr ""))
+	(lib
+		(name "Battery_Management")
+		(type "KiCad")
+		(uri "${KIPRJMOD}/lib/symbols/Battery_Management.kicad_symdir")
+		(options "")
+		(descr ""))
+	(lib
+		(name "Bluespeaker")
+		(type "KiCad")
+		(uri "${KIPRJMOD}/lib/symbols/Bluespeaker.kicad_symdir")
+		(options "")
+		(descr ""))
+	(lib
+		(name "Connector_Generic")
+		(type "KiCad")
+		(uri "${KIPRJMOD}/lib/symbols/Connector_Generic.kicad_symdir")
+		(options "")
+		(descr ""))
+	(lib
+		(name "Device")
+		(type "KiCad")
+		(uri "${KIPRJMOD}/lib/symbols/Device.kicad_symdir")
+		(options "")
+		(descr ""))
+	(lib
+		(name "Mechanical")
+		(type "KiCad")
+		(uri "${KIPRJMOD}/lib/symbols/Mechanical.kicad_symdir")
+		(options "")
+		(descr ""))
+	(lib
+		(name "RF_Module")
+		(type "KiCad")
+		(uri "${KIPRJMOD}/lib/symbols/RF_Module.kicad_symdir")
+		(options "")
+		(descr ""))
+	(lib
+		(name "Regulator_Switching")
+		(type "KiCad")
+		(uri "${KIPRJMOD}/lib/symbols/Regulator_Switching.kicad_symdir")
+		(options "")
+		(descr ""))
+	(lib
+		(name "Switch")
+		(type "KiCad")
+		(uri "${KIPRJMOD}/lib/symbols/Switch.kicad_symdir")
+		(options "")
+		(descr ""))
+	(lib
+		(name "power")
+		(type "KiCad")
+		(uri "${KIPRJMOD}/lib/symbols/power.kicad_symdir")
+		(options "")
+		(descr "")))

@@ -1,0 +1,15 @@
+{
+ "parts": [
+  {
+   "name": "sleeve",
+   "color": "#8b8e91",
+   "file": "glb/print_sleeve/sleeve.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  }
+ ]
+}

@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bluespeaker Mini</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+} }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+:root {
+  --bg: #f1efea;
+  --paper: #fbfaf7;
+  --ink: #1d1d1b;
+  --muted: #6e6c66;
+  --line: #d9d6ce;
+  --shell: #ebe8e0;
+  --shell-edge: #c9c5ba;
+  --strip: #c8c8c4;
+  --hole: #2a2a28;
+  --orange: #e2541f;
+  --grey-key: #b9b8b2;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: Inter, Helvetica, Arial, sans-serif; line-height: 1.55;
+}
+header {
+  padding: 48px 16px 24px; max-width: 1100px; margin: 0 auto;
+  display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap;
+}
+header h1 { margin: 0; font-weight: 700; letter-spacing: -0.02em; font-size: 2.2rem; }
+header .dot { width: 14px; height: 14px; border-radius: 50%; background: var(--orange); display: inline-block; }
+header p { margin: 0; color: var(--muted); }
+main { max-width: 1100px; margin: 0 auto; padding: 0 16px 80px; }
+.views {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 40px;
+}
+.card {
+  background: var(--paper); border: 1px solid var(--line); border-radius: 6px;
+  padding: 20px;
+}
+.card.wide { grid-column: 1 / -1; }
+.card h2 { margin: 0 0 4px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); font-weight: 500; }
+.card .note { color: var(--muted); font-size: 0.85rem; margin: 8px 0 0; }
+svg { width: 100%; height: auto; display: block; }
+label.toggle { font-size: 0.85rem; color: var(--muted); cursor: pointer; user-select: none; }
+.lcd-wrap { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
+.lcd-wrap svg { max-width: 480px; flex: 1 1 320px; }
+.lcd-wrap ul { flex: 1 1 240px; margin: 0; padding-left: 18px; color: var(--muted); font-size: 0.9rem; }
+.tabs { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+.tabs button {
+  font: inherit; font-size: 0.85rem; border: 1px solid var(--line); background: var(--bg);
+  padding: 4px 12px; border-radius: 999px; cursor: pointer; color: var(--ink);
+}
+.tabs button.on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.md { background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 8px 32px 32px; }
+.md h1 { font-size: 1.8rem; letter-spacing: -0.02em; }
+.md h2 { border-top: 1px solid var(--line); padding-top: 24px; margin-top: 40px; }
+.md table { border-collapse: collapse; width: 100%; font-size: 0.9rem; display: block; overflow-x: auto; }
+.md th, .md td { border-bottom: 1px solid var(--line); padding: 6px 10px; text-align: left; vertical-align: top; }
+.md th { background: var(--bg); }
+.md code { font-family: "JetBrains Mono", monospace; font-size: 0.85em; background: var(--bg); padding: 1px 4px; border-radius: 3px; }
+.md pre { background: var(--bg); padding: 12px; border-radius: 4px; overflow-x: auto; line-height: 1.25; }
+.md pre code { background: none; padding: 0; }
+.md .mermaid { background: var(--paper); text-align: center; }
+.md a { color: var(--orange); }
+.model { display: grid; grid-template-columns: 1fr 240px; gap: 16px; }
+#stage { position: relative; height: 560px; border-radius: 4px; overflow: hidden; background: radial-gradient(circle at 50% 40%, #ffffff, #e4e1d9); }
+#stage canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+#stage .status { position: absolute; inset: auto 12px 10px auto; font-size: 0.8rem; color: var(--muted); }
+#pick { position: absolute; left: 12px; top: 10px; font-size: 0.85rem; background: #fbfaf7e6; border: 1px solid var(--line); border-radius: 4px; padding: 6px 10px; display: none; }
+.ctl { display: flex; flex-direction: column; gap: 12px; font-size: 0.85rem; }
+.ctl input[type=range] { width: 100%; accent-color: var(--orange); }
+.ctl .row { display: flex; gap: 8px; flex-wrap: wrap; }
+.ctl button { font: inherit; font-size: 0.8rem; border: 1px solid var(--line); background: var(--bg); padding: 4px 10px; border-radius: 4px; cursor: pointer; color: var(--ink); }
+.ctl button:hover { border-color: var(--ink); }
+#parts { list-style: none; margin: 0; padding: 0; max-height: 330px; overflow-y: auto; border-top: 1px solid var(--line); }
+#parts li { display: flex; align-items: center; gap: 8px; padding: 3px 0; border-bottom: 1px solid var(--line); cursor: pointer; }
+#parts li.sel { font-weight: 700; }
+.pcbsides { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+.pcbsides figure { margin: 0; }
+.pcbsides img { width: 100%; border-radius: 4px; }
+.pcbsides figcaption { font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
+@media (max-width: 760px) { .pcbsides { grid-template-columns: 1fr; } }
+#parts li.dim { opacity: 0.35; }
+#parts li.cur .lbl { color: var(--orange); font-weight: 700; }
+.stepbar { display: flex; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 4px; padding: 6px; background: var(--bg); }
+.stepbar span { flex: 1; text-align: center; font-size: 0.8rem; line-height: 1.3; }
+.md .show3d { margin-left: 12px; font: inherit; font-size: 0.75rem; vertical-align: middle; border: 1px solid var(--orange); color: var(--orange); background: transparent; border-radius: 999px; padding: 2px 10px; cursor: pointer; }
+.md .show3d:hover { background: var(--orange); color: #fff; }
+.md blockquote { margin: 12px 0; padding: 8px 14px; border-left: 4px solid var(--orange); background: var(--bg); }
+.md blockquote p { margin: 0; }
+#assembly { margin-bottom: 32px; }
+#parts .sw { width: 10px; height: 10px; border-radius: 2px; flex: none; border: 1px solid #0003; }
+#parts li span.lbl { flex: 1; }
+#parts .tag { color: var(--muted); font-size: 0.7rem; }
+@media (max-width: 760px) {
+  .model { grid-template-columns: 1fr; }
+  #stage { height: 420px; }
+  .views { grid-template-columns: 1fr; }
+  .md { padding: 4px 16px 16px; }
+  header { padding-top: 24px; }
+}
+.schemes { display: flex; flex-direction: column; gap: 4px; }
+.schemes button { display: flex; align-items: center; gap: 8px; text-align: left; font: inherit; font-size: 0.8rem; border: 1px solid var(--line); background: var(--bg); padding: 4px 8px; border-radius: 4px; cursor: pointer; color: var(--ink); }
+.schemes button.on { border-color: var(--ink); font-weight: 700; }
+.schemes .chips { display: inline-flex; }
+.strips { display: flex; gap: 4px; align-items: center; font-size: 0.8rem; }
+.strips span { color: var(--muted); margin-right: 4px; }
+.strips button { flex: 1; display: flex; align-items: center; gap: 6px; font: inherit; font-size: 0.8rem; border: 1px solid var(--line); background: var(--bg); padding: 4px 6px; border-radius: 4px; cursor: pointer; color: var(--ink); }
+.strips button.on { border-color: var(--ink); font-weight: 700; }
+.strips i { width: 12px; height: 12px; border-radius: 50%; border: 1px solid #0003; display: inline-block; }
+.schemes .chips i { width: 12px; height: 12px; display: inline-block; border: 1px solid #0003; margin-right: -3px; border-radius: 50%; }
+</style>
+</head>
+<body>
+<header>
+  <span class="dot"></span>
+  <h1>Bluespeaker Mini</h1>
+  <p>2 × Dayton PC68-4 · ZK-502C Bluetooth amplifier · 166 × 108 × 94 mm · <a href="index.html" style="color:var(--orange)">large version</a></p>
+</header>
+<main>
+  <section class="views">
+    <div class="card wide">
+      <h2>3D model · cad/bluespeaker_mini.py</h2>
+      <div class="model">
+        <div id="stage" data-manifest="models-mini/manifest.json"><div id="pick"></div><div class="status" id="status">Loading parts…</div></div>
+        <div class="ctl">
+          <label>Explode <input type="range" id="explode" min="0" max="1" step="0.01" value="0"></label>
+          <div class="row">
+            <button id="anim">Explode</button>
+            <button id="reset">Reset view</button>
+          </div>
+          <div class="schemes" id="schemes"></div>
+          <div class="strips" id="strips"><span>Strip</span></div>
+          <div class="stepbar">
+            <button id="sPrev" aria-label="Previous step">&#9664;</button>
+            <span id="sLbl">Assembly steps</span>
+            <button id="sNext" aria-label="Next step">&#9654;</button>
+          </div>
+          <button id="sAll">Show all parts</button>
+          <label><input type="checkbox" id="ghost"> Transparent sleeve</label>
+          <label><input type="checkbox" id="refs" checked> Bought parts</label>
+          <label><input type="checkbox" id="edges" checked> Edges</label>
+          <ul id="parts"></ul>
+        </div>
+      </div>
+      <p class="note">Drag to orbit. Scroll to zoom. Right-drag to pan. Click a part to see its size, quantity, and step. Zoom in on the grille to see the lattice ribs.</p>
+    </div>
+  </section>
+  <article id="mini" class="md">Loading MINI.md…</article>
+</main>
+<script>
+fetch("MINI.md", { cache: "no-store" }).then(r => r.text()).then(md => {
+  const art = document.getElementById("mini");
+  art.innerHTML = marked.parse(md);
+  art.querySelectorAll("h2").forEach(h => {
+    const m = h.textContent.match(/^Step (\d+)/);
+    if (!m || +m[1] > 6) return;
+    const b = document.createElement("button");
+    b.className = "show3d"; b.textContent = "Show in 3D";
+    b.addEventListener("click", () => window.bsShowStep && window.bsShowStep(+m[1]));
+    h.appendChild(b);
+  });
+}).catch(err => { document.getElementById("mini").textContent = "Could not load MINI.md: " + err; });
+</script>
+<script>
+// Colour schemes. Filament: grey and orange, plus white for the knob mark only.
+const SCHEMES = {
+  "Orange behind grille": {
+    "sleeve": "#8b8e91",
+    "baffle": "#e2541f",
+    "rear_panel": "#8b8e91",
+    "tray": "#8b8e91",
+    "grille": "#8b8e91",
+    "control_strip": "#8b8e91",
+    "knob": "#e2541f",
+    "knob_mark": "#f2f1ec",
+    "feet": "#8b8e91"
+  },
+  "Orange grille": {
+    "sleeve": "#8b8e91",
+    "baffle": "#8b8e91",
+    "rear_panel": "#8b8e91",
+    "tray": "#8b8e91",
+    "grille": "#e2541f",
+    "control_strip": "#8b8e91",
+    "knob": "#8b8e91",
+    "knob_mark": "#f2f1ec",
+    "feet": "#8b8e91"
+  },
+  "Orange strip": {
+    "sleeve": "#8b8e91",
+    "baffle": "#8b8e91",
+    "rear_panel": "#8b8e91",
+    "tray": "#8b8e91",
+    "grille": "#8b8e91",
+    "control_strip": "#e2541f",
+    "knob": "#8b8e91",
+    "knob_mark": "#f2f1ec",
+    "feet": "#8b8e91"
+  },
+  "Orange shell": {
+    "sleeve": "#e2541f",
+    "baffle": "#8b8e91",
+    "rear_panel": "#e2541f",
+    "tray": "#8b8e91",
+    "grille": "#8b8e91",
+    "control_strip": "#8b8e91",
+    "knob": "#e2541f",
+    "knob_mark": "#f2f1ec",
+    "feet": "#8b8e91"
+  },
+  "Grey, orange knob": {
+    "sleeve": "#8b8e91",
+    "baffle": "#8b8e91",
+    "rear_panel": "#8b8e91",
+    "tray": "#8b8e91",
+    "grille": "#8b8e91",
+    "control_strip": "#8b8e91",
+    "knob": "#e2541f",
+    "knob_mark": "#f2f1ec",
+    "feet": "#8b8e91"
+  }
+};
+const STRIPS = { White: "#f2f1ec", Grey: "#8b8e91", Orange: "#e2541f" };
+const box = document.getElementById("schemes"), stripBox = document.getElementById("strips");
+let scheme = "Orange behind grille", strip = "White";
+function apply() {
+  if (!window.bsSetColors) return;
+  window.bsSetColors({ ...SCHEMES[scheme], control_strip: STRIPS[strip] });
+  box.querySelectorAll("button").forEach(b => b.classList.toggle("on", b.dataset.n === scheme));
+  stripBox.querySelectorAll("button").forEach(b => b.classList.toggle("on", b.dataset.n === strip));
+  try { localStorage.setItem("bsMiniScheme", scheme); localStorage.setItem("bsMiniStrip", strip); } catch (e) {}
+}
+function pick(name) { scheme = name; apply(); }
+for (const name of Object.keys(STRIPS)) {
+  const b = document.createElement("button");
+  b.dataset.n = name;
+  b.innerHTML = `<i style="background:${STRIPS[name]}"></i>${name}`;
+  b.addEventListener("click", () => { strip = name; apply(); });
+  stripBox.appendChild(b);
+}
+for (const name of Object.keys(SCHEMES)) {
+  const b = document.createElement("button");
+  b.dataset.n = name;
+  const c = SCHEMES[name];
+  b.innerHTML = `<span class="chips"><i style="background:${c.sleeve}"></i><i style="background:${c.grille}"></i><i style="background:${c.baffle}"></i><i style="background:${c.control_strip}"></i><i style="background:${c.knob}"></i></span>${name}`;
+  b.addEventListener("click", () => pick(name));
+  box.appendChild(b);
+}
+window.addEventListener("bsready", () => {
+  const qs = new URLSearchParams(location.search);
+  let sc = qs.get("scheme"), st = qs.get("strip");
+  try { if (!SCHEMES[sc]) sc = localStorage.getItem("bsMiniScheme"); if (!STRIPS[st]) st = localStorage.getItem("bsMiniStrip"); } catch (e) {}
+  if (SCHEMES[sc]) scheme = sc;
+  if (STRIPS[st]) strip = st;
+  apply();
+});
+</script>
+<script type="module" src="viewer.js"></script>
+</body>
+</html>

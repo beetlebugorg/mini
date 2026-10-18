@@ -1,0 +1,52 @@
+<!doctype html><html><head><meta charset="utf-8">
+<!-- Render page for cad/mini_report.py: ?m=manifest &dir=x,y,z &zoom &target=x,y,z (model mm) &rad &ortho &explode &shadow &exp -->
+<script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/" } }</script>
+<style>html,body{margin:0;background:transparent;overflow:hidden}canvas{display:block}</style></head><body>
+<script type="module">
+import * as THREE from "three";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
+const qs = new URLSearchParams(location.search);
+const W = innerWidth, H = innerHeight;
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1); renderer.setSize(W, H);
+renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = +(qs.get("exp") || 1.0);
+renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+document.body.appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.04).texture;
+const sun = new THREE.DirectionalLight(0xffffff, 1.6); sun.position.set(250, 600, 500); sun.castShadow = true;
+sun.shadow.mapSize.set(4096, 4096); Object.assign(sun.shadow.camera, { left: -400, right: 400, top: 400, bottom: -400, near: 10, far: 2000 }); sun.shadow.bias = -0.0005;
+scene.add(sun, new THREE.HemisphereLight(0xffffff, 0xe8e6e1, 0.5));
+const toThree = ([x, y, z]) => new THREE.Vector3(x, z, -y);
+const man = await (await fetch(qs.get("m") || "glb/assembly/manifest.json")).json();
+const only = qs.has("only") ? new Set(qs.get("only").split(",")) : null;
+const hide = new Set((qs.get("hide") || "").split(","));
+const explode = +(qs.get("explode") || 0);
+const colors = JSON.parse(qs.get("colors") || "{}");
+const loader = new GLTFLoader();
+const group = new THREE.Group(); scene.add(group);
+await Promise.all(man.parts.map(async info => {
+  if (only && !only.has(info.name)) return; if (hide.has(info.name)) return;
+  const g = await loader.loadAsync(info.file); const root = g.scene; root.scale.setScalar(1000);
+  const metal = info.name.startsWith("screws_") || info.name.startsWith("inserts_") || info.name === "pot_nut";
+  const mat = new THREE.MeshPhysicalMaterial({ color: colors[info.name] || info.color, roughness: metal ? 0.3 : 0.62, metalness: metal ? 0.9 : 0, clearcoat: metal ? 0 : 0.08, side: THREE.DoubleSide });
+  root.traverse(o => { if (o.isMesh) { o.material = mat; o.castShadow = o.receiveShadow = true; } });
+  const h = new THREE.Group(); h.add(root); h.position.copy(toThree(info.explode)).multiplyScalar(explode); group.add(h);
+}));
+// ground shadow catcher
+const ground = new THREE.Mesh(new THREE.PlaneGeometry(4000, 4000), new THREE.ShadowMaterial({ opacity: +(qs.get("shadow") || 0.12) }));
+ground.rotation.x = -Math.PI / 2; ground.receiveShadow = true; ground.position.y = +(qs.get("ground") || 0); scene.add(ground);
+const box = new THREE.Box3().setFromObject(group); let c = box.getCenter(new THREE.Vector3()); const size = box.getSize(new THREE.Vector3());
+if (qs.has("target")) c = toThree(qs.get("target").split(",").map(Number));
+const dir = new THREE.Vector3(...(qs.get("dir") || "0.55,0.35,1").split(",").map(Number)).normalize();
+const fov = +(qs.get("fov") || 22);
+const cam = qs.get("ortho") ? null : new THREE.PerspectiveCamera(fov, W / H, 1, 10000);
+const rad = qs.has("rad") ? +qs.get("rad") : size.length() / 2 * +(qs.get("zoom") || 1.0);
+let camera;
+if (cam) { const d = rad / Math.sin(THREE.MathUtils.degToRad(fov / 2)) ; cam.position.copy(c).addScaledVector(dir, d); cam.lookAt(c); camera = cam; }
+else { const s = rad * 1.05; const a = W / H; camera = new THREE.OrthographicCamera(-s * a, s * a, s, -s, 1, 10000); camera.position.copy(c).addScaledVector(dir, 2000); camera.lookAt(c); }
+if (qs.has("dy")) { camera.position.y += +qs.get("dy"); }
+renderer.render(scene, camera);
+document.title = "ready";
+</script></body></html>
