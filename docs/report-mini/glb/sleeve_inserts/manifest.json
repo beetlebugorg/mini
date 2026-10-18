@@ -1,0 +1,37 @@
+{
+ "parts": [
+  {
+   "name": "sleeve",
+   "color": "#8b8e91",
+   "file": "glb/sleeve_inserts/sleeve.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  },
+  {
+   "name": "inserts_front",
+   "color": "#c9a24a",
+   "file": "glb/sleeve_inserts/inserts_front.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  },
+  {
+   "name": "inserts_rear",
+   "color": "#c9a24a",
+   "file": "glb/sleeve_inserts/inserts_rear.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  }
+ ]
+}

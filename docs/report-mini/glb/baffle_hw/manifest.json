@@ -1,0 +1,48 @@
+{
+ "parts": [
+  {
+   "name": "baffle",
+   "color": "#e2541f",
+   "file": "glb/baffle_hw/baffle.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  },
+  {
+   "name": "inserts_speaker",
+   "color": "#c9a24a",
+   "file": "glb/baffle_hw/inserts_speaker.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  },
+  {
+   "name": "screws_front",
+   "color": "#2b2b2b",
+   "file": "glb/baffle_hw/screws_front.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  },
+  {
+   "name": "screws_tray",
+   "color": "#2b2b2b",
+   "file": "glb/baffle_hw/screws_tray.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  }
+ ]
+}

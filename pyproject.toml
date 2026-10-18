@@ -1,0 +1,13 @@
+[project]
+name = "bluespeaker-cad"
+version = "0.1.0"
+description = "Parametric enclosure model for the Bluespeaker"
+requires-python = ">=3.12"
+dependencies = [
+    "build123d==0.13.0",
+    "ocp_vscode>=4.1",
+    "ocp_viewer",
+]
+
+[tool.uv]
+package = false

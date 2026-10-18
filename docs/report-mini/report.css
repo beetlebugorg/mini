@@ -1,0 +1,75 @@
+:root { --ink: #1d1d1f; --muted: #6e6e73; --line: #d2d2d7; --soft: #f5f5f7; --orange: #e2541f; }
+@page { size: letter; margin: 0; }
+* { box-sizing: border-box; }
+html, body { margin: 0; background: #fff; color: var(--ink); }
+body {
+  font-family: Inter, -apple-system, Helvetica, Arial, sans-serif; font-size: 8.8pt; line-height: 1.42;
+  -webkit-font-smoothing: antialiased; -webkit-print-color-adjust: exact; print-color-adjust: exact;
+}
+.page { width: 8.5in; height: 11in; padding: 0.55in 0.6in 0.6in; position: relative; overflow: hidden; page-break-after: always; }
+.page:last-child { page-break-after: auto; }
+.foot { position: absolute; left: 0.6in; right: 0.6in; bottom: 0.3in; display: flex; justify-content: space-between;
+  font-size: 6.8pt; color: var(--muted); border-top: 0.5pt solid var(--line); padding-top: 5pt; }
+.eyebrow { font-size: 9pt; font-weight: 600; color: var(--orange); margin: 0 0 4pt; }
+h1 { font-size: 44pt; line-height: 1.02; font-weight: 700; letter-spacing: -0.025em; margin: 0; }
+h2 { font-size: 24pt; line-height: 1.08; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 10pt; }
+h2.h2s { font-size: 16pt; letter-spacing: -0.01em; }
+h3 { font-size: 11pt; font-weight: 600; margin: 0 0 5pt; letter-spacing: -0.01em; }
+h3 .tag { font-size: 8pt; color: var(--muted); font-weight: 500; margin-left: 6pt; }
+.sp { margin-top: 12pt; }
+p { margin: 0 0 6pt; }
+.lede { font-size: 12pt; line-height: 1.4; color: var(--muted); max-width: 6.2in; margin: 8pt 0 10pt; }
+.lede.small2 { font-size: 9.5pt; }
+.small, .small td { font-size: 7.6pt; }
+p.small { color: var(--muted); }
+.mono { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 0.92em; }
+.note { background: var(--soft); border-radius: 9pt; padding: 9pt 11pt; color: var(--muted); }
+.note b { color: var(--ink); }
+
+/* cover */
+.cover .brand { display: flex; align-items: center; gap: 7pt; font-weight: 600; font-size: 11pt; margin-bottom: 0.45in; }
+.cover .dot { width: 10pt; height: 10pt; border-radius: 50%; background: var(--orange); }
+.cover .hero { width: 5.8in; display: block; margin: 0.1in auto 0.2in; }
+
+/* tables */
+table { width: 100%; border-collapse: collapse; }
+th { text-align: left; font-weight: 600; color: var(--muted); font-size: 6.8pt; text-transform: uppercase; letter-spacing: 0.04em;
+  padding: 0 7pt 4pt 0; border-bottom: 0.6pt solid var(--ink); }
+td { padding: 4pt 7pt 4pt 0; border-bottom: 0.5pt solid var(--line); vertical-align: top; }
+table.dense td { padding-top: 2.4pt; padding-bottom: 2.4pt; }
+table.kv thead { display: none; }
+table.kv td:first-child { font-weight: 600; width: 1.7in; }
+.sw { display: inline-block; width: 7pt; height: 7pt; border-radius: 50%; vertical-align: -0.5pt; margin-right: 4pt; border: 0.5pt solid rgba(0,0,0,0.2); }
+
+/* figures */
+figure { margin: 0; }
+figure img { width: 100%; display: block; border-radius: 6pt; background: #fff; }
+figcaption { font-size: 7.4pt; color: var(--muted); margin-top: 4pt; }
+figure.wide img { max-height: 3.0in; object-fit: contain; }
+figure.mid img { max-height: 3.2in; object-fit: contain; margin-top: 10pt; }
+figure.small-fig { width: 2.6in; margin-top: 16pt; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12pt; align-items: start; }
+.grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10pt; margin-bottom: 10pt; }
+.grid2 figure img, .grid3 figure img { aspect-ratio: 4 / 3; object-fit: cover; border: 0.5pt solid var(--line); }
+.grid2.tight { gap: 14pt; margin-top: 8pt; }
+
+/* section drawings */
+figure.section img { max-height: 5.3in; object-fit: contain; border: 0.5pt solid var(--line); border-radius: 6pt; }
+ol.callouts { list-style: none; margin: 0; padding: 0; }
+ol.callouts li { display: grid; grid-template-columns: 18pt 1fr; padding: 3.5pt 0; border-bottom: 0.5pt solid var(--line); }
+ol.callouts li span { color: var(--orange); font-weight: 700; }
+
+/* part sheets */
+.partsheet { display: grid; grid-template-columns: 2.5in 1fr; gap: 14pt; padding: 10pt 0; border-bottom: 0.5pt solid var(--line); }
+.partsheet .ph img { aspect-ratio: 4 / 3; object-fit: contain; border: 0.5pt solid var(--line); }
+.partsheet table.kv td:first-child { width: 1.05in; }
+
+/* contents, lists, steps */
+ol.toc { list-style: none; padding: 0; margin: 10pt 0 0; font-size: 13pt; }
+ol.toc li { padding: 7pt 0; border-bottom: 0.5pt solid var(--line); display: grid; grid-template-columns: 30pt 1fr; }
+ol.toc li span { color: var(--orange); font-weight: 700; }
+ul.clean { margin: 0; padding-left: 12pt; }
+ul.clean li { margin: 0 0 5pt; }
+ol.steps { margin: 0; padding: 0; list-style: none; counter-reset: s; }
+ol.steps li { counter-increment: s; position: relative; padding: 7pt 0 7pt 20pt; border-bottom: 0.5pt solid var(--line); }
+ol.steps li::before { content: counter(s); position: absolute; left: 0; top: 6pt; font-weight: 700; color: var(--orange); font-size: 11pt; }

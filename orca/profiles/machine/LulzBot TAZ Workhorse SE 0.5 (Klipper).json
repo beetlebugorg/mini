@@ -1,0 +1,111 @@
+{
+    "type": "machine",
+    "name": "LulzBot TAZ Workhorse SE 0.5 (Klipper)",
+    "printer_settings_id": "LulzBot TAZ Workhorse SE 0.5 (Klipper)",
+    "from": "User",
+    "inherits": "MyKlipper 0.4 nozzle",
+    "version": "2.4.2.0",
+    "printer_variant": "0.5",
+    "nozzle_diameter": [
+        "0.5"
+    ],
+    "printable_area": [
+        "0x0",
+        "280x0",
+        "280x280",
+        "0x280"
+    ],
+    "printable_height": "285",
+    "gcode_flavor": "klipper",
+    "use_relative_e_distances": "1",
+    "use_firmware_retraction": "0",
+    "machine_start_gcode": "; Klipper start: wipe, washer probe, and prime line run in the PRINT_START macro\nPRINT_START BED=[bed_temperature_initial_layer_single] EXTRUDER=[nozzle_temperature_initial_layer] WIPE=160 LAYER=[initial_layer_print_height] SPEED=[initial_layer_speed]\nM117 [input_filename_base]\n",
+    "machine_end_gcode": "; Klipper end\nPRINT_END\n",
+    "machine_pause_gcode": "PAUSE",
+    "machine_max_speed_x": [
+        "300",
+        "300"
+    ],
+    "machine_max_speed_y": [
+        "300",
+        "300"
+    ],
+    "machine_max_speed_z": [
+        "25",
+        "25"
+    ],
+    "machine_max_speed_e": [
+        "40",
+        "40"
+    ],
+    "machine_max_acceleration_x": [
+        "3000",
+        "3000"
+    ],
+    "machine_max_acceleration_y": [
+        "3000",
+        "3000"
+    ],
+    "machine_max_acceleration_z": [
+        "100",
+        "100"
+    ],
+    "machine_max_acceleration_e": [
+        "1000",
+        "1000"
+    ],
+    "machine_max_acceleration_extruding": [
+        "3000",
+        "3000"
+    ],
+    "machine_max_acceleration_retracting": [
+        "1000",
+        "1000"
+    ],
+    "machine_max_acceleration_travel": [
+        "3000",
+        "3000"
+    ],
+    "machine_max_jerk_x": [
+        "5",
+        "5"
+    ],
+    "machine_max_jerk_y": [
+        "5",
+        "5"
+    ],
+    "max_layer_height": [
+        "0.4"
+    ],
+    "min_layer_height": [
+        "0.08"
+    ],
+    "retraction_length": [
+        "1.5"
+    ],
+    "retraction_speed": [
+        "15"
+    ],
+    "deretraction_speed": [
+        "15"
+    ],
+    "retract_when_changing_layer": [
+        "1"
+    ],
+    "retraction_minimum_travel": [
+        "3"
+    ],
+    "z_hop": [
+        "0"
+    ],
+    "wipe": [
+        "0"
+    ],
+    "default_filament_profile": [
+        "Workhorse PLA 2.85 - 230"
+    ],
+    "default_print_profile": "Workhorse SE - Standard 0.20",
+    "host_type": "octoprint",
+    "print_host": "http://192.168.76.110",
+    "printhost_apikey": ""
+}

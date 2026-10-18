@@ -1,0 +1,48 @@
+{
+ "parts": [
+  {
+   "name": "sleeve",
+   "color": "#8b8e91",
+   "file": "glb/cut_rear/sleeve.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  },
+  {
+   "name": "rear_panel",
+   "color": "#8b8e91",
+   "file": "glb/cut_rear/rear_panel.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  },
+  {
+   "name": "screws_rear",
+   "color": "#2b2b2b",
+   "file": "glb/cut_rear/screws_rear.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  },
+  {
+   "name": "inserts_rear",
+   "color": "#c9a24a",
+   "file": "glb/cut_rear/inserts_rear.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  }
+ ]
+}

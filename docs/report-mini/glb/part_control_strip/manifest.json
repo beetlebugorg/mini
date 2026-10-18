@@ -1,0 +1,15 @@
+{
+ "parts": [
+  {
+   "name": "control_strip",
+   "color": "#f2f1ec",
+   "file": "glb/part_control_strip/control_strip.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  }
+ ]
+}

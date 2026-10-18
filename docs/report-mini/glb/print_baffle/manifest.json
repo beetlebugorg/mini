@@ -1,0 +1,15 @@
+{
+ "parts": [
+  {
+   "name": "baffle",
+   "color": "#e2541f",
+   "file": "glb/print_baffle/baffle.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  }
+ ]
+}

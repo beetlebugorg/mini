@@ -1,0 +1,15 @@
+{
+ "parts": [
+  {
+   "name": "knob_mark",
+   "color": "#f2f1ec",
+   "file": "glb/print_knob_mark/knob_mark.glb",
+   "explode": [
+    0,
+    0,
+    0
+   ],
+   "printed": true
+  }
+ ]
+}
