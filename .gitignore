@@ -3,3 +3,5 @@ __pycache__/
 cad/stl/
 docs/lineart/node_modules/
 docs/lineart/raw/
+pcb/
+docs/pcb/
