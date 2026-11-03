@@ -1,0 +1,199 @@
+# Printdeck builds of the Mini, the Bluetooth desk speaker: the printed parts, the slicer profiles
+# in profiles/ (the Cura profiles of cura/ on the TAZ Workhorse SE with the 0.5 mm tool head), and
+# the speaker in its parts on the Parts tab. The parts print in three PLA colours: grey, orange and
+# a little white. cad/bluespeaker_mini.py writes the STL files of the parts. The generate step
+# writes them again on GitHub, and fails when they differ from the committed files. Run the same
+# command on your computer, and commit the STL files.
+project: mini
+
+generate:
+  install: pip install uv && uv sync --frozen
+  run: uv run --frozen python cad/bluespeaker_mini.py --stl
+  check: true
+
+parts:
+  # The shell.
+  - name: Sleeve
+    group: The shell
+    description: >-
+      The grey box of the speaker, 166 x 108 x 94 mm, with solid 3 mm walls. The front module slides
+      into its front, and the rear panel into its back. Remove the supports under the four front posts,
+      drill the post holes (4.0 mm, 7 mm deep), and press 8 short M3 inserts into the posts.
+    files: [cad/stl-mini/sleeve.stl]
+    printer: taz
+    profile: taz-workhorse-se/pla-0.25-shell
+    material: grey
+  - name: Rear panel
+    group: The shell
+    description: >-
+      The grey back of the box. The DC socket of the amplifier lines up with its hole. Four M3 x 6
+      screws hold it in the sleeve.
+    files: [cad/stl-mini/rear_panel.stl]
+    printer: taz
+    profile: taz-workhorse-se/pla-0.25-parts
+    material: grey
+  - name: Feet
+    group: The shell
+    description: >-
+      Four grey feet that you glue into the recesses on the bottom. Stick-on rubber feet are an
+      option: PLA feet can slide on a desk.
+    files: [cad/stl-mini/feet.stl]
+    printer: taz
+    profile: taz-workhorse-se/pla-0.25-parts
+    material: grey
+
+  # The front module: the baffle, the drivers, the tray and the amplifier, in one piece.
+  - name: Front baffle
+    group: The front module
+    description: >-
+      The orange front panel. It holds the two PC68-4 drivers on spacer frames, and it shows through
+      the grille. Drill the membranes, and press 8 short M3 inserts into the spacer frames. The volume
+      control and the AUX socket of the ZK-502C come through it.
+    files: [cad/stl-mini/baffle.stl]
+    printer: taz
+    profile: taz-workhorse-se/pla-0.25-parts
+    material: orange
+  - name: Amp tray
+    group: The front module
+    description: >-
+      The grey tray under the ZK-502C board, behind the baffle. Two M3 x 8 screws go from the front of
+      the baffle into the inserts of its tabs, and two self-tapping screws hold the rear edge of the
+      board on its posts.
+    files: [cad/stl-mini/tray.stl]
+    printer: taz
+    profile: taz-workhorse-se/pla-0.25-parts
+    material: grey
+
+  # The covers: they snap on over the screw heads.
+  - name: Grille
+    group: The covers
+    description: >-
+      The grey lattice over the drivers, with one 0.5 mm line for each rib. Four catches click it onto
+      the front over the two upper screw heads. Use the Grille profile: it has no horizontal expansion.
+    files: [cad/stl-mini/grille.stl]
+    printer: taz
+    profile: taz-workhorse-se/pla-0.25-grille
+    material: grey
+  - name: Control strip
+    group: The covers
+    description: >-
+      The white strip under the grille, over the two lower screw heads and the volume control. Four
+      catches click it on. A pry slot at its top edge lets you lift it off.
+    files: [cad/stl-mini/control_strip.stl]
+    printer: taz
+    profile: taz-workhorse-se/pla-0.25-parts
+    material: white
+  - name: Knob
+    group: The covers
+    description: The orange volume knob. It pushes onto the shaft of the volume control.
+    files: [cad/stl-mini/knob.stl]
+    printer: taz
+    profile: taz-workhorse-se/pla-0.25-parts
+    material: orange
+  - name: Knob mark
+    group: The covers
+    description: The white mark of the knob. Glue it into the groove on the knob.
+    files: [cad/stl-mini/knob_mark.stl]
+    printer: taz
+    profile: taz-workhorse-se/pla-0.25-parts
+    material: white
+
+# The picture of the project in the project lists.
+cover: docs/lineart/img/hero-light.png
+
+docs:
+  - name: Spec sheet
+    file: docs/Bluespeaker-Mini-Specs.pdf
+  - name: Engineering report
+    file: docs/Bluespeaker-Mini-Engineering-Report.pdf
+
+# The Mini in its parts, for the 3D view of the Parts tab. cad/mini_assembly.py writes the files:
+# each part in its place, Z up, in millimetres, the front toward -Y. The items are in the order of
+# the assembly, and the exploded view takes them off from the last. Items next to each other with
+# the same explode move together: the front module comes out of the sleeve as one piece.
+assemblies:
+  - name: The Mini
+    description: >-
+      The front module (the baffle, the drivers, the tray and the amplifier) slides into the front of
+      the sleeve, and the rear panel into its back. The grille and the strip snap on over the screw
+      heads.
+    items:
+      - part: Sleeve
+        file: cad/assembly-mini/sleeve.stl
+      - name: Inserts (sleeve front)
+        file: cad/assembly-mini/inserts_front.stl
+        color: "#c9a24a"
+      - name: Inserts (sleeve rear)
+        file: cad/assembly-mini/inserts_rear.stl
+        color: "#c9a24a"
+      - part: Feet
+        file: cad/assembly-mini/feet.stl
+      - part: Front baffle
+        file: cad/assembly-mini/baffle.stl
+        explode: [0, -1, 0.01]
+      - name: Dayton Audio PC68-4 (left)
+        file: cad/assembly-mini/speaker_l.stl
+        color: "#2f2f2d"
+        explode: [0, -1, 0.01]
+      - name: Dayton Audio PC68-4 (right)
+        file: cad/assembly-mini/speaker_r.stl
+        color: "#2f2f2d"
+        explode: [0, -1, 0.01]
+      - name: Inserts (drivers)
+        file: cad/assembly-mini/inserts_speaker.stl
+        color: "#c9a24a"
+        explode: [0, -1, 0.01]
+      - name: M3 x 5 screws (drivers)
+        file: cad/assembly-mini/screws_speaker.stl
+        color: "#2b2b2b"
+        explode: [0, -1, 0.01]
+      - part: Amp tray
+        file: cad/assembly-mini/tray.stl
+        explode: [0, -1, 0.01]
+      - name: Inserts (tray)
+        file: cad/assembly-mini/inserts_tray.stl
+        color: "#c9a24a"
+        explode: [0, -1, 0.01]
+      - name: M3 x 8 screws (tray)
+        file: cad/assembly-mini/screws_tray.stl
+        color: "#2b2b2b"
+        explode: [0, -1, 0.01]
+      - name: ZK-502C board
+        file: cad/assembly-mini/amp_board.stl
+        color: "#1c1c1c"
+        explode: [0, -1, 0.01]
+      - name: ZK-502C parts
+        file: cad/assembly-mini/amp_parts.stl
+        color: "#55575a"
+        explode: [0, -1, 0.01]
+      - name: Self-tapping screws (board)
+        file: cad/assembly-mini/screws_board.stl
+        color: "#2b2b2b"
+        explode: [0, -1, 0.01]
+      - name: M3 x 8 screws (front module)
+        file: cad/assembly-mini/screws_front.stl
+        color: "#2b2b2b"
+        explode: [0, -1, 0.004]
+      - part: Rear panel
+        file: cad/assembly-mini/rear_panel.stl
+        explode: [0, 1, 0.001]
+      - name: M3 x 6 screws (rear panel)
+        file: cad/assembly-mini/screws_rear.stl
+        color: "#2b2b2b"
+        explode: [0, 1, 0]
+      - name: Nut (volume control)
+        file: cad/assembly-mini/pot_nut.stl
+        color: "#9a9a9a"
+        explode: [0, -1, 0.003]
+      - part: Control strip
+        file: cad/assembly-mini/control_strip.stl
+        explode: [0, -1, 0.001]
+      - part: Grille
+        file: cad/assembly-mini/grille.stl
+        explode: [0, -1, 0.002]
+      - part: Knob
+        file: cad/assembly-mini/knob.stl
+        explode: [0, -1, 0]
+      - part: Knob mark
+        file: cad/assembly-mini/knob_mark.stl
+        explode: [0, -1, 0]
