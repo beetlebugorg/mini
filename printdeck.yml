@@ -191,6 +191,10 @@ assemblies:
         explode: [0, -1, 0.001]
       - part: Grille
         file: cad/assembly-mini/grille.stl
+        # From the coordinates of grille_honeycomb.3mf to the assembly: the inverse of the print
+        # orientation (Rot(90, 0, 0)) and of the offsets in write_3mf. The 3D view then shows the
+        # model from the G-code of the grille, with the honeycomb.
+        transform: [1, 0, 0, 0, 0, -1, 0, 1, 0, -140, -47, 209.1]
         explode: [0, -1, 0.002]
       - part: Knob
         file: cad/assembly-mini/knob.stl
