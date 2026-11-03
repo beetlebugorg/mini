@@ -929,6 +929,17 @@ GRILLE_INFILL = [
     ("Trihexagon 4.0", "trihexagon", 37.5, "[]"),
 ]
 
+# The preset of grille_honeycomb.3mf, the grille of the Printdeck build.
+GRILLE_HONEYCOMB = ("honeycomb", 20, "[]")
+
+
+def line_distance(pattern, density, line_w=0.5):
+    """infill_line_distance as Cura 5.13 calculates it from the pattern and the density (%)."""
+    d = line_w * 100 / density
+    if pattern in ("honeycomb", "octagon"):
+        return d * (4 / 3 - density / 300)
+    return d * {"grid": 2, "triangles": 3, "trihexagon": 3}.get(pattern, 1)
+
 
 # Cura per-model settings for the plate: always solid, whatever the infill in the print settings
 PLATE_SETTINGS = {"infill_sparse_density": "100", "infill_pattern": "lines", "infill_angles": "[]",
@@ -977,11 +988,14 @@ def cura_value(v):
         return v
 
 
-def write_3mf(path: Path, objects, rot, centre=(140.0, 140.0)):
+def write_3mf(path: Path, objects, rot, centre=(140.0, 140.0), engine=False):
     """Write a 3MF that Cura opens with the objects in place and with their per-model settings.
 
     objects: (name, shape, settings, (dx, dy)). All shapes turn by rot and share one offset, so
     a modifier stays on its plate. dx, dy move one object pair on the bed (mm).
+    engine=True is for Printdeck. Printdeck gives each value to CuraEngine as it is, and
+    CuraEngine stops on a value that starts with "=", so the values are plain text. Printdeck
+    also puts each build item at a different place on the bed, so the objects go into one group.
     """
     import zipfile
     from xml.sax.saxutils import escape
@@ -992,7 +1006,8 @@ def write_3mf(path: Path, objects, rot, centre=(140.0, 140.0)):
     res, items = [], []
     for i, (name, s, settings, (dx, dy)) in enumerate(turned, start=1):
         verts, tris = s.tessellate(0.02, 0.1)
-        meta = "".join(f'<metadata name="cura:{k}" preserve="true" type="xs:string">{escape(cura_value(v))}</metadata>'
+        meta = "".join(f'<metadata name="cura:{k}" preserve="true" type="xs:string">'
+                       f'{escape(str(v) if engine else cura_value(v))}</metadata>'
                        for k, v in settings.items())
         vx = "".join(f'<vertex x="{v.X:.4f}" y="{v.Y:.4f}" z="{v.Z - z0:.4f}"/>' for v in verts)
         tx = "".join(f'<triangle v1="{a}" v2="{b}" v3="{c}"/>' for a, b, c in tris)
@@ -1000,6 +1015,11 @@ def write_3mf(path: Path, objects, rot, centre=(140.0, 140.0)):
                    f'{f"<metadatagroup>{meta}</metadatagroup>" if meta else ""}'
                    f'<mesh><vertices>{vx}</vertices><triangles>{tx}</triangles></mesh></object>')
         items.append(f'<item objectid="{i}" transform="1 0 0 0 1 0 0 0 1 {centre[0] + dx} {centre[1] + dy} 0"/>')
+    if engine:
+        group = len(turned) + 1
+        comps = "".join(it.replace("<item ", "<component ") for it in items)
+        res.append(f'<object id="{group}" name="{escape(path.stem)}" type="model"><components>{comps}</components></object>')
+        items = [f'<item objectid="{group}" transform="1 0 0 0 1 0 0 0 1 0 0 0"/>']
     model = ('<?xml version="1.0" encoding="UTF-8"?>\n'
              '<model unit="millimeter" xml:lang="en-US" xmlns="http://schemas.microsoft.com/3dmanufacturing/core/2015/02" '
              'xmlns:cura="http://software.ultimaker.com/xml/cura/3mf/2015/10">'
@@ -1042,6 +1062,15 @@ def write_grille_infill(p: MParams, out_dir: Path):
         objs.append((f"coupon {i + 1} window ({name})", cw, window_settings(preset), d))
     write_3mf(out_dir / "grille_infill_presets.3mf", objs, rot)
     print("  grille_infill.3mf, grille_infill_coupon.3mf, grille_infill_presets.3mf (slicer-infill grille, for Cura)")
+    # grille_honeycomb.3mf: the full grille with the honeycomb window, for Printdeck. CuraEngine
+    # gets no formulas, so the file also has the line distance of the window.
+    pattern, density, _ = GRILLE_HONEYCOMB
+    honeycomb = window_settings(GRILLE_HONEYCOMB)
+    honeycomb["infill_line_distance"] = f"{line_distance(pattern, density):.4g}"
+    write_3mf(out_dir / "grille_honeycomb.3mf",
+              [("grille_plate", plate, PLATE_SETTINGS, (0, 0)), ("grille_window", window, honeycomb, (0, 0))], rot,
+              engine=True)
+    print("  grille_honeycomb.3mf (slicer-infill grille with a honeycomb window, for Printdeck)")
 
 
 def write_stls(parts, stl_dir: Path):

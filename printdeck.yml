@@ -1,9 +1,9 @@
 # Printdeck builds of the Mini, the Bluetooth desk speaker: the printed parts, the slicer profiles
 # in profiles/ (the Cura profiles of cura/ on the TAZ Workhorse SE with the 0.5 mm tool head), and
 # the speaker in its parts on the Parts tab. The parts print in three PLA colours: grey, orange and
-# a little white. cad/bluespeaker_mini.py writes the STL files of the parts. The generate step
+# white. cad/bluespeaker_mini.py writes the STL and 3MF files of the parts. The generate step
 # writes them again on GitHub, and fails when they differ from the committed files. Run the same
-# command on your computer, and commit the STL files.
+# command on your computer, and commit the files.
 project: mini
 
 generate:
@@ -68,12 +68,13 @@ parts:
   - name: Grille
     group: The covers
     description: >-
-      The grey lattice over the drivers, with one 0.5 mm line for each rib. Four catches click it onto
-      the front over the two upper screw heads. Use the Grille profile: it has no horizontal expansion.
-    files: [cad/stl-mini/grille.stl]
+      The white honeycomb over the drivers. The 3MF file has a solid plate and a window of honeycomb
+      infill with no walls and no top or bottom layers. Four catches click it onto the front over the
+      two upper screw heads. Use the Grille profile: it has no horizontal expansion.
+    files: [cad/stl-mini/grille_honeycomb.3mf]
     printer: taz
     profile: taz-workhorse-se/pla-0.25-grille
-    material: grey
+    material: white
   - name: Control strip
     group: The covers
     description: >-

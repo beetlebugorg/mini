@@ -152,6 +152,22 @@ Notes:
 - The coupons in `grille_infill_presets.3mf` have their own settings, so the
   print settings do not change them.
 
+### Honeycomb (Printdeck)
+
+The export also writes `grille_honeycomb.3mf`, the grille of the Printdeck
+build. It has the same plate and window as `grille_infill.3mf`. The window
+has fixed settings: Honeycomb, 20 %, line distance 3.167 mm.
+
+Printdeck gives the 3MF settings to CuraEngine without the Cura app, so this
+file is different from the other three:
+
+- The values are plain text, for example `0`. CuraEngine stops on a formula
+  such as `=0`.
+- The file has the line distance. CuraEngine does not calculate it from the
+  density.
+- The plate and the window are one group. Printdeck puts each object of a
+  3MF file at a different place on the bed.
+
 ## Cura profiles (PLA)
 
 The folder `cura/` has four PLA profiles for the LulzBot TAZ Workhorse SE
