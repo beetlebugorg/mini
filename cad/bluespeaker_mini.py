@@ -158,7 +158,10 @@ class MParams:
     snap_post: float = 2.0  # post length along the beam
     snap_w: float = 3.0  # post width across the beam
     snap_bump: float = 0.4  # bump height on the beam
-    snap_clear: float = 0.15  # pocket clearance around the posts (this locates the grille)
+    # Pocket clearance around the posts (this locates the grille). The click interference is
+    # snap_bump - snap_clear: 0.15 mm here. With 0.15 mm clearance (0.25 mm interference) the
+    # posts bound and the click was too hard.
+    snap_clear: float = 0.25
     snap_preload: float = 0.05  # the bump presses on the lip by this much: it pulls the grille flat
     snap_depth: float = 3.0  # pocket depth in the baffle (1 mm floor)
 
