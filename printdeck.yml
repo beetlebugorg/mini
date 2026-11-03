@@ -1,6 +1,10 @@
 # Printdeck builds of the Mini, the Bluetooth desk speaker: the printed parts, the slicer profiles
-# in profiles/ (the Cura profiles of cura/ on the TAZ Workhorse SE with the 0.5 mm tool head), and
-# the speaker in its parts on the Parts tab. The parts print in three PLA colours: grey, orange and
+# in profiles/, and the speaker in its parts on the Parts tab. The profiles are the profiles of the
+# other Printdeck projects (0.10 Fine, 0.20 Standard, 0.30 Fast) on the TAZ Workhorse SE with the
+# 0.5 mm tool head. The materials have the calibration of the filament: 220 C, xy_offset 0.095 mm,
+# hole_xy_offset 0.17 mm and 100.21 % shrinkage. Each part prints on 0.20 Standard, with its own
+# settings. The flat parts have a brim. The sleeve and the grille print alone: their settings
+# are for the whole plate. The parts print in three PLA colours: grey, orange and
 # white. cad/bluespeaker_mini.py writes the STL and 3MF files of the parts. The generate step
 # writes them again on GitHub, and fails when they differ from the committed files. Run the same
 # command on your computer, and commit the files.
@@ -21,7 +25,9 @@ parts:
       drill the post holes (4.0 mm, 7 mm deep), and press 8 short M3 inserts into the posts.
     files: [cad/stl-mini/sleeve.stl]
     printer: taz
-    profile: taz-workhorse-se/pla-0.25-shell
+    profile: taz-workhorse-se/pla-0.20-standard
+    settings: {wall_line_count: 6, support_enable: true, support_structure: normal, support_type: buildplate, adhesion_type: brim, brim_line_count: 12, brim_location: everywhere, cool_fan_speed: 40}
+    alone: true
     material: grey
   - name: Rear panel
     group: The shell
@@ -30,7 +36,8 @@ parts:
       screws hold it in the sleeve.
     files: [cad/stl-mini/rear_panel.stl]
     printer: taz
-    profile: taz-workhorse-se/pla-0.25-parts
+    profile: taz-workhorse-se/pla-0.20-standard
+    settings: {wall_line_count: 4, infill_sparse_density: 40, adhesion_type: brim}
     material: grey
   - name: Feet
     group: The shell
@@ -39,7 +46,8 @@ parts:
       option: PLA feet can slide on a desk.
     files: [cad/stl-mini/feet.stl]
     printer: taz
-    profile: taz-workhorse-se/pla-0.25-parts
+    profile: taz-workhorse-se/pla-0.20-standard
+    settings: {wall_line_count: 4, infill_sparse_density: 40, adhesion_type: brim}
     material: grey
 
   # The front module: the baffle, the drivers, the tray and the amplifier, in one piece.
@@ -51,7 +59,8 @@ parts:
       control and the AUX socket of the ZK-502C come through it.
     files: [cad/stl-mini/baffle.stl]
     printer: taz
-    profile: taz-workhorse-se/pla-0.25-parts
+    profile: taz-workhorse-se/pla-0.20-standard
+    settings: {wall_line_count: 4, infill_sparse_density: 40, adhesion_type: brim}
     material: orange
   - name: Amp tray
     group: The front module
@@ -61,7 +70,8 @@ parts:
       board on its posts.
     files: [cad/stl-mini/tray.stl]
     printer: taz
-    profile: taz-workhorse-se/pla-0.25-parts
+    profile: taz-workhorse-se/pla-0.20-standard
+    settings: {wall_line_count: 4, infill_sparse_density: 40, adhesion_type: brim}
     material: grey
 
   # The covers: they snap on over the screw heads.
@@ -70,10 +80,12 @@ parts:
     description: >-
       The white honeycomb over the drivers. The 3MF file has a solid plate and a window of honeycomb
       infill with no walls and no top or bottom layers. Four catches click it onto the front over the
-      two upper screw heads. Use the Grille profile: it has no horizontal expansion.
+      two upper screw heads. Its settings have no horizontal expansion: each rib is one line.
     files: [cad/stl-mini/grille_honeycomb.3mf]
     printer: taz
-    profile: taz-workhorse-se/pla-0.25-grille
+    profile: taz-workhorse-se/pla-0.20-standard
+    settings: {wall_line_count: 1, top_bottom_thickness: 0, xy_offset: 0, xy_offset_layer_0: 0, hole_xy_offset: 0, speed_print: 30, retraction_amount: 2.0, retraction_speed: 30, retraction_min_travel: 1.5, wall_0_wipe_dist: 0, speed_travel: 250, travel_avoid_other_parts: false, cool_fan_full_layer: 1, adhesion_type: brim}
+    alone: true
     material: white
   - name: Control strip
     group: The covers
@@ -82,21 +94,24 @@ parts:
       catches click it on. A pry slot at its top edge lets you lift it off.
     files: [cad/stl-mini/control_strip.stl]
     printer: taz
-    profile: taz-workhorse-se/pla-0.25-parts
+    profile: taz-workhorse-se/pla-0.20-standard
+    settings: {wall_line_count: 4, infill_sparse_density: 40, adhesion_type: brim}
     material: white
   - name: Knob
     group: The covers
     description: The orange volume knob. It pushes onto the shaft of the volume control.
     files: [cad/stl-mini/knob.stl]
     printer: taz
-    profile: taz-workhorse-se/pla-0.25-parts
+    profile: taz-workhorse-se/pla-0.20-standard
+    settings: {wall_line_count: 4, infill_sparse_density: 40}
     material: orange
   - name: Knob mark
     group: The covers
     description: The white mark of the knob. Glue it into the groove on the knob.
     files: [cad/stl-mini/knob_mark.stl]
     printer: taz
-    profile: taz-workhorse-se/pla-0.25-parts
+    profile: taz-workhorse-se/pla-0.20-standard
+    settings: {wall_line_count: 4, infill_sparse_density: 40, adhesion_type: brim}
     material: white
 
 # The picture of the project in the project lists.
