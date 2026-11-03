@@ -350,7 +350,11 @@ and the tray screw heads.
   break.
 - The bump presses 0.05 mm on the lip. This preload pulls the grille flat
   against the baffle.
-- The posts fit their pockets with 0.15 mm clearance. They locate the cover.
+- The posts fit their pockets with 0.25 mm clearance. They locate the cover.
+- The bump presses past the pocket wall by the bump height less the
+  clearance: 0.15 mm on the strip, and 0.245 mm on the grille (with its
+  0.095 mm compensation). A 0.15 mm clearance was too tight: the posts bound,
+  and the click was too hard.
 - The strip prints with the Parts profile, which has 0.095 mm horizontal
   expansion. Its beam is therefore modelled 0.31 mm wide, so it prints as
   one 0.5 mm line.
@@ -363,8 +367,8 @@ Before you print the baffle and the covers, print the three test parts:
 `fit_test_snap_grille.stl` (Grille profile), and `fit_test_snap_strip.stl`
 (Parts profile). Press each catch into a pocket, then pull it out:
 
-- Too tight, or the beam cracks: set `snap_bump` smaller (for example 0.3).
-- Too loose: set `snap_bump` larger (for example 0.5) or `snap_preload`
+- Too tight, or the beam cracks: set `snap_bump` smaller (for example 0.35).
+- Too loose: set `snap_bump` larger (for example 0.45) or `snap_preload`
   larger (for example 0.1).
 
 To remove the grille, put a flat blade in the slot at the top edge of the

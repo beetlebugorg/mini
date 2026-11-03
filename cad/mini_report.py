@@ -465,7 +465,7 @@ def html():
   <div>{table(["File", "Profile", "Test"], [["<span class='mono'>fit_test_snap_baffle.stl</span>", "Parts", "Two pockets"],
         ["<span class='mono'>fit_test_snap_grille.stl</span>", "Grille", "Grille catch"], ["<span class='mono'>fit_test_snap_strip.stl</span>", "Parts", "Strip catch"],
         ["<span class='mono'>grille_infill_presets.3mf</span>", "Grille Infill", "Six grille mesh presets"]])}
-  <p class="small">Press each catch into a pocket until it clicks. Pull it out by hand. Accept: a clear click, the coupon sits flat, it comes out with no crack. Too tight: set <span class="mono">snap_bump</span> to 0.3. Too loose: set it to 0.5.</p></div></div>
+  <p class="small">Press each catch into a pocket until it clicks. Pull it out by hand. Accept: a clear click, the coupon sits flat, it comes out with no crack. Too tight: set <span class="mono">snap_bump</span> to 0.35. Too loose: set it to 0.45.</p></div></div>
 </section>""")
 
     # ---- 5 drawings
@@ -532,9 +532,9 @@ def html():
   <div class="grid3">{fig("img/grille_snap.jpg", "Grille catch: two posts and one bridged beam with a bump.")}{fig("img/baffle_pocket.jpg", "Baffle pocket: narrow mouth (lip), wider inside, 1 mm floor.")}{fig("img/strip_snap.jpg", "Strip catch.")}</div>
   <ul class="clean">
     <li><b>Print direction.</b> The beam bridges 0.5 mm above the cover back, so the slicer prints it as straight lines along its length. It flexes in the cover plane. The bending load goes along the lines, not across the layers. An upright pin or hook would bend across the layers and crack.</li>
-    <li><b>Lock.</b> The 0.4 mm bump clicks behind a 45° lip at the pocket mouth. The bump presses 0.05 mm on the lip, which pulls the cover flat and flush.</li>
+    <li><b>Lock.</b> The {P['snap_bump']:g} mm bump clicks behind a 45° lip at the pocket mouth. The bump presses 0.05 mm on the lip, which pulls the cover flat and flush.</li>
     <li><b>Release.</b> A pull on the cover makes the 45° lip push the bump back. The catch releases and does not break.</li>
-    <li><b>Location.</b> The posts fit their pockets with 0.15 mm clearance on each side. They locate the cover in X and Z.</li>
+    <li><b>Location.</b> The posts fit their pockets with {P['snap_clear']:g} mm clearance on each side. They locate the cover in X and Z.</li>
     <li><b>No support.</b> The baffle prints front face down. The pocket is narrow at the mouth and wider inside, so its walls only step back. The floor is a 3.3 mm bridge.</li>
   </ul>
   <div class="grid2 sp">{table(["Value (estimate, one catch)", ""], [
