@@ -40,6 +40,13 @@ const PARTS = {
   knob_mark: ["Knob", "print", [0, -150, -35]],
 };
 
+// The three filaments (COL of cad/bluespeaker_mini.py). A shot with color: true shows the printed
+// parts in their filament: the hero and the exploded view of the site. The drawings stay line art.
+const FILAMENT = {
+  sleeve: "#8b8e91", feet: "#8b8e91", tray: "#8b8e91", rear_panel: "#8b8e91", grille: "#8b8e91",
+  baffle: "#e2541f", knob: "#e2541f", control_strip: "#f2f1ec", knob_mark: "#f2f1ec",
+};
+
 const shell = ["sleeve", "feet", "inserts_front", "inserts_rear"];
 const front = ["baffle", "speaker_l", "speaker_r", "inserts_speaker", "screws_speaker"];
 const amp = ["tray", "inserts_tray", "screws_tray", "amp_board", "amp_parts", "screws_board"];
@@ -54,11 +61,11 @@ const each = (ids, v) => Object.fromEntries(ids.map((id) => [id, v]));
 // name: { show, focus, explode {id: offset}, camera, frame }. A focus part with no explode
 // entry uses its default offset. The steps are the same as on the site.
 const SHOTS = {
-  hero: { show: all, focus: [], camera: CAMERA },
+  hero: { show: all, focus: [], camera: CAMERA, color: true },
   front: { show: all, focus: [], camera: [0, -1, 0] },
   rear: { show: all, focus: [], camera: REAR },
   exploded: {
-    show: all, focus: [], camera: [1.6, -1.2, 0.9],
+    show: all, focus: [], camera: [1.6, -1.2, 0.9], color: true,
     explode: {
       sleeve: [0, 0, 0], feet: [0, 0, -40], inserts_front: [0, 0, 0], inserts_rear: [0, 0, 0],
       ...each([...front, ...amp, "pot_nut"], [0, -110, 0]), screws_front: [0, -150, 0],
@@ -99,7 +106,7 @@ function job(spec) {
     const [label, finish, explode] = PARTS[id];
     const focus = spec.focus.includes(id);
     return {
-      url: `/models-mini/${id}.glb`, finish, focus,
+      url: `/models-mini/${id}.glb`, finish, focus, color: spec.color ? FILAMENT[id] : undefined,
       label: spec.labels?.[id] ?? label,
       offset: spec.explode?.[id] ?? (focus ? explode : undefined),
     };

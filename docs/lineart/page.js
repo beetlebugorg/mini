@@ -76,7 +76,8 @@ window.renderShot = async (shot, themeName) => {
   const nodes = [];
   const geoms = await Promise.all(shot.parts.map((p) => geometry(p.url)));
   shot.parts.forEach((p, i) => {
-    const color = new THREE.Color(T.fill[p.finish]);
+    // A printed part with the color of its filament keeps it, a little darker in the dark theme.
+    const color = p.color ? new THREE.Color(p.color).multiplyScalar(T === THEMES.dark ? 0.8 : 1) : new THREE.Color(T.fill[p.finish]);
     if (p.focus) color.lerp(accent, T.mix);
     const clear = p.finish === "clear";
     const mesh = new THREE.Mesh(geoms[i].mesh, new THREE.MeshStandardMaterial({
