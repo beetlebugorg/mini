@@ -5,19 +5,19 @@
  "definition_changes": "definition_changes/machine.inst.cfg",
  "definition_changes_extruder": "definition_changes/extruder.inst.cfg",
  "profiles": {
-  "pla-0.25-shell": {
-   "quality_changes": "quality_changes/Bluespeaker_Mini_PLA_Shell.inst.cfg",
-   "quality_changes_extruder": "quality_changes/Bluespeaker_Mini_PLA_Shell_e0.inst.cfg",
+  "pla-0.10-fine": {
+   "quality_changes": "quality_changes/PLA_0.10_Fine.inst.cfg",
+   "quality_changes_extruder": "quality_changes/PLA_0.10_Fine_e0.inst.cfg",
    "quality": "quality/draft.inst.cfg"
   },
-  "pla-0.25-grille": {
-   "quality_changes": "quality_changes/Bluespeaker_Mini_PLA_Grille.inst.cfg",
-   "quality_changes_extruder": "quality_changes/Bluespeaker_Mini_PLA_Grille_e0.inst.cfg",
+  "pla-0.20-standard": {
+   "quality_changes": "quality_changes/PLA_0.20_Standard.inst.cfg",
+   "quality_changes_extruder": "quality_changes/PLA_0.20_Standard_e0.inst.cfg",
    "quality": "quality/draft.inst.cfg"
   },
-  "pla-0.25-parts": {
-   "quality_changes": "quality_changes/Bluespeaker_Mini_PLA_Parts.inst.cfg",
-   "quality_changes_extruder": "quality_changes/Bluespeaker_Mini_PLA_Parts_e0.inst.cfg",
+  "pla-0.30-fast": {
+   "quality_changes": "quality_changes/PLA_0.30_Fast.inst.cfg",
+   "quality_changes_extruder": "quality_changes/PLA_0.30_Fast_e0.inst.cfg",
    "quality": "quality/draft.inst.cfg"
   }
  },
