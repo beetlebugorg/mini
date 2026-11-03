@@ -1,8 +1,15 @@
 # Printdeck builds of the Mini, the Bluetooth desk speaker: the printed parts, the slicer profiles
 # in profiles/ (the Cura profiles of cura/ on the TAZ Workhorse SE with the 0.5 mm tool head), and
 # the speaker in its parts on the Parts tab. The parts print in three PLA colours: grey, orange and
-# a little white. The STL files come from cad/bluespeaker_mini.py; run it, and commit the files.
+# a little white. cad/bluespeaker_mini.py writes the STL files of the parts. The generate step
+# writes them again on GitHub, and fails when they differ from the committed files. Run the same
+# command on your computer, and commit the STL files.
 project: mini
+
+generate:
+  install: pip install uv && uv sync --frozen
+  run: uv run --frozen python cad/bluespeaker_mini.py --stl
+  check: true
 
 parts:
   # The shell.
