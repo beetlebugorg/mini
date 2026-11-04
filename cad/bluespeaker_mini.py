@@ -116,13 +116,14 @@ class MParams:
     tab_d: float = 9.0  # tab depth along the screw
     # Board posts: two posts on the tray under the rear mounting holes of the ZK-502C. A small self-tapping
     # screw (1.9 mm thread, 3.28 mm head, 7 mm long) goes down through each hole into its post and holds the rear edge.
-    # Hole positions: X from the left board edge, Y from the front edge. The front holes (Y 4.88) have no posts.
-    amp_holes: tuple = ((3.0, 60.77), (47.5, 60.77))  # Y measured; X estimated
+    # Hole positions: X from the left board edge, Y from the front edge, measured on the hole centres.
+    # The rear holes are 4.15 mm from the side edges. The front holes (3.75 mm from the side edges) have no posts.
+    amp_holes: tuple = ((4.15, 60.81), (45.9, 60.81))
     board_post_d: float = 6.5  # 2.5 mm wall around the tap hole, 5 lines
     tap_d: float = 1.5  # tap hole for the 1.9 mm thread (PLA): the thread cuts 0.2 mm deep each side
     tap_depth: float = 6.5  # below the PCB bottom: the screw goes 5.4 mm into the post, 1.1 mm spare
-    amp_w: float = 50.5
-    amp_l: float = 82.0
+    amp_w: float = 50.05  # measured
+    amp_l: float = 81.77  # measured
     pcb_t: float = 1.6
     pot_x: float = 38.2
     pot_z: float = 5.5
