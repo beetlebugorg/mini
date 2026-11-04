@@ -197,7 +197,7 @@
       "file": "models-mini/tray.glb",
       "edges": true,
       "size": [
-        72.5,
+        72.0,
         81.0,
         15.5
       ]
@@ -219,8 +219,8 @@
       "file": "models-mini/amp_board.glb",
       "edges": true,
       "size": [
-        50.5,
-        82.0,
+        50.0,
+        81.8,
         1.6
       ]
     },
@@ -439,7 +439,7 @@
       "file": "models-mini/screws_tray.glb",
       "edges": true,
       "size": [
-        67.0,
+        66.5,
         11.0,
         5.5
       ]
@@ -461,7 +461,7 @@
       "file": "models-mini/inserts_tray.glb",
       "edges": true,
       "size": [
-        65.5,
+        65.0,
         3.0,
         4.0
       ]
@@ -571,7 +571,7 @@
       "file": "models-mini/screws_board.glb",
       "edges": true,
       "size": [
-        47.8,
+        45.0,
         3.3,
         8.3
       ]
