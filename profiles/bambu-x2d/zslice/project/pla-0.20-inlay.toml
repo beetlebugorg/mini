@@ -1,0 +1,10 @@
+# 0.20 mm layers. The first layer is 0.20 mm, so the 0.4 mm inlay is two layers.
+layer_height = 0.2
+first_layer_height = 0.2
+wall_count = 4
+top_thickness = 0.8
+bottom_thickness = 0.6
+infill_density = 0.4
+infill_pattern = "grid"
+skirt_loops = 0
+brim_width = 3

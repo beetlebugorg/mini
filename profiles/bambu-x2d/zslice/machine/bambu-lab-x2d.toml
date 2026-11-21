@@ -1,0 +1,939 @@
+# A zslice machine profile.
+
+# The name of the printer, for the G-code header.
+name = "Bambu Lab X2D"
+
+# The id of the printer model in the printer library, for example
+# "creality-ender-3-v2". The 3D view shows the bed model of this printer.
+# Empty: the view shows the bed as a grid.
+model = "bambu-lab-x2d"
+
+# The size of the bed in X.
+bed_size_x = 256
+
+# The size of the bed in Y.
+bed_size_y = 256
+
+# The G-code X of the front left corner of the bed. The slicer places parts
+# in bed coordinates (0, 0 at the front left corner) and adds this to each X
+# in the G-code. Most printers: 0. A printer with its origin at the bed
+# center: minus half the bed width.
+origin_x = 0
+
+# The G-code Y of the front left corner of the bed. See `origin_x`.
+origin_y = 0
+
+# The highest part that the printer can make.
+max_height = 261
+
+# The build plate on the bed, for a printer with plates that change (Bambu
+# Lab): the start G-code of the printer uses it ({curr_bed_type}), and the
+# printer checks it against the plate that it sees.
+bed_type = "textured_pei_plate"
+
+# The diameter of the nozzle hole. The default line width comes from it.
+nozzle_diameter = 0.4
+
+# The material of the nozzle. A Bambu Lab printer checks it against the
+# nozzle that it has (the file names it), and a hard filament (with carbon
+# or glass fiber) needs hardened steel or tungsten carbide.
+nozzle_type = "hardened_steel"
+
+# The flow of the hot end: `standard`, or `high_flow` (a longer melt zone).
+# A Bambu Lab printer checks it against its nozzle.
+nozzle_flow = "standard"
+
+# The radius of the flat face at the tip of the nozzle, around the hole. A
+# common brass nozzle has a face about 1 mm across. Slope smoothing uses it
+# to keep the nozzle off the layer that it just printed.
+nozzle_tip_radius = 0.5
+
+# The angle between the axis of the nozzle and the side of its cone, in
+# degrees. Slope smoothing uses it with `nozzle_tip_radius`.
+nozzle_cone_angle = 45
+
+# The temperature of the air around the print, in °C: the room for an open
+# printer, about 35 to 45 in a closed box with no heater, or the set point
+# of a heated chamber. The simulated print cools the plastic toward it.
+chamber_temp = 25
+
+# The speed of the air of the part cooling fans at full speed where the
+# plastic leaves the nozzle, in m/s, of all the fans together. The simulated
+# print cools the plastic with it. About 5 to 10 for a radial blower and a
+# duct.
+part_fan_air = 6
+
+# The maximum speed of the print head in X and Y.
+max_speed = 300
+
+# The speed of travel moves (moves with no extrusion).
+travel_speed = 400
+
+# The speed of Z moves at each layer change.
+max_z_speed = 20
+
+# The acceleration of Z moves (the layer change and the z hop), in mm/s².
+# Only the time estimate uses it.
+max_z_accel = 100
+
+# The cost of one hour of this printer, in your currency: the power, the
+# wear, and the time of the machine. A print costs its hours times this, and
+# its filament. 0: only the filament counts.
+hour_rate = 0
+
+# The acceleration of the print head in X and Y, in mm/s². The time
+# estimate uses it, and it is the acceleration of each feature that has no
+# acceleration of its own (0 in the project).
+max_accel = 20000
+
+# The speed at which the head turns a corner with no stop (jerk in Marlin,
+# square corner velocity in Klipper), in mm/s. The time estimate uses it.
+corner_speed = 9
+
+# How the motors move the head, for the time estimate. `cartesian`: a motor
+# for X and one for Y (also a bed slinger, which moves the bed on Y).
+# `corexy`: two motors, A = X + Y and B = X - Y. With per-axis limits and
+# Marlin, the limits of a CoreXY apply to its motors.
+kinematics = "cartesian"
+
+# The acceleration limit of the X axis (of motor A on a CoreXY with Marlin),
+# in mm/s², as the firmware has it (M201 X). 0: `max_accel`.
+max_accel_x = 0
+
+# The acceleration limit of the Y axis (of motor B on a CoreXY with Marlin),
+# in mm/s² (M201 Y). A bed slinger moves the bed on Y and has a lower
+# limit. 0: `max_accel`.
+max_accel_y = 0
+
+# The speed limit of the X axis (M203 X), in mm/s. 0: `max_speed`.
+max_speed_x = 0
+
+# The speed limit of the Y axis (M203 Y), in mm/s. 0: `max_speed`.
+max_speed_y = 0
+
+# Write acceleration commands in the G-code: the acceleration of each
+# feature (project `*_accel`), and the corner speed at the start. Off: the
+# printer uses its own values; the time estimate still uses `max_accel` and
+# `corner_speed`.
+accel_control = false
+
+# The G-code dialect of the acceleration commands. `marlin`: M204 S and M205
+# X Y. `klipper`: SET_VELOCITY_LIMIT ACCEL and SQUARE_CORNER_VELOCITY.
+# `reprap` (RepRapFirmware): M204 P T and M566 X Y. `repetier`: M201 X Y and
+# M207 X.
+gcode_flavor = "marlin"
+
+# The extruder type. `direct`: the motor is on the print head. `bowden`: the
+# motor pushes the filament through a long tube.
+extruder = "direct"
+
+# The retraction length of this extruder. A bowden extruder needs more.
+retract_length = 0.8
+
+# The speed of the filament during a retraction.
+retract_speed = 30
+
+# How the printer changes to another filament of the plate. `pause`: one
+# filament path; the print pauses (M600) and you change the filament by
+# hand. `tool`: a unit that feeds many filaments (a Bambu Lab AMS, a Prusa
+# MMU) changes it with a tool change (T0, T1, and on).
+filament_change = "tool"
+
+# The number of nozzles of the print head: 1, or 2 for a head with a second
+# nozzle (the Bambu Lab X2D and H2D). Each filament prints with its own
+# nozzle (`filament.nozzle`). The firmware calibrates the offset between the
+# nozzles: the G-code has one frame for both.
+nozzles = 2
+
+# The right edge of the area that the first nozzle reaches, in bed X (mm).
+# The left nozzle of the H2D stops 25 mm from the right side. 0: the whole
+# bed.
+nozzle1_max_x = 0
+
+# The highest z that the first nozzle reaches (mm). 0: `max_height`.
+nozzle1_max_height = 0
+
+# The left edge of the area that the second nozzle reaches, in bed X (mm).
+# The second nozzle of the X2D stops 20.5 mm from the left side of the bed.
+# 0: the whole bed.
+nozzle2_min_x = 20.5
+
+# The highest z that the second nozzle reaches (mm). 0: `max_height`.
+nozzle2_max_height = 256
+
+# The text of a filament change. Empty: zslice writes the command of the
+# G-code flavor (M600 for a pause, Tn for a tool change). The variables of
+# Bambu Studio and PrusaSlicer work here: {next_extruder},
+# {previous_extruder}, [next_filament_id], [flush_length],
+# [new_filament_temp], [old_filament_temp], {layer_z}, {max_layer_z}, and
+# {toolchange_count}.
+change_gcode = '''
+;======== X2D filament_change gcode ==========
+;===== 2026/07/29 =====
+
+M620 S[next_filament_id]A B H[next_hotend]
+;M204 S9000
+{if toolchange_count > 1 && (z_hop_types[current_filament_id] == 0 || z_hop_types[current_filament_id] == 3)}
+G17
+G2 Z{z_after_toolchange + 0.4} I0.86 J0.86 P1 F10000 ; spiral lift a little from second lift
+{endif}
+
+;nozzle_change_gcode
+
+G1 Z{max_layer_z + 3.0} F1200
+
+M400
+M106 P1 S0
+
+{if toolchange_count == 2}
+; get travel path for change filament
+;M620.1 X[travel_point_1_x] Y[travel_point_1_y] F21000 P0
+;M620.1 X[travel_point_2_x] Y[travel_point_2_y] F21000 P1
+;M620.1 X[travel_point_3_x] Y[travel_point_3_y] F21000 P2
+{endif}
+
+{if ((filament_type[current_filament_id] == "PLA") || (filament_type[current_filament_id] == "PLA-CF") || (filament_type[current_filament_id] == "PETG")) && (nozzle_diameter_at_nozzle_id[current_nozzle_id] == 0.2)}
+M620.10 A0 F74.8347 L[flush_length] H{nozzle_diameter_at_nozzle_id[current_nozzle_id]} T{flush_temperatures[current_filament_id]} P[old_filament_temp] S1
+{else}
+M620.10 A0 F{flush_volumetric_speeds[current_filament_id]/2.4053*60} L[flush_length] H{nozzle_diameter_at_nozzle_id[current_nozzle_id]} T{flush_temperatures[current_filament_id]} P[old_filament_temp] S1
+{endif}
+
+{if ((filament_type[next_filament_id] == "PLA") || (filament_type[next_filament_id] == "PLA-CF") || (filament_type[next_filament_id] == "PETG")) && (nozzle_diameter_at_nozzle_id[next_nozzle_id] == 0.2)}
+M620.10 A1 F74.8347 L[flush_length] H{nozzle_diameter_at_nozzle_id[next_nozzle_id]} T{flush_temperatures[next_filament_id]} P[new_filament_temp] S1
+{else}
+M620.10 A1 F{flush_volumetric_speeds[next_filament_id]/2.4053*60} L[flush_length] H{nozzle_diameter_at_nozzle_id[next_nozzle_id]} T{flush_temperatures[next_filament_id]} P[new_filament_temp] S1
+{endif}
+
+M620.15 C{new_filament_temp - filament_cooling_before_tower[next_filament_id]}
+
+{if long_retraction_when_cut}
+M620.11 P1 L0 I[current_filament_id] B[current_hotend] E-{retraction_distance_when_cut} F{max((flush_volumetric_speeds[current_filament_id]/2.4053*60), 200)}
+{else}
+M620.11 P0 L0 I[current_filament_id] B[current_hotend] E0
+{endif}
+
+{if long_retraction_when_ec}
+M620.11 K1 I[current_filament_id] B[current_hotend] R{retraction_distance_when_ec} F{max((flush_volumetric_speeds[current_filament_id]/2.4053*60), 200)}
+{else}
+M620.11 K0 I[current_filament_id] B[current_hotend] R0
+{endif}
+
+M620.22 I[next_filament_id] P1    ; enable remote extruder runout auto purge.
+
+T[next_filament_id] H[next_hotend]
+
+;deretract
+{if filament_type[next_filament_id] == "TPU"}
+{else}
+{if filament_type[next_filament_id] == "PA"}
+;VG1 E1 F{max(new_filament_e_feedrate, 200)}
+;VG1 E1 F{max(new_filament_e_feedrate/2, 100)}
+{else}
+;VG1 E4 F{max(new_filament_e_feedrate, 200)}
+;VG1 E4 F{max(new_filament_e_feedrate/2, 100)}
+{endif}
+{endif}
+
+; VFLUSH_START
+{if flush_length>41.5}
+;VG1 E41.5 F{min(old_filament_e_feedrate,new_filament_e_feedrate)}
+;VG1 E{flush_length-41.5} F{new_filament_e_feedrate}
+{else}
+;VG1 E{flush_length} F{min(old_filament_e_feedrate,new_filament_e_feedrate)}
+{endif}
+SYNC T{ceil(flush_length / 125) * 5}
+; VFLUSH_END
+
+M1002 set_filament_type:{filament_type[next_filament_id]}
+
+M400
+M83
+{if next_filament_id < 255}
+M620.10 R{retract_length_toolchange[filament_map[next_filament_id]-1]}
+M628 S0
+;VM109 S[new_filament_temp]
+M629
+M400
+
+;prime_tower_interface
+{if is_prime_tower_interface && filament_tower_interface_purge_volume !=0}
+G150.1
+M620.13 W0 L{filament_tower_interface_purge_volume} T{filament_tower_interface_print_temp} R0.0
+{endif}
+;prime_tower_interface
+
+M983.3 F{filament_max_volumetric_speed[next_filament_id]/2.4} A0.4 R{retract_length_toolchange[filament_map[next_filament_id]-1]}
+
+M400
+
+G1 Z{max_layer_z + 3.0} F3000
+
+{else}
+G1 X[x_after_toolchange] Y[y_after_toolchange] Z[z_after_toolchange] F12000
+{endif}
+
+
+M621 S[next_filament_id]A B
+
+M622.1 S0 ;for prev version, default skip
+M1002 judge_flag powerloss_resume_flag
+M622 J1
+M983.3 F{filament_max_volumetric_speed[next_filament_id]/2.4} A0.4 R{retract_length_toolchange[filament_map[next_filament_id]-1]}
+M400
+G1 Z{max_layer_z + 3.0} F3000
+M1002 set_flag powerloss_resume_flag=0
+M623
+
+M620.6 I[next_filament_id] H[next_hotend] W1 ;enable ams air printing detect
+
+{if (filament_type[next_filament_id] == "TPU")}
+M1015.3 S1 H{nozzle_diameter_at_nozzle_id[next_nozzle_id]};enable tpu clog detect
+{else}
+M1015.3 S0;disable tpu clog detect
+{endif}
+
+{if (filament_type[next_filament_id] == "PLA") ||  (filament_type[next_filament_id] == "PETG")
+ ||  (filament_type[next_filament_id] == "PLA-CF")  ||  (filament_type[next_filament_id] == "PETG-CF")}
+M1015.4 S1 K1 H{nozzle_diameter_at_nozzle_id[next_nozzle_id]} ;enable E air printing detect
+{else}
+M1015.4 S0 K0 H{nozzle_diameter_at_nozzle_id[next_nozzle_id]} ;disable E air printing detect
+{endif}
+
+{if layer_z <= (initial_layer_print_height + 0.001)}
+M204 S[initial_layer_acceleration]
+{else}
+M204 S[travel_acceleration]
+{endif}
+
+G1 Y256 F18000
+
+
+{if (overall_chamber_temperature < 40)}
+{if (layer_num + 1 <= close_additional_fan_first_x_layers[next_filament_id])}
+    M106 P2 S{first_x_layer_fan_speed[next_filament_id]*255.0/100.0 };set first x_layer fan
+    M106 P10 S{first_x_layer_fan_speed[next_filament_id]*255.0/100.0 };set first x_layer fan
+{elsif (layer_num + 1 < additional_fan_full_speed_layer[next_filament_id] && additional_fan_full_speed_layer[next_filament_id] > close_additional_fan_first_x_layers[next_filament_id])}
+    M106 P2 S{(first_x_layer_fan_speed[next_filament_id] + (additional_cooling_fan_speed[next_filament_id] - first_x_layer_fan_speed[next_filament_id]) * (layer_num + 1 - close_additional_fan_first_x_layers[next_filament_id]) / max(additional_fan_full_speed_layer[next_filament_id] - close_additional_fan_first_x_layers[next_filament_id], 1)) * 255.0/100.0}
+    M106 P10 S{(first_x_layer_fan_speed[next_filament_id] + (additional_cooling_fan_speed[next_filament_id] - first_x_layer_fan_speed[next_filament_id]) * (layer_num + 1 - close_additional_fan_first_x_layers[next_filament_id]) / max(additional_fan_full_speed_layer[next_filament_id] - close_additional_fan_first_x_layers[next_filament_id], 1)) * 255.0/100.0}
+{else}
+    {if (min_vitrification_temperature <= 50)}
+        {if (nozzle_diameter_at_nozzle_id[current_nozzle_id] == 0.2)}
+            M142 P1 R30 S40 U{max_additional_fan/100.0} V1.0 O45; set PLA/TPU ND0.2 chamber autocooling
+        {else}
+            M142 P1 R30 S40 U{max_additional_fan/100.0} V1.0 O45; set PLA/TPU ND0.4 chamber autocooling
+        {endif}
+    {else}
+        {if (!is_all_bbl_filament)}
+            M142 P1 R40 S45 U{max_additional_fan/100.0} V0.5 O50; set third-party PETG chamber 
+        {else}
+            {if (nozzle_diameter_at_nozzle_id[current_nozzle_id] == 0.2)}
+                M142 P1 R45 S50 U{max_additional_fan/100.0} V0.5 O50; set PETG ND0.2 chamber autocooling
+            {else}
+                M142 P1 R50 S55 U{max_additional_fan/100.0} V0.5 O55; set PETG ND0.4 chamber autocooling
+            {endif}
+        {endif}
+    {endif}
+{endif}
+{endif}
+;not set fan changing filament
+'''
+
+# The time of one filament change, in seconds, for the time estimate: the
+# cut, the unload, the load, and the flush. A pause counts this time too,
+# but the real time depends on you.
+change_time = 40
+
+# The plastic (mm³) that the nozzle flushes after a change to a filament of
+# the same color. A change from a dark color to a light color flushes up to
+# 5 times more (see `project.flush_multiplier`). A pause flushes nothing:
+# you push the new filament through by hand.
+flush_volume = 140
+
+# The pictures of the print at the top of the G-code, for the screen of the
+# printer (Prusa, Klipper with Mainsail or Fluidd, and others): sizes in
+# pixels, as 300x300,32x32. Each is a PNG of the parts from the front right,
+# in the filament color. Empty: none.
+thumbnails = ""
+
+# The text before the print. These variables are replaced: {nozzle_temp},
+# {first_layer_nozzle_temp}, {bed_temp}, {standby_temp}, {layer_height},
+# {first_layer_height}, {first_layer_speed} (mm/s), {nozzle_diameter},
+# {filament_diameter}, {filament_name}, {machine_name}, and {job_name}. The
+# variables and the expressions of Cura, PrusaSlicer, OrcaSlicer, and Bambu
+# Studio also work. A line with a variable that has no value becomes a
+# comment. If the text does not heat the nozzle or the bed, zslice heats
+# them before it.
+start_gcode = '''
+;M1002 set_flag extrude_cali_flag=1
+;M1002 set_flag g29_before_print_flag=1
+;M1002 set_flag auto_cali_toolhead_offset_flag=1
+;M1002 set_flag build_plate_detect_flag=1
+
+;======== X2D start gcode==========
+;===== 2026/10/20 =====
+
+  M140 S[bed_temperature_initial_layer_single] ; heat heatbed first
+  M993 A0 B0 C0 ; nozzle cam detection not allowed.
+  M400
+  ;M73 P99
+
+;=====printer start sound ===================
+M17
+M400 S1
+M1006 S1
+M1006 A53 B9 L50 C53 D9 M50 E53 F9 N50
+M1006 A56 B9 L50 C56 D9 M50 E56 F9 N50
+M1006 A61 B9 L50 C61 D9 M50 E61 F9 N50
+M1006 A53 B9 L50 C53 D9 M50 E53 F9 N50
+M1006 A56 B9 L50 C56 D9 M50 E56 F9 N50
+M1006 A61 B18 L50 C61 D18 M50 E61 F18 N50
+M1006 W
+;=====printer start sound ===================
+
+  M1012.1 T1100
+  M620 M ;enable remap
+  M622.1 S0
+  G383.4
+
+;===== avoid end stop =================
+  G91
+  G380 S2 Z22 F1200
+  G380 S2 Z-12 F1200
+  G90
+;===== avoid end stop =================
+
+;===== reset machine status =================
+  M204 S10000
+  M630 S0 P1
+  G90
+  M17 D ; reset motor current to default
+  M960 S5 P1 ; turn on logo lamp
+  M220 S100 ;Reset Feedrate
+  M1002 set_gcode_claim_speed_level: 5
+  M221 S100 ;Reset Flowrate
+  M73.2   R1.0 ;Reset left time magnitude
+  G29.1 Z{+0.0} ; clear z-trim value first
+  M983.1 M1
+  M982.2 S1 ; turn on cog noise reduction
+  M9714 A0
+;===== reset machine status =================
+
+;==== set airduct mode ====
+{if (overall_chamber_temperature >= 40)}
+M145 P1 ; set airduct mode to heating mode for heating
+M106 P2 S0 ; turn off auxiliary fan
+M106 P10 S255 ; turn on filter fan
+{else}
+M145 P0 ; set airduct mode to cooling mode for cooling
+M106 P2 S255 ; turn on auxiliary fan for cooling
+M106 P10 S255 ; turn on auxiliary fan for cooling
+M106 P3 S127 ; turn on chamber fan for cooling
+;M140 S0 ; stop heatbed from heating
+M1002 gcode_claim_action : 29
+M191 S0 ; wait for chamber temp
+M106 P2 S102 ; turn on auxiliary fan
+M106 P10 S102 ; turn on chamber fan
+M142 P6 R30 S40 U0.6 V0.8 ; set PLA/TPU/PETG exhaust chamber autocooling
+{endif}
+;==== set airduct mode ====
+
+;===== start to heat heatbed & hotend==========
+  M1002 gcode_claim_action : 2
+  M1002 set_filament_type:{filament_type[initial_no_support_filament_id]}
+
+  ;===== set chamber temperature ==========
+  {if (overall_chamber_temperature >= 40)}
+    M145 P1 ; set airduct mode to heating mode
+    M141 S[overall_chamber_temperature] ; Let Chamber begin to heat
+  {endif}
+;===== set chamber temperature ==========
+
+  G29.2 S0 ; avoid invalid abl data
+
+;===== first homing start =====
+  M1002 gcode_claim_action : 13
+  G28 X T300 R
+  G150.1 F8000 ; wipe mouth to avoid filament stick to heatbed
+  G150.3
+  M972 S24 P0
+  M1002 gcode_claim_action : 74 ; Heatbed surface foreign object detection
+  M972 S26 P0 C0
+  G90
+  M83
+  G1 Y128 F30000
+  G1 X128
+  G28 Z P0 T400
+  M400
+;===== first homign end =====
+
+;===== detection start =====
+  M1002 gcode_claim_action : 11
+
+      M104 S0 T0
+      M104 S0 T1
+      M562 P1 E0 B1
+      M562 P2 E0 B1
+      M18 E
+      M400 P200
+      M1028 S1
+      M972 S19 P0   ;heatbed detection
+      M972 S31 P0   ;toolhead camera dirt detection
+      M1002 gcode_claim_action : 73 ; Build plate alignment detection
+      M972 S34 P0   ;print plate deviation detection
+      M1028 S0
+      M562 P1 E1 B1
+      M562 P2 E1 B1
+      M17 D
+
+  ;M400
+  M104 S{nozzle_temperature_initial_layer[initial_no_support_filament_id]} T{filament_map[initial_no_support_filament_id] % 2} ; rise temp in advance
+
+  {if max_print_z >= 145}
+    G151 P{filament_map[initial_no_support_filament_id] % 2} M ; plug the heat nozzle
+    M1002 gcode_claim_action : 75 ;  Detect obstacles at the botton of the heated bed
+    G3811 Z{max_print_z}  ; Detect obstacles at the bottom of the heated bed
+  {endif}
+;===== detection end =====
+
+;===== prepare print temperature and material ==========
+  M104 S{nozzle_temperature_initial_layer[initial_no_support_filament_id]-40} A ; rise temp in advance
+  M400
+  M211 X0 Y0 Z0 ;turn off soft endstop
+  M975 S1 ; turn on input shaping
+
+  G29.2 S0 ; avoid invalid abl data
+  G150.3
+{if ((filament_type[initial_no_support_filament_id] == "PLA") || (filament_type[initial_no_support_filament_id] == "PLA-CF") || (filament_type[initial_no_support_filament_id] == "PETG")) && (nozzle_diameter_at_nozzle_id[initial_nozzle_id] == 0.2)}
+M620.10 A0 F74.8347 H{nozzle_diameter_at_nozzle_id[initial_nozzle_id]} T{flush_temperatures[initial_no_support_filament_id]} P{nozzle_temperature_initial_layer[initial_no_support_filament_id]} S1
+M620.10 A1 F74.8347 H{nozzle_diameter_at_nozzle_id[initial_nozzle_id]} T{flush_temperatures[initial_no_support_filament_id]} P{nozzle_temperature_initial_layer[initial_no_support_filament_id]} S1
+{else}
+M620.10 A0 F{flush_volumetric_speeds[initial_no_support_filament_id]/2.4053*60} H{nozzle_diameter_at_nozzle_id[initial_nozzle_id]} T{flush_temperatures[initial_no_support_filament_id]} P{nozzle_temperature_initial_layer[initial_no_support_filament_id]} S1
+M620.10 A1 F{flush_volumetric_speeds[initial_no_support_filament_id]/2.4053*60} H{nozzle_diameter_at_nozzle_id[initial_nozzle_id]} T{flush_temperatures[initial_no_support_filament_id]} P{nozzle_temperature_initial_layer[initial_no_support_filament_id]} S1
+{endif}
+
+ M620.11 P0 L0 I[initial_no_support_filament_id] B[initial_no_support_hotend] E0
+ M620.11 K0 I[initial_no_support_filament_id] B[initial_no_support_hotend] R0
+
+  M620 S[initial_no_support_filament_id]A H[initial_no_support_hotend] B   ; switch material if AMS exist
+  M620.22 I[initial_no_support_filament_id] P1    ; enable remote extruder runout auto purge.
+  M1002 gcode_claim_action : 4
+  M1002 set_filament_type:UNKNOWN
+  M400
+  T[initial_no_support_filament_id] H[initial_no_support_hotend]
+  M400
+  M628 S0
+  M629
+  M400
+  M1002 set_filament_type:{filament_type[initial_no_support_filament_id]}
+  M621 S[initial_no_support_filament_id]A B
+  M104 S{nozzle_temperature_initial_layer[initial_no_support_filament_id]}
+  M400
+  M106 P1 S0
+  M400
+  G29.2 S1
+;===== prepare print temperature and material ==========
+
+;===== auto extrude cali start =========================
+  M975 S1
+  M1002 judge_flag extrude_cali_flag
+  M622 J0
+    M983.3 F{filament_max_volumetric_speed[initial_no_support_filament_id]/2.4} A0.4 ; cali dynamic extrusion compensation
+  M623
+
+  M622 J1
+    M1002 set_filament_type:{filament_type[initial_no_support_filament_id]}
+    M1002 gcode_claim_action : 8
+    M109 S{nozzle_temperature[initial_no_support_filament_id]}
+    G90
+    M83
+    M983.3 F{filament_max_volumetric_speed[initial_no_support_filament_id]/2.4} A0.4 ; cali dynamic extrusion compensation
+    M400
+    M106 P1 S255
+    M400 S5
+    M106 P1 S0
+    G150.3
+  M623
+
+  M622 J2
+    M1002 set_filament_type:{filament_type[initial_no_support_filament_id]}
+    M1002 gcode_claim_action : 8
+    M109 S{nozzle_temperature[initial_no_support_filament_id]}
+    G90
+    M83
+    M983.3 F{filament_max_volumetric_speed[initial_no_support_filament_id]/2.4} A0.4 ; cali dynamic extrusion compensation
+    M400
+    M106 P1 S255
+    M400 S5
+    M106 P1 S0
+    G150.3
+  M623
+;===== auto extrude cali end =========================
+
+  {if hold_chamber_temp_for_flat_print}
+    G150.3
+    M1002 gcode_claim_action : 58
+    M104 S{first_layer_temperature[initial_no_support_filament_id]}
+    {if bed_temperature_initial_layer_single > 89}
+        {if overall_chamber_temperature < 40}
+            M1030 S1200
+            SYNC R0 T1200
+        {else}
+            M1030 S600
+            SYNC R0 T600
+        {endif}
+    {else}
+        M1030 S300
+        SYNC R0 T300
+    {endif}
+    M1030 C
+  {endif}
+
+  {if filament_type[initial_filament_id] == "TPU" || filament_type[initial_filament_id] == "PVA"}
+  {else}
+    M83
+    G1 E-3 F1800
+    M400 P500
+  {endif}
+  G150.2
+  G150.1 F8000
+  G150.2
+  G150.1 F8000
+
+  G91
+  G1 Y-16 F12000 ; move away from the trash bin
+  G90
+  M400
+
+  M104 S{nozzle_temperature_initial_layer[initial_no_support_filament_id]-80} A
+
+;===== wipe right nozzle start =====
+  M1002 gcode_claim_action : 14
+  G150 T{nozzle_temperature_initial_layer[initial_no_support_filament_id]}
+  M400
+;===== wipe left nozzle end =====
+
+{if filament_type[initial_filament_id] == "PC"}
+  M109 S170 A
+{else}
+  M109 S140 A
+{endif}
+  M106 S0 ; turn off fan , too noisy
+  G91
+  G1 Z5 F1200
+  G90
+  M400
+  G150.1
+
+{if (overall_chamber_temperature >= 40)}
+M1002 gcode_claim_action : 49
+M191 S[overall_chamber_temperature] ; wait for chamber temp
+{endif}
+
+;===== z ofst cali start =====
+  M190 S[bed_temperature_initial_layer_single]; ensure bed temp
+  G383 O0 M1 T140
+  M400
+;===== z ofst cali end =====
+G90
+M83
+G0 Y200 F18000
+
+;===== bed leveling ==================================
+  M1002 gcode_claim_action : 54
+  M190 S[bed_temperature_initial_layer_single]; ensure bed temp
+  M109 S140 A
+  M106 S0 ; turn off fan , too noisy
+  M1002 judge_flag g29_before_print_flag
+  M622 J1
+    M1002 gcode_claim_action : 1
+    {if hold_chamber_temp_for_flat_print}
+      G29 H R
+    {else}
+      G29 A1 X{first_layer_print_min[0]} Y{first_layer_print_min[1]} I{first_layer_print_size[0]} J{first_layer_print_size[1]} R
+    {endif}
+    M400
+  M623
+
+  M622 J2
+    M1002 gcode_claim_action : 1
+    {if hold_chamber_temp_for_flat_print}
+      G29 H R
+    {else}
+      G29 A2 X{first_layer_print_min[0]} Y{first_layer_print_min[1]} I{first_layer_print_size[0]} J{first_layer_print_size[1]} R
+    {endif}
+    M400
+  M623
+
+  M622 J0
+    G28 R
+  M623
+  G29.2 S1
+;===== bed leveling end ================================
+
+; cali eddy z pos
+;G383.13 T1 C1
+
+M104 S{nozzle_temperature_initial_layer[initial_no_support_filament_id]} A
+;===== mech mode sweep start =====
+  M1002 gcode_claim_action : 3
+  G90
+  G1 X128 Y128 F20000
+  G1 Z5 F1200
+  M400 P200
+  M970.3 Q1 A5 K0 O1
+  M974 S2 P0
+  M975 S1
+  M970.3 Q1 A5 K0 L0 T15 O3 F1 U2
+  M970.3 Q0 A7 K0 O1
+  M970.2 Q0 W73 K1 Z0.01
+  M974 S2 P0
+  M975 S1
+  M400
+;===== mech mode sweep end =====
+
+M104 S{nozzle_temperature_initial_layer[initial_filament_id]} A
+
+M1040 E0 B1
+G150.3
+
+;===== xy ofst cali start =====
+M1002 judge_flag auto_cali_toolhead_offset_flag
+
+M622 J0
+    M1012.5 N1 R1
+M623
+
+M622 J1
+    M1002 gcode_claim_action : 39
+    M141 S0
+    M620.17 T0 S{nozzle_temperature_initial_layer[(first_non_support_filaments[0] != -1 ? first_non_support_filaments[0] : (first_filaments[0] != -1 ? first_filaments[0] : 0))]} L{(first_non_support_filaments[0] != -1 ? first_non_support_filaments[0] : (first_filaments[0] != -1 ? first_filaments[0] : 0))}
+    M620.17 T1 S{nozzle_temperature_initial_layer[(first_non_support_filaments[1] != -1 ? first_non_support_filaments[1] : (first_filaments[1] != -1 ? first_filaments[1] : 0))]} L{(first_non_support_filaments[1] != -1 ? first_non_support_filaments[1] : (first_filaments[1] != -1 ? first_filaments[1] : 0))}
+    M620 D[initial_no_support_hotend]
+    G383 O1 T{nozzle_temperature_initial_layer[initial_no_support_filament_id]} L{initial_no_support_filament_id}
+    M141 S[overall_chamber_temperature]
+M623
+
+M622 J2
+    M1002 gcode_claim_action : 39
+    M141 S0
+    M620.17 T0 S{nozzle_temperature_initial_layer[(first_non_support_filaments[0] != -1 ? first_non_support_filaments[0] : (first_filaments[0] != -1 ? first_filaments[0] : 0))]} L{(first_non_support_filaments[0] != -1 ? first_non_support_filaments[0] : (first_filaments[0] != -1 ? first_filaments[0] : 0))}
+    M620.17 T1 S{nozzle_temperature_initial_layer[(first_non_support_filaments[1] != -1 ? first_non_support_filaments[1] : (first_filaments[1] != -1 ? first_filaments[1] : 0))]} L{(first_non_support_filaments[1] != -1 ? first_non_support_filaments[1] : (first_filaments[1] != -1 ? first_filaments[1] : 0))}
+    M620 D[initial_no_support_hotend]
+    G383.3 T{nozzle_temperature_initial_layer[initial_no_support_filament_id]} L{initial_no_support_filament_id}
+    M141 S[overall_chamber_temperature]
+M623
+;===== xy ofst cali end =====
+
+  M104 S{nozzle_temperature_initial_layer[initial_filament_id]} A
+
+ G150.3 ; move to garbage can to wait for temp
+
+;===== wait temperature reaching the reference value =======
+  M140 S[bed_temperature_initial_layer_single]
+  M190 S[bed_temperature_initial_layer_single]
+
+  ;========turn off light and fans =============
+  M960 S1 P0 ; turn off laser
+  M960 S2 P0 ; turn off laser
+  M106 S0 ; turn off cooling fan
+
+;===== wait temperature reaching the reference value =======
+
+  M1002 gcode_claim_action : 255
+  M400
+  M975 S1 ; turn on mech mode supression
+  M983.4 S0 ; turn off deformation compensation
+
+;============switch again==================
+  M211 X0 Y0 Z0 ;turn off soft endstop
+  G91
+  G1 Z6 F1200
+  G90
+  M1002 set_filament_type:{filament_type[initial_no_support_filament_id]}
+  M620 S[initial_no_support_filament_id]A H[initial_no_support_hotend] B
+  M620.22 I[initial_no_support_filament_id] P1    ; enable remote extruder runout auto purge.
+  M400
+  T[initial_no_support_filament_id] H[initial_no_support_hotend]
+  M400
+  M628 S0
+  M629
+  M400
+  M621 S[initial_no_support_filament_id]A B
+;============switch again==================
+
+;===== for Textured PEI Plate , lower the nozzle as the nozzle was touching topmost of the texture when homing ==
+  {if bed_temperature_initial_layer_single > 70}
+    {if curr_bed_type=="Textured PEI Plate"}
+      G29.1 Z{-0.003} ; for Textured PEI Plate
+    {else}
+      G29.1 Z{0.017}
+    {endif}
+  {else}
+    {if curr_bed_type=="Textured PEI Plate"}
+      G29.1 Z{0.002} ; for Textured PEI Plate
+    {else}
+      G29.1 Z{0.022}
+    {endif}
+  {endif}
+
+;===== nozzle load line ===============================
+M1002 gcode_claim_action : 51
+  G29.2 S1 ; ensure z comp turn on
+  G90
+  M83
+  M400 P50
+  M500 D1
+  M400 S3
+  M109 S{nozzle_temperature_initial_layer[initial_no_support_filament_id]}
+  G0 X100 Y0 F24000
+  M400
+  ;G130 O0 X100 Y-0.4 Z0.6 F{filament_max_volumetric_speed[initial_no_support_filament_id]/2/2.4053} L40 E20 D5
+  G130 O0 X100 Y-0.2 Z0.6 F{filament_max_volumetric_speed[initial_no_support_filament_id]/2/2.4053} L40 E12 D4
+G90
+  G90
+  M83
+  G1 Z1
+  M400
+;===== noozle load line end ===========================
+M1002 gcode_claim_action : 0
+  G29.99
+
+;M993 A1 B1 C1 ; nozzle cam detection allowed.
+
+M620.6 I[initial_no_support_filament_id] H[initial_no_support_hotend] W1 ;enable ams air printing detect
+
+
+{if (filament_type[initial_no_support_filament_id] == "TPU")}
+M1015.3 S1 H{nozzle_diameter_at_nozzle_id[initial_nozzle_id]};enable tpu clog detect
+{else}
+M1015.3 S0;disable tpu clog detect
+{endif}
+
+{if (filament_type[initial_no_support_filament_id] == "PLA") ||  (filament_type[initial_no_support_filament_id] == "PETG")
+ ||  (filament_type[initial_no_support_filament_id] == "PLA-CF")  ||  (filament_type[initial_no_support_filament_id] == "PETG-CF")}
+M1015.4 S1 K1 H{nozzle_diameter_at_nozzle_id[initial_nozzle_id]} ;enable E air printing detect
+{else}
+M1015.4 S0 K0 H{nozzle_diameter_at_nozzle_id[initial_nozzle_id]} ;disable E air printing detect
+{endif}'''
+
+# The text after the print. The same values as in `start_gcode` are
+# replaced.
+end_gcode = '''
+;======== X2D end gcode ==========
+;===== 2026/07/29 =====
+
+M1003 S0
+M73 P100 R0
+
+M400 ; wait for buffer to clear
+G92 E0 ; zero the extruder
+M211 Z1
+
+G90
+G1 Z{max_layer_z + 0.4} F900 ; lower z a little
+M1002 judge_flag timelapse_record_flag
+M622 J1
+    G150.3
+    M400 ; wait all motion done
+    M991 S0 P-1 ;end smooth timelapse at safe pos
+    M400 S5 ;wait for last picture to be taken
+M623  ;end of "timelapse_record_flag"
+
+G90
+G1 Z{max_layer_z + 10} F900 ; lower z a little
+
+M140 S0 ; turn off bed
+M141 S0 ; turn off chamber heating
+M106 S0 ; turn off fan
+M106 P2 S0 ; turn off remote part cooling fan
+M106 P3 S0 ; turn off chamber cooling fan
+M106 P10 S0 ; turn off remote part1 cooling fan
+
+; pull back filament to AMS
+M620 S65279 B
+; M620.11 P1 L0 I65279 E-3
+T65279
+G150.1 F8000
+M621 S65279 B
+
+M620 S65535 B
+; M620.11 P1 L0 I65535 E-4
+T65535
+G150.1 F8000
+M621 S65535 B
+
+G150.3
+
+M104 S0 T0; turn off hotend
+M104 S0 T1; turn off hotend
+
+M400 ; wait all motion done
+M17 S
+M17 Z0.4 ; lower z motor current to reduce impact if there is something in the bottom
+{if (80.0 - max_layer_z/2) > 0}
+    {if (max_layer_z + 80.0 - max_layer_z/2) < 256}
+        G1 Z{max_layer_z + 80.0 - max_layer_z/2} F600
+        G1 Z{max_layer_z + 78.0 - max_layer_z/2}
+    {else}
+        G1 Z256 F600
+        G1 Z256
+    {endif}
+{else}
+    {if (max_layer_z + 4.0) < 256}
+        G1 Z{max_layer_z + 4.0} F600
+        G1 Z{max_layer_z + 2.0}
+    {else}
+        G1 Z256 F600
+        G1 Z256
+    {endif}
+{endif}
+M400 P100
+M17 R ; restore z current
+
+M220 S100  ; Reset feedrate magnitude
+M201.2 K1.0 ; Reset acc magnitude
+M73.2 R1.0 ;Reset left time magnitude
+
+M1015.3 S0 ;disable clog detect
+M1015.4 S0 K0 ;disable air printing detect
+
+;=====printer finish air purification=========
+M622.1 S0
+M1002 judge_flag print_finish_air_filt_flag
+
+M622 J1
+M1002 gcode_claim_action : 66
+M145 P1
+M106 P10 S255
+M400 S180
+M106 P10 S0
+M623
+
+M622 J2
+M1002 gcode_claim_action : 66
+M145 P0
+M106 P3 S255
+M400 S180
+M106 P3 S0
+M623
+;=====printer finish air purification=========
+
+;=====printer finish  sound=========
+M17
+M400 S1
+M1006 S1
+M1006 A53 B10 L50 C53 D10 M50 E53 F10 N50 
+M1006 A57 B10 L50 C57 D10 M50 E57 F10 N50 
+M1006 A0 B15 L0 C0 D15 M0 E0 F15 N0 
+M1006 A53 B10 L50 C53 D10 M50 E53 F10 N50 
+M1006 A57 B10 L50 C57 D10 M50 E57 F10 N50 
+M1006 A0 B15 L0 C0 D15 M0 E0 F15 N0 
+M1006 A48 B10 L50 C48 D10 M50 E48 F10 N50 
+M1006 A0 B15 L0 C0 D15 M0 E0 F15 N0 
+M1006 A60 B10 L50 C60 D10 M50 E60 F10 N50 
+M1006 W
+;=====printer finish  sound=========
+M400
+M18
+
+'''

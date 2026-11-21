@@ -1,5 +1,6 @@
 # Printdeck builds of the Mini, the Bluetooth desk speaker: the printed parts, the slicer profiles
-# in profiles/, and the speaker in its parts on the Parts tab. The profiles are the profiles of the
+# in profiles/, and the speaker in its parts on the Parts tab. All parts slice with zslice. The
+# zslice profiles of the TAZ come from its Cura stack (zslice import cura). The profiles are the profiles of the
 # other Printdeck projects (0.10 Fine, 0.20 Standard, 0.30 Fast) on the TAZ Workhorse SE with the
 # 0.5 mm tool head. The materials have the calibration of the filament: 220 C, xy_offset 0.095 mm,
 # hole_xy_offset 0.17 mm and 100.21 % shrinkage. Each part prints on 0.20 Standard, with its own
@@ -25,6 +26,7 @@ parts:
       drill the post holes (4.0 mm, 7 mm deep), and press 8 short M3 inserts into the posts.
     files: [cad/stl-mini/sleeve.stl]
     printer: taz
+    slicer: zslice
     profile: taz-workhorse-se/pla-0.20-standard
     settings: {wall_line_count: 6, support_enable: true, support_structure: normal, support_type: buildplate, adhesion_type: brim, brim_line_count: 12, brim_location: everywhere, cool_fan_speed: 40}
     alone: true
@@ -36,6 +38,7 @@ parts:
       screws hold it in the sleeve.
     files: [cad/stl-mini/rear_panel.stl]
     printer: taz
+    slicer: zslice
     profile: taz-workhorse-se/pla-0.20-standard
     settings: {wall_line_count: 4, infill_sparse_density: 40, adhesion_type: brim}
     material: grey
@@ -46,6 +49,7 @@ parts:
       option: PLA feet can slide on a desk.
     files: [cad/stl-mini/feet.stl]
     printer: taz
+    slicer: zslice
     profile: taz-workhorse-se/pla-0.20-standard
     settings: {wall_line_count: 4, infill_sparse_density: 40, adhesion_type: brim}
     material: grey
@@ -59,6 +63,7 @@ parts:
       control and the AUX socket of the ZK-502C come through it.
     files: [cad/stl-mini/baffle.stl]
     printer: taz
+    slicer: zslice
     profile: taz-workhorse-se/pla-0.20-standard
     settings: {wall_line_count: 4, infill_sparse_density: 40, adhesion_type: brim}
     material: orange
@@ -70,6 +75,7 @@ parts:
       board on its posts.
     files: [cad/stl-mini/tray.stl]
     printer: taz
+    slicer: zslice
     profile: taz-workhorse-se/pla-0.20-standard
     settings: {wall_line_count: 4, infill_sparse_density: 40, adhesion_type: brim}
     material: grey
@@ -83,6 +89,7 @@ parts:
       two upper screw heads. Its settings have no horizontal expansion: each rib is one line.
     files: [cad/stl-mini/grille_honeycomb.3mf]
     printer: taz
+    slicer: zslice
     profile: taz-workhorse-se/pla-0.20-standard
     settings: {wall_line_count: 1, top_bottom_thickness: 0, xy_offset: 0, xy_offset_layer_0: 0, hole_xy_offset: 0, speed_print: 30, retraction_amount: 2.0, retraction_speed: 30, retraction_min_travel: 1.5, wall_0_wipe_dist: 0, speed_travel: 250, travel_avoid_other_parts: false, cool_fan_full_layer: 1, adhesion_type: brim}
     alone: true
@@ -94,14 +101,28 @@ parts:
       catches click it on. A pry slot at its top edge lets you lift it off.
     files: [cad/stl-mini/control_strip.stl]
     printer: taz
+    slicer: zslice
     profile: taz-workhorse-se/pla-0.20-standard
     settings: {wall_line_count: 4, infill_sparse_density: 40, adhesion_type: brim}
     material: white
+  # The two-color strip for the Bambu Lab X2D, from cad/mini_x2d.py. The 3MF file gives the white
+  # strip filament 1 and the gray inlay filament 2. Both filaments use the AMS nozzle.
+  - name: Control strip (X2D)
+    group: The covers
+    description: >-
+      The white strip with gray inlaid AUX and VOLUME labels and 21 dial bars. It prints front face
+      down on the Bambu Lab X2D. The gray is the first two layers. No supports.
+    files: [cad/x2d/control_strip_source.3mf]
+    printer: x2d
+    profile: bambu-x2d/pla-0.20-inlay
+    alone: true
+    material: white-gray
   - name: Knob
     group: The covers
     description: The orange volume knob. It pushes onto the shaft of the volume control.
     files: [cad/stl-mini/knob.stl]
     printer: taz
+    slicer: zslice
     profile: taz-workhorse-se/pla-0.20-standard
     settings: {wall_line_count: 4, infill_sparse_density: 40}
     material: orange
@@ -110,6 +131,7 @@ parts:
     description: The white mark of the knob. Glue it into the groove on the knob.
     files: [cad/stl-mini/knob_mark.stl]
     printer: taz
+    slicer: zslice
     profile: taz-workhorse-se/pla-0.20-standard
     settings: {wall_line_count: 4, infill_sparse_density: 40, adhesion_type: brim}
     material: white

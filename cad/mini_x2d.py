@@ -3,7 +3,9 @@
 The strip prints front face down. The gray inlay is the first two layers. Both filaments use the
 AMS nozzle. Run: uv run --frozen python cad/mini_x2d.py
 """
+import json
 import math
+import os
 import struct
 import subprocess
 import sys
@@ -128,43 +130,38 @@ def read_stl(path):
     return verts, tris
 
 
-def mesh_xml(mesh, oid, name, z0, cx, cy):
+def mesh_xml(mesh, oid, name, filament, walls, z0, cx, cy):
+    """One 3MF object. The zslice settings keep the two parts apart: joined parts print as paint,
+    and paint on a bottom face goes through the full bottom thickness."""
     verts, tris = mesh
+    meta = (f'<metadatagroup><metadata name="zslice:project.filament">{filament}</metadata>'
+            f'<metadata name="zslice:project.wall_count">{walls}</metadata></metadatagroup>')
     vx = "".join(f'<vertex x="{x - cx:.4f}" y="{y - cy:.4f}" z="{z - z0:.4f}"/>' for x, y, z in verts)
     tx = "".join(f'<triangle v1="{a}" v2="{b}" v3="{c}"/>' for a, b, c in tris)
-    return f'<object id="{oid}" name="{name}" type="model"><mesh><vertices>{vx}</vertices><triangles>{tx}</triangles></mesh></object>'
+    return f'<object id="{oid}" name="{name}" type="model">{meta}<mesh><vertices>{vx}</vertices><triangles>{tx}</triangles></mesh></object>'
 
 
 def write_source_3mf(path, white, gray):
-    """One object with two parts. Filament 1 is white, so the brim is white. Filament 2 is gray."""
+    """Two build items at one place. Filament 1 is white and filament 2 is gray."""
     w, g = read_stl(white), read_stl(gray)
     xs, ys, zs = zip(*w[0])
     z0, cx, cy = min(zs), (min(xs) + max(xs)) / 2, (min(ys) + max(ys)) / 2
-    comps = '<component objectid="1"/><component objectid="2"/>'
+    place = 'transform="1 0 0 0 1 0 0 0 1 128 128 0"'
     model = ('<?xml version="1.0" encoding="UTF-8"?>\n<model unit="millimeter" xml:lang="en-US" '
-             'xmlns="http://schemas.microsoft.com/3dmanufacturing/core/2015/02"><metadata name="Application">OrcaSlicer-02.05.00.00</metadata><metadata name="BambuStudio:3mfVersion">1</metadata>'
-             f'<resources>{mesh_xml(w, 1, "white", z0, cx, cy)}{mesh_xml(g, 2, "gray", z0, cx, cy)}'
-             f'<object id="3" name="Control strip" type="model"><components>{comps}</components></object></resources>'
-             '<build><item objectid="3" transform="1 0 0 0 1 0 0 0 1 128 128 0"/></build></model>')
-    cfg = ('<?xml version="1.0" encoding="UTF-8"?>\n<config><object id="3"><metadata key="name" value="Control strip"/>'
-           '<metadata key="extruder" value="1"/>'
-           '<part id="1" subtype="normal_part"><metadata key="name" value="white"/><metadata key="extruder" value="1"/></part>'
-           '<part id="2" subtype="normal_part"><metadata key="name" value="gray"/><metadata key="extruder" value="2"/></part>'
-           '</object><plate><metadata key="plater_id" value="1"/><metadata key="filament_map_mode" value="Manual"/>'
-           '<metadata key="filament_maps" value="1 1"/><metadata key="first_layer_sequence_choice" value="Customize"/>'
-           '<metadata key="first_layer_print_sequence" value="1 2"/><model_instance><metadata key="object_id" value="3"/>'
-           '<metadata key="instance_id" value="0"/><metadata key="identify_id" value="1"/></model_instance></plate></config>')
+             'xmlns="http://schemas.microsoft.com/3dmanufacturing/core/2015/02">'
+             f'<resources>{mesh_xml(w, 1, "white", 1, 4, z0, cx, cy)}{mesh_xml(g, 2, "gray", 2, 2, z0, cx, cy)}</resources>'
+             f'<build><item objectid="1" {place}/><item objectid="2" {place}/></build></model>')
+    colors = json.dumps({"filament_colour": ["#FFFFFF", "#8E9089"], "filament_type": ["PLA", "PLA"]})
     types = ('<?xml version="1.0" encoding="UTF-8"?>\n<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">'
              '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>'
              '<Default Extension="model" ContentType="application/vnd.ms-package.3dmanufacturing-3dmodel+xml"/>'
-             '<Default Extension="config" ContentType="text/xml"/></Types>')
+             '<Default Extension="config" ContentType="text/plain"/></Types>')
     rels = ('<?xml version="1.0" encoding="UTF-8"?>\n<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
             '<Relationship Target="/3D/3dmodel.model" Id="rel0" Type="http://schemas.microsoft.com/3dmanufacturing/2013/01/3dmodel"/></Relationships>')
     with zipfile.ZipFile(path, "w", zipfile.ZIP_DEFLATED) as z:
-        z.writestr("[Content_Types].xml", types)
-        z.writestr("_rels/.rels", rels)
-        z.writestr("3D/3dmodel.model", model)
-        z.writestr("Metadata/model_settings.config", cfg)
+        for name, text in (("[Content_Types].xml", types), ("_rels/.rels", rels), ("3D/3dmodel.model", model),
+                           ("Metadata/project_settings.config", colors)):
+            z.writestr(zipfile.ZipInfo(name, (2026, 1, 1, 0, 0, 0)), text, zipfile.ZIP_DEFLATED)
 
 
 def main():
@@ -186,13 +183,15 @@ def main():
     export_stl(Rot(90, 0, 0) * gray, gray_stl, tolerance=0.01, angular_tolerance=0.1)
     src = OUT / "control_strip_source.3mf"
     write_source_3mf(src, white_stl, gray_stl)
-    out = OUT / "control_strip_x2d.gcode.3mf"
-    cmd = ["orca-slicer", "--datadir", str(OUT / ".orca"), "--load-settings", f"{PROFILES/'machine.json'};{PROFILES/'process.json'}",
-           "--load-filaments", f"{PROFILES/'filament_white.json'};{PROFILES/'filament_gray.json'}",
-           "--slice", "1", "--export-3mf", out.name, "--outputdir", str(OUT), str(src)]
-    r = subprocess.run(cmd, capture_output=True, text=True)
-    print(r.stdout[-1500:], r.stderr[-1500:], "exit", r.returncode)
-    return r.returncode
+    zslice = os.environ.get("ZSLICE")
+    if not zslice:
+        print("Set ZSLICE to bin/zslice.mjs of zslice 0.5.0-beta to write the print file.")
+        return 0
+    profiles = PROFILES / "zslice"
+    cmd = ["node", zslice, "slice", str(src), "-m", str(profiles / "machine/bambu-lab-x2d.toml"),
+           "-f", str(profiles / "filament/white-gray.toml"), "-p", str(profiles / "project/pla-0.20-inlay.toml"),
+           "-o", os.devnull, "--bambu", str(OUT / "control_strip_x2d.gcode.3mf"), "--stats", "-"]
+    return subprocess.run(cmd).returncode
 
 
 if __name__ == "__main__":
