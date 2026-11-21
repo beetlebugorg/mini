@@ -1,0 +1,11 @@
+# Bambu PLA Basic on the X2D, from the Bambu Lab preset for the 0.4 mm nozzle.
+# The 3MF file of the part sets the two colors.
+name = "PLA white and gray"
+material = "PLA"
+diameter = 1.75
+density = 1.26
+nozzle_temp = 220
+first_layer_nozzle_temp = 220
+bed_temp = 55
+max_flow = 21
+flow_ratio = 0.98
